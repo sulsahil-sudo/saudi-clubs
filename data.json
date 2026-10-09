@@ -2,6 +2,18 @@
   "standings": [
     {
       "r": 1,
+      "t": "القادسية",
+      "p": "8",
+      "w": "6",
+      "d": "1",
+      "l": "1",
+      "gf": "21",
+      "ga": "8",
+      "gd": "+13",
+      "pts": "19"
+    },
+    {
+      "r": 2,
       "t": "الهلال",
       "p": "7",
       "w": "6",
@@ -13,7 +25,7 @@
       "pts": "18"
     },
     {
-      "r": 2,
+      "r": 3,
       "t": "الاتحاد",
       "p": "7",
       "w": "5",
@@ -25,7 +37,7 @@
       "pts": "17"
     },
     {
-      "r": 3,
+      "r": 4,
       "t": "النصر",
       "p": "7",
       "w": "5",
@@ -34,18 +46,6 @@
       "gf": "16",
       "ga": "7",
       "gd": "+9",
-      "pts": "16"
-    },
-    {
-      "r": 4,
-      "t": "القادسية",
-      "p": "7",
-      "w": "5",
-      "d": "1",
-      "l": "1",
-      "gf": "16",
-      "ga": "8",
-      "gd": "+8",
       "pts": "16"
     },
     {
@@ -75,13 +75,13 @@
     {
       "r": 7,
       "t": "الخلود",
-      "p": "7",
+      "p": "8",
       "w": "3",
       "d": "3",
-      "l": "1",
+      "l": "2",
       "gf": "12",
-      "ga": "10",
-      "gd": "+2",
+      "ga": "15",
+      "gd": "-3",
       "pts": "12"
     },
     {
@@ -217,8 +217,457 @@
       "pts": "2"
     }
   ],
-  "results": [],
+  "results": [
+    {
+      "home": "الخلود",
+      "away": "القادسية",
+      "hs": "0",
+      "as": "5",
+      "date": "2026-10-09T13:50Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+4'",
+      "period": 2
+    },
+    {
+      "home": "الفتح",
+      "away": "الأهلي",
+      "hs": "0",
+      "as": "3",
+      "date": "2026-10-09T14:55Z",
+      "status": "64'",
+      "state": "in",
+      "completed": false,
+      "clock": "64'",
+      "period": 2
+    },
+    {
+      "home": "النصر",
+      "away": "الدرعية",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-09T18:00Z",
+      "status": "Fri, October 9th at 2:00 PM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الحزم",
+      "away": "نيوم",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-10T13:50Z",
+      "status": "Sat, October 10th at 9:50 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الاتفاق",
+      "away": "الخليج",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-10T14:55Z",
+      "status": "Sat, October 10th at 10:55 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الهلال",
+      "away": "الاتحاد",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-10T18:00Z",
+      "status": "Sat, October 10th at 2:00 PM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الفيحاء",
+      "away": "الرياض",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-11T13:40Z",
+      "status": "Sun, October 11th at 9:40 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "أبها",
+      "away": "الفيصلي",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-11T15:25Z",
+      "status": "Sun, October 11th at 11:25 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الشباب",
+      "away": "التعاون",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-11T18:00Z",
+      "status": "Sun, October 11th at 2:00 PM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الفيصلي",
+      "away": "الخلود",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-15T13:40Z",
+      "status": "Thu, October 15th at 9:40 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الخليج",
+      "away": "الفيحاء",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-15T14:50Z",
+      "status": "Thu, October 15th at 10:50 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الحزم",
+      "away": "الفتح",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-15T15:15Z",
+      "status": "Thu, October 15th at 11:15 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الأهلي",
+      "away": "النصر",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-15T18:00Z",
+      "status": "Thu, October 15th at 2:00 PM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "القادسية",
+      "away": "أبها",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-16T13:15Z",
+      "status": "Fri, October 16th at 9:15 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الرياض",
+      "away": "الهلال",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-16T15:00Z",
+      "status": "Fri, October 16th at 11:00 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    },
+    {
+      "home": "الاتحاد",
+      "away": "الشباب",
+      "hs": "0",
+      "as": "0",
+      "date": "2026-10-16T18:00Z",
+      "status": "Fri, October 16th at 2:00 PM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
+    }
+  ],
   "players": [
+    {
+      "name": "Koen Casteels",
+      "team": "القادسية",
+      "position": "G",
+      "number": "1",
+      "age": "34",
+      "nationality": "Belgium"
+    },
+    {
+      "name": "Ahmed Al-Kassar",
+      "team": "القادسية",
+      "position": "G",
+      "number": "28",
+      "age": "35",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Meshari Sunyur",
+      "team": "القادسية",
+      "position": "G",
+      "number": "50",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Wafi Al Aklabi",
+      "team": "القادسية",
+      "position": "G",
+      "number": "60",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abgullah Almuhaysin",
+      "team": "القادسية",
+      "position": "G",
+      "number": "31",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Nacho",
+      "team": "القادسية",
+      "position": "D",
+      "number": "6",
+      "age": "36",
+      "nationality": "Spain"
+    },
+    {
+      "name": "Yasser Al-Shahrani",
+      "team": "القادسية",
+      "position": "D",
+      "number": "12",
+      "age": "34",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Gastón Álvarez",
+      "team": "القادسية",
+      "position": "D",
+      "number": "17",
+      "age": "26",
+      "nationality": "Uruguay"
+    },
+    {
+      "name": "Mohammed Qasem",
+      "team": "القادسية",
+      "position": "D",
+      "number": "24",
+      "age": "31",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Waleed Al-Ahmed",
+      "team": "القادسية",
+      "position": "D",
+      "number": "23",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Jehad Thakri",
+      "team": "القادسية",
+      "position": "D",
+      "number": "4",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ali Diabaté",
+      "team": "القادسية",
+      "position": "D",
+      "number": "26",
+      "age": "19",
+      "nationality": ""
+    },
+    {
+      "name": "Abdulah Al Jwayzan",
+      "team": "القادسية",
+      "position": "D",
+      "number": "13",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Julian Weigl",
+      "team": "القادسية",
+      "position": "M",
+      "number": "5",
+      "age": "31",
+      "nationality": "Germany"
+    },
+    {
+      "name": "Nahitan Nández",
+      "team": "القادسية",
+      "position": "M",
+      "number": "8",
+      "age": "30",
+      "nationality": "Uruguay"
+    },
+    {
+      "name": "Tijjani Reijnders",
+      "team": "القادسية",
+      "position": "M",
+      "number": "14",
+      "age": "28",
+      "nationality": "Netherlands"
+    },
+    {
+      "name": "Turki Al-Ammar",
+      "team": "القادسية",
+      "position": "M",
+      "number": "7",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ali Abdullah Hazzazi",
+      "team": "القادسية",
+      "position": "M",
+      "number": "11",
+      "age": "32",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Musab Al-Juwayr",
+      "team": "القادسية",
+      "position": "M",
+      "number": "10",
+      "age": "23",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulmalik Al Jaber",
+      "team": "القادسية",
+      "position": "M",
+      "number": "18",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Abu Al-Shamat",
+      "team": "القادسية",
+      "position": "M",
+      "number": "2",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Eyad Houssa",
+      "team": "القادسية",
+      "position": "M",
+      "number": "27",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ahmed Al Siyahi",
+      "team": "القادسية",
+      "position": "M",
+      "number": "35",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Julián Quiñones",
+      "team": "القادسية",
+      "position": "F",
+      "number": "33",
+      "age": "29",
+      "nationality": "Mexico"
+    },
+    {
+      "name": "Mateo Retegui",
+      "team": "القادسية",
+      "position": "F",
+      "number": "32",
+      "age": "27",
+      "nationality": "Italy"
+    },
+    {
+      "name": "Abdullah Al-Salem",
+      "team": "القادسية",
+      "position": "F",
+      "number": "9",
+      "age": "33",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Haitham Asiri",
+      "team": "القادسية",
+      "position": "F",
+      "number": "19",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Al-Qahtani",
+      "team": "القادسية",
+      "position": "F",
+      "number": "15",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulaziz Al-Aliwa",
+      "team": "القادسية",
+      "position": "F",
+      "number": "46",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Christopher Bonsu Baah",
+      "team": "القادسية",
+      "position": "F",
+      "number": "22",
+      "age": "21",
+      "nationality": "Ghana"
+    },
+    {
+      "name": "Sani Suleiman",
+      "team": "القادسية",
+      "position": "F",
+      "number": "",
+      "age": "20",
+      "nationality": "Nigeria"
+    },
+    {
+      "name": "Mahamadou Sangaré",
+      "team": "القادسية",
+      "position": "F",
+      "number": "30",
+      "age": "19",
+      "nationality": "France"
+    },
     {
       "name": "Yassine Bounou",
       "team": "الهلال",
@@ -1002,262 +1451,6 @@
       "number": "56",
       "age": "21",
       "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Koen Casteels",
-      "team": "القادسية",
-      "position": "G",
-      "number": "1",
-      "age": "34",
-      "nationality": "Belgium"
-    },
-    {
-      "name": "Ahmed Al-Kassar",
-      "team": "القادسية",
-      "position": "G",
-      "number": "28",
-      "age": "35",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Meshari Sunyur",
-      "team": "القادسية",
-      "position": "G",
-      "number": "50",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Wafi Al Aklabi",
-      "team": "القادسية",
-      "position": "G",
-      "number": "60",
-      "age": "18",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abgullah Almuhaysin",
-      "team": "القادسية",
-      "position": "G",
-      "number": "31",
-      "age": "19",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Nacho",
-      "team": "القادسية",
-      "position": "D",
-      "number": "6",
-      "age": "36",
-      "nationality": "Spain"
-    },
-    {
-      "name": "Yasser Al-Shahrani",
-      "team": "القادسية",
-      "position": "D",
-      "number": "12",
-      "age": "34",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Gastón Álvarez",
-      "team": "القادسية",
-      "position": "D",
-      "number": "17",
-      "age": "26",
-      "nationality": "Uruguay"
-    },
-    {
-      "name": "Mohammed Qasem",
-      "team": "القادسية",
-      "position": "D",
-      "number": "24",
-      "age": "31",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Waleed Al-Ahmed",
-      "team": "القادسية",
-      "position": "D",
-      "number": "23",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Jehad Thakri",
-      "team": "القادسية",
-      "position": "D",
-      "number": "4",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ali Diabaté",
-      "team": "القادسية",
-      "position": "D",
-      "number": "26",
-      "age": "19",
-      "nationality": ""
-    },
-    {
-      "name": "Abdulah Al Jwayzan",
-      "team": "القادسية",
-      "position": "D",
-      "number": "13",
-      "age": "19",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Julian Weigl",
-      "team": "القادسية",
-      "position": "M",
-      "number": "5",
-      "age": "31",
-      "nationality": "Germany"
-    },
-    {
-      "name": "Nahitan Nández",
-      "team": "القادسية",
-      "position": "M",
-      "number": "8",
-      "age": "30",
-      "nationality": "Uruguay"
-    },
-    {
-      "name": "Tijjani Reijnders",
-      "team": "القادسية",
-      "position": "M",
-      "number": "14",
-      "age": "28",
-      "nationality": "Netherlands"
-    },
-    {
-      "name": "Turki Al-Ammar",
-      "team": "القادسية",
-      "position": "M",
-      "number": "7",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ali Abdullah Hazzazi",
-      "team": "القادسية",
-      "position": "M",
-      "number": "11",
-      "age": "32",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Musab Al-Juwayr",
-      "team": "القادسية",
-      "position": "M",
-      "number": "10",
-      "age": "23",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulmalik Al Jaber",
-      "team": "القادسية",
-      "position": "M",
-      "number": "18",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Abu Al-Shamat",
-      "team": "القادسية",
-      "position": "M",
-      "number": "2",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Eyad Houssa",
-      "team": "القادسية",
-      "position": "M",
-      "number": "27",
-      "age": "19",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ahmed Al Siyahi",
-      "team": "القادسية",
-      "position": "M",
-      "number": "35",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Julián Quiñones",
-      "team": "القادسية",
-      "position": "F",
-      "number": "33",
-      "age": "29",
-      "nationality": "Mexico"
-    },
-    {
-      "name": "Mateo Retegui",
-      "team": "القادسية",
-      "position": "F",
-      "number": "32",
-      "age": "27",
-      "nationality": "Italy"
-    },
-    {
-      "name": "Abdullah Al-Salem",
-      "team": "القادسية",
-      "position": "F",
-      "number": "9",
-      "age": "33",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Haitham Asiri",
-      "team": "القادسية",
-      "position": "F",
-      "number": "19",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Al-Qahtani",
-      "team": "القادسية",
-      "position": "F",
-      "number": "15",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulaziz Al-Aliwa",
-      "team": "القادسية",
-      "position": "F",
-      "number": "46",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Christopher Bonsu Baah",
-      "team": "القادسية",
-      "position": "F",
-      "number": "22",
-      "age": "21",
-      "nationality": "Ghana"
-    },
-    {
-      "name": "Sani Suleiman",
-      "team": "القادسية",
-      "position": "F",
-      "number": "",
-      "age": "20",
-      "nationality": "Nigeria"
-    },
-    {
-      "name": "Mahamadou Sangaré",
-      "team": "القادسية",
-      "position": "F",
-      "number": "30",
-      "age": "19",
-      "nationality": "France"
     },
     {
       "name": "Luís Maximiano",
@@ -4957,5 +5150,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-09 15:27 UTC"
+  "lastUpdated": "2026-10-09 16:19 UTC"
 }
