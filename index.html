@@ -8,24 +8,32 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
   h1 { text-align: center; margin-bottom: 25px; color: #1a5490; }
-  .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; }
-  .tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-weight: bold; color: #555; border-radius: 8px; font-family: inherit; }
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-weight: bold; color: #555; border-radius: 8px; transition: 0.2s; font-family: inherit; }
+  .tab:hover { background: #f0f2f5; }
   .tab.active { background: #1a5490; color: white; }
-  .content { background: white; padding: 20px; border-radius: 10px; }
+  .content { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
   .hidden { display: none; }
   table { width: 100%; border-collapse: collapse; }
-  th { background: #1a5490; color: white; padding: 12px; font-size: 14px; }
+  th { background: #1a5490; color: white; padding: 12px; text-align: center; font-size: 14px; }
   td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; font-size: 14px; }
   .team { text-align: right; font-weight: bold; }
+  tr:hover { background: #f8f9fa; }
   .loading { text-align: center; color: #1a5490; padding: 40px; }
-  .match { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
-  .match-team { flex: 1; font-weight: bold; }
-  .match-team.home { text-align: left; }
-  .match-team.away { text-align: right; }
-  .score { background: #1a5490; color: white; padding: 8px 18px; border-radius: 6px; font-weight: bold; font-size: 18px; margin: 0 15px; min-width: 70px; text-align: center; }
-  .match-date { text-align: center; color: #888; font-size: 12px; padding: 5px; }
+  .empty { text-align: center; color: #888; padding: 40px; font-size: 16px; }
+  .match-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: 0.2s; }
+  .match-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; color: #666; }
+  .match-date { font-weight: bold; }
+  .match-status { background: #e8f4fd; color: #1a5490; padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+  .match-status.live { background: #fee; color: #c0392b; }
+  .match-status.finished { background: #e8f8e8; color: #27ae60; }
+  .match-body { display: flex; justify-content: space-between; align-items: center; }
+  .match-team { flex: 1; font-weight: bold; font-size: 16px; text-align: center; }
+  .match-center { margin: 0 20px; min-width: 100px; text-align: center; }
+  .match-score { background: #1a5490; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 20px; }
+  .match-time { color: #1a5490; font-weight: bold; font-size: 16px; padding: 8px 0; }
   .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
-  .empty { text-align: center; color: #888; padding: 40px; }
 </style>
 </head>
 <body>
@@ -34,7 +42,7 @@
 
 <div class="tabs">
   <button class="tab active" onclick="showTab('standings', this)">الترتيب</button>
-  <button class="tab" onclick="showTab('results', this)">النتائج</button>
+  <button class="tab" onclick="showTab('results', this)">المباريات</button>
 </div>
 
 <div id="standings" class="content">
@@ -64,6 +72,24 @@ function showTab(id, btn) {
   btn.classList.add('active');
 }
 
+function formatMatchDate(iso) {
+  var d = new Date(iso);
+  var days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  var months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  return days[d.getDay()] + '، ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+}
+
+function formatMatchTime(iso) {
+  var d = new Date(iso);
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var ampm = h >= 12 ? 'مساءً' : 'صباحاً';
+  h = h % 12;
+  if (h === 0) h = 12;
+  var mm = m < 10 ? '0' + m : m;
+  return h + ':' + mm + ' ' + ampm;
+}
+
 fetch('data.json?v=' + Date.now())
   .then(function(r) { return r.json(); })
   .then(function(data) {
@@ -86,21 +112,37 @@ fetch('data.json?v=' + Date.now())
     document.getElementById('standingsBody').innerHTML = html;
     document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
 
-    // النتائج
+    // المباريات
     var rd = document.getElementById('resultsData');
     if (!data.results || data.results.length === 0) {
-      rd.innerHTML = '<div class="empty">لا توجد مباريات حديثة. سيتم التحديث تلقائياً.</div>';
+      rd.innerHTML = '<div class="empty">لا توجد مباريات حالياً. سيتم التحديث تلقائياً.</div>';
     } else {
       var rhtml = '';
       data.results.forEach(function(m) {
-        var d = new Date(m.date);
-        var ds = d.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' });
-        rhtml += '<div>';
-        rhtml += '<div class="match-date">' + ds + ' — ' + m.status + '</div>';
-        rhtml += '<div class="match">';
-        rhtml += '<div class="match-team home">' + m.home + '</div>';
-        rhtml += '<div class="score">' + m.hs + ' - ' + m.as + '</div>';
-        rhtml += '<div class="match-team away">' + m.away + '</div>';
+        var statusClass = 'match-status';
+        var statusText = m.status || 'قادمة';
+        var isLive = statusText.indexOf('progress') !== -1 || statusText.indexOf('Half') !== -1;
+        var isFinished = statusText.indexOf('Final') !== -1 || statusText.indexOf('FT') !== -1;
+        if (isLive) { statusClass += ' live'; statusText = '🔴 مباشر'; }
+        else if (isFinished) { statusClass += ' finished'; statusText = 'انتهت'; }
+        else { statusText = 'لم تبدأ'; }
+
+        var centerHtml;
+        if (isFinished || isLive) {
+          centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
+        } else {
+          centerHtml = '<div class="match-time">' + formatMatchTime(m.date) + '</div>';
+        }
+
+        rhtml += '<div class="match-card">';
+        rhtml += '<div class="match-header">';
+        rhtml += '<div class="match-date">' + formatMatchDate(m.date) + '</div>';
+        rhtml += '<div class="' + statusClass + '">' + statusText + '</div>';
+        rhtml += '</div>';
+        rhtml += '<div class="match-body">';
+        rhtml += '<div class="match-team">' + m.home + '</div>';
+        rhtml += '<div class="match-center">' + centerHtml + '</div>';
+        rhtml += '<div class="match-team">' + m.away + '</div>';
         rhtml += '</div></div>';
       });
       rd.innerHTML = rhtml;
