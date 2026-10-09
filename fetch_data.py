@@ -3,8 +3,7 @@ from datetime import datetime
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard"
-ESPN_LEADERS = "https://site.web.api.espn.com/apis/common/v3/sports/soccer/ksa.1/leaders"
-ESPN_ATHLETES = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/athletes?limit=100&active=true"
+ESPN_ATHLETES = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/athletes?limit=200&active=true"
 
 translations = {
     "Al Hilal":"الهلال","Al Ittihad":"الاتحاد","Al Nassr":"النصر","Al Qadsiah":"القادسية",
@@ -13,7 +12,6 @@ translations = {
     "Al Khaleej":"الخليج","Al Shabab":"الشباب","Al Fateh":"الفتح","Al Faisaly":"الفيصلي",
     "Al Taawoun":"التعاون","Abha":"أبها"
 }
-
 def tr(name): return translations.get(name, name)
 
 def fetch_json(url, timeout=30):
@@ -39,9 +37,9 @@ try:
             "gd": s.get("pointDifferential", "0"),
             "pts": s.get("points", "0")
         })
-    print(f"الترتيب: {len(standings)} فريق")
+    print(f"الترتيب: {len(standings)}")
 except Exception as ex:
-    print("خطأ في الترتيب:", ex)
+    print("خطأ الترتيب:", ex)
 
 # 2. المباريات
 results = []
@@ -62,50 +60,35 @@ try:
             })
     print(f"المباريات: {len(results)}")
 except Exception as ex:
-    print("خطأ في المباريات:", ex)
+    print("خطأ المباريات:", ex)
 
-# 3. الهدافون - نجرب عدة endpoints
-scorers = []
+# 3. اللاعبون
+players = []
 try:
-    leaders = fetch_json(ESPN_LEADERS)
-    # محاولة استخراج الهدافين من leaders
-    if "leaders" in leaders:
-        for cat in leaders["leaders"]:
-            if cat.get("name") in ("goals", "totalGoals") or "goal" in cat.get("name","").lower():
-                for item in cat.get("leaders", [])[:20]:
-                    athlete = item.get("athlete", {})
-                    team = athlete.get("team", {}) or item.get("team", {})
-                    scorers.append({
-                        "name": athlete.get("displayName", "غير معروف"),
-                        "team": tr(team.get("displayName", "")),
-                        "goals": str(item.get("value", 0)).split(".")[0],
-                        "assists": "0"
-                    })
-                break
+    ath = fetch_json(ESPN_ATHLETES)
+    for item in ath.get("athletes", []):
+        team = item.get("team", {}) or {}
+        position = item.get("position", {}) or {}
+        players.append({
+            "name": item.get("displayName", ""),
+            "team": tr(team.get("displayName", "")),
+            "position": position.get("abbreviation", position.get("name", "")),
+            "number": str(item.get("jersey", "")),
+            "age": str(item.get("age", "")),
+            "nationality": item.get("citizenship", "")
+        })
+    print(f"اللاعبون: {len(players)}")
 except Exception as ex:
-    print("محاولة leaders فشلت:", ex)
+    print("خطأ اللاعبين:", ex)
 
-# إذا لم نجد هدافين، نجرب athletes
-if not scorers:
-    try:
-        ath = fetch_json(ESPN_ATHLETES)
-        for item in ath.get("athletes", [])[:30]:
-            # نحتاج إحصائيات لكل لاعب - هذا بطيء، لذلك نكتفي بالبيانات الأساسية
-            pass
-    except Exception as ex:
-        print("محاولة athletes فشلت:", ex)
-
-print(f"الهدافون: {len(scorers)}")
-
-# حفظ
 output = {
     "standings": standings,
     "results": results,
-    "scorers": scorers,
+    "scorers": [],
+    "players": players,
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
 
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
-
-print("تم الحفظ بنجاح")
+print("تم الحفظ")
