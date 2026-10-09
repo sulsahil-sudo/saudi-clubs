@@ -34,6 +34,12 @@
   .match-score { background: #1a5490; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 20px; }
   .match-time { color: #1a5490; font-weight: bold; font-size: 16px; padding: 8px 0; }
   .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
+  .rank-badge { display: inline-block; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background: #e8f4fd; color: #1a5490; font-weight: bold; text-align: center; }
+  .rank-badge.gold { background: #ffd700; color: #333; }
+  .rank-badge.silver { background: #c0c0c0; color: #333; }
+  .rank-badge.bronze { background: #cd7f32; color: white; }
+  .player-name { text-align: right; font-weight: bold; font-size: 15px; }
+  .goals-cell { font-size: 18px; font-weight: bold; color: #1a5490; }
 </style>
 </head>
 <body>
@@ -42,22 +48,27 @@
 
 <div class="tabs">
   <button class="tab active" onclick="showTab('standings', this)">الترتيب</button>
+  <button class="tab" onclick="showTab('scorers', this)">الهدافون</button>
   <button class="tab" onclick="showTab('results', this)">المباريات</button>
 </div>
 
 <div id="standings" class="content">
   <table>
     <thead>
-      <tr>
-        <th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th>
-        <th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th>
-      </tr>
+      <tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr>
     </thead>
-    <tbody id="standingsBody">
-      <tr><td colspan="10" class="loading">جاري التحميل...</td></tr>
-    </tbody>
+    <tbody id="standingsBody"><tr><td colspan="10" class="loading">جاري التحميل...</td></tr></tbody>
   </table>
   <div id="updatedStandings" class="updated"></div>
+</div>
+
+<div id="scorers" class="content hidden">
+  <table>
+    <thead>
+      <tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>الأهداف</th></tr>
+    </thead>
+    <tbody id="scorersBody"><tr><td colspan="4" class="loading">جاري التحميل...</td></tr></tbody>
+  </table>
 </div>
 
 <div id="results" class="content hidden">
@@ -84,8 +95,7 @@ function formatMatchTime(iso) {
   var h = d.getHours();
   var m = d.getMinutes();
   var ampm = h >= 12 ? 'مساءً' : 'صباحاً';
-  h = h % 12;
-  if (h === 0) h = 12;
+  h = h % 12; if (h === 0) h = 12;
   var mm = m < 10 ? '0' + m : m;
   return h + ':' + mm + ' ' + ampm;
 }
@@ -96,21 +106,31 @@ fetch('data.json?v=' + Date.now())
     // الترتيب
     var html = '';
     data.standings.forEach(function(t) {
-      html += '<tr>';
-      html += '<td>' + t.r + '</td>';
-      html += '<td class="team">' + t.t + '</td>';
-      html += '<td>' + t.p + '</td>';
-      html += '<td>' + t.w + '</td>';
-      html += '<td>' + t.d + '</td>';
-      html += '<td>' + t.l + '</td>';
-      html += '<td>' + t.gf + '</td>';
-      html += '<td>' + t.ga + '</td>';
-      html += '<td>' + t.gd + '</td>';
-      html += '<td><b>' + t.pts + '</b></td>';
-      html += '</tr>';
+      html += '<tr><td>' + t.r + '</td><td class="team">' + t.t + '</td><td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.gd + '</td><td><b>' + t.pts + '</b></td></tr>';
     });
     document.getElementById('standingsBody').innerHTML = html;
     document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
+
+    // الهدافون
+    var sb = document.getElementById('scorersBody');
+    if (!data.scorers || data.scorers.length === 0) {
+      sb.innerHTML = '<tr><td colspan="4" class="empty">قائمة الهدافين ستتوفر قريباً. يتم جمع البيانات...</td></tr>';
+    } else {
+      var shtml = '';
+      data.scorers.forEach(function(p, i) {
+        var badgeClass = 'rank-badge';
+        if (i === 0) badgeClass += ' gold';
+        else if (i === 1) badgeClass += ' silver';
+        else if (i === 2) badgeClass += ' bronze';
+        shtml += '<tr>';
+        shtml += '<td><span class="' + badgeClass + '">' + (i+1) + '</span></td>';
+        shtml += '<td class="player-name">' + p.name + '</td>';
+        shtml += '<td>' + p.team + '</td>';
+        shtml += '<td class="goals-cell">' + p.goals + '</td>';
+        shtml += '</tr>';
+      });
+      sb.innerHTML = shtml;
+    }
 
     // المباريات
     var rd = document.getElementById('resultsData');
@@ -120,30 +140,22 @@ fetch('data.json?v=' + Date.now())
       var rhtml = '';
       data.results.forEach(function(m) {
         var statusClass = 'match-status';
-        var statusText = m.status || 'قادمة';
+        var statusText = m.status || '';
         var isLive = statusText.indexOf('progress') !== -1 || statusText.indexOf('Half') !== -1;
         var isFinished = statusText.indexOf('Final') !== -1 || statusText.indexOf('FT') !== -1;
         if (isLive) { statusClass += ' live'; statusText = '🔴 مباشر'; }
         else if (isFinished) { statusClass += ' finished'; statusText = 'انتهت'; }
         else { statusText = 'لم تبدأ'; }
-
         var centerHtml;
         if (isFinished || isLive) {
           centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
         } else {
           centerHtml = '<div class="match-time">' + formatMatchTime(m.date) + '</div>';
         }
-
         rhtml += '<div class="match-card">';
-        rhtml += '<div class="match-header">';
-        rhtml += '<div class="match-date">' + formatMatchDate(m.date) + '</div>';
-        rhtml += '<div class="' + statusClass + '">' + statusText + '</div>';
+        rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + statusText + '</div></div>';
+        rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
         rhtml += '</div>';
-        rhtml += '<div class="match-body">';
-        rhtml += '<div class="match-team">' + m.home + '</div>';
-        rhtml += '<div class="match-center">' + centerHtml + '</div>';
-        rhtml += '<div class="match-team">' + m.away + '</div>';
-        rhtml += '</div></div>';
       });
       rd.innerHTML = rhtml;
     }
