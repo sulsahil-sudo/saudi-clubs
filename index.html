@@ -21,19 +21,31 @@
   tr:hover { background: #f8f9fa; }
   .loading { text-align: center; color: #1a5490; padding: 40px; }
   .empty { text-align: center; color: #888; padding: 40px; font-size: 16px; }
+
   .match-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: 0.2s; }
   .match-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
   .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; color: #666; }
   .match-date { font-weight: bold; }
   .match-status { background: #e8f4fd; color: #1a5490; padding: 4px 10px; border-radius: 6px; font-size: 12px; }
-  .match-status.live { background: #fee; color: #c0392b; }
+  .match-status.live { background: #fee; color: #c0392b; animation: pulse 1.5s infinite; }
   .match-status.finished { background: #e8f8e8; color: #27ae60; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
   .match-body { display: flex; justify-content: space-between; align-items: center; }
   .match-team { flex: 1; font-weight: bold; font-size: 16px; text-align: center; }
-  .match-center { margin: 0 20px; min-width: 100px; text-align: center; }
+  .match-center { margin: 0 20px; min-width: 180px; text-align: center; }
   .match-score { background: #1a5490; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 20px; }
-  .match-time { color: #1a5490; font-weight: bold; font-size: 16px; padding: 8px 0; }
+
+  /* عداد تنازلي */
+  .countdown { display: flex; justify-content: center; gap: 6px; direction: ltr; }
+  .cd-box { background: linear-gradient(135deg, #1a5490, #2c6db5); color: white; padding: 8px 10px; border-radius: 8px; min-width: 50px; text-align: center; }
+  .cd-num { font-size: 20px; font-weight: bold; line-height: 1; }
+  .cd-label { font-size: 10px; opacity: 0.85; margin-top: 3px; }
+  .cd-sep { color: #1a5490; font-size: 20px; font-weight: bold; align-self: center; padding: 0 2px; }
+
+  .match-time { color: #1a5490; font-weight: bold; font-size: 14px; padding: 5px 0; }
   .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
+
   .rank-badge { display: inline-block; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background: #e8f4fd; color: #1a5490; font-weight: bold; text-align: center; }
   .rank-badge.gold { background: #ffd700; color: #333; }
   .rank-badge.silver { background: #c0c0c0; color: #333; }
@@ -100,6 +112,58 @@ function formatMatchTime(iso) {
   return h + ':' + mm + ' ' + ampm;
 }
 
+// تخزين المباريات عالمياً للعداد
+var allMatches = [];
+
+// توليد HTML للعداد التنازلي
+function countdownHTML(matchId) {
+  return '<div class="countdown" id="cd-' + matchId + '">' +
+         '<div class="cd-box"><div class="cd-num" id="cd-d-' + matchId + '">0</div><div class="cd-label">يوم</div></div>' +
+         '<div class="cd-sep">:</div>' +
+         '<div class="cd-box"><div class="cd-num" id="cd-h-' + matchId + '">0</div><div class="cd-label">ساعة</div></div>' +
+         '<div class="cd-sep">:</div>' +
+         '<div class="cd-box"><div class="cd-num" id="cd-m-' + matchId + '">0</div><div class="cd-label">دقيقة</div></div>' +
+         '<div class="cd-sep">:</div>' +
+         '<div class="cd-box"><div class="cd-num" id="cd-s-' + matchId + '">0</div><div class="cd-label">ثانية</div></div>' +
+         '</div>';
+}
+
+// تحديث جميع العدادات كل ثانية
+function updateAllCountdowns() {
+  allMatches.forEach(function(m, idx) {
+    var el = document.getElementById('cd-' + idx);
+    if (!el) return;
+    var target = new Date(m.date).getTime();
+    var now = Date.now();
+    var diff = target - now;
+
+    var dEl = document.getElementById('cd-d-' + idx);
+    var hEl = document.getElementById('cd-h-' + idx);
+    var mEl = document.getElementById('cd-m-' + idx);
+    var sEl = document.getElementById('cd-s-' + idx);
+
+    if (diff <= 0) {
+      // انتهى العد، المباراة بدأت
+      dEl.textContent = '0';
+      hEl.textContent = '0';
+      mEl.textContent = '0';
+      sEl.textContent = '0';
+      return;
+    }
+
+    var totalSec = Math.floor(diff / 1000);
+    var days = Math.floor(totalSec / 86400);
+    var hours = Math.floor((totalSec % 86400) / 3600);
+    var mins = Math.floor((totalSec % 3600) / 60);
+    var secs = totalSec % 60;
+
+    dEl.textContent = days;
+    hEl.textContent = hours < 10 ? '0' + hours : hours;
+    mEl.textContent = mins < 10 ? '0' + mins : mins;
+    sEl.textContent = secs < 10 ? '0' + secs : secs;
+  });
+}
+
 fetch('data.json?v=' + Date.now())
   .then(function(r) { return r.json(); })
   .then(function(data) {
@@ -114,7 +178,7 @@ fetch('data.json?v=' + Date.now())
     // الهدافون
     var sb = document.getElementById('scorersBody');
     if (!data.scorers || data.scorers.length === 0) {
-      sb.innerHTML = '<tr><td colspan="4" class="empty">قائمة الهدافين ستتوفر قريباً. يتم جمع البيانات...</td></tr>';
+      sb.innerHTML = '<tr><td colspan="4" class="empty">قائمة الهدافين ستتوفر قريباً.</td></tr>';
     } else {
       var shtml = '';
       data.scorers.forEach(function(p, i) {
@@ -122,12 +186,7 @@ fetch('data.json?v=' + Date.now())
         if (i === 0) badgeClass += ' gold';
         else if (i === 1) badgeClass += ' silver';
         else if (i === 2) badgeClass += ' bronze';
-        shtml += '<tr>';
-        shtml += '<td><span class="' + badgeClass + '">' + (i+1) + '</span></td>';
-        shtml += '<td class="player-name">' + p.name + '</td>';
-        shtml += '<td>' + p.team + '</td>';
-        shtml += '<td class="goals-cell">' + p.goals + '</td>';
-        shtml += '</tr>';
+        shtml += '<tr><td><span class="' + badgeClass + '">' + (i+1) + '</span></td><td class="player-name">' + p.name + '</td><td>' + p.team + '</td><td class="goals-cell">' + p.goals + '</td></tr>';
       });
       sb.innerHTML = shtml;
     }
@@ -137,27 +196,41 @@ fetch('data.json?v=' + Date.now())
     if (!data.results || data.results.length === 0) {
       rd.innerHTML = '<div class="empty">لا توجد مباريات حالياً. سيتم التحديث تلقائياً.</div>';
     } else {
+      allMatches = data.results;
       var rhtml = '';
-      data.results.forEach(function(m) {
+      data.results.forEach(function(m, idx) {
         var statusClass = 'match-status';
         var statusText = m.status || '';
         var isLive = statusText.indexOf('progress') !== -1 || statusText.indexOf('Half') !== -1;
         var isFinished = statusText.indexOf('Final') !== -1 || statusText.indexOf('FT') !== -1;
-        if (isLive) { statusClass += ' live'; statusText = '🔴 مباشر'; }
-        else if (isFinished) { statusClass += ' finished'; statusText = 'انتهت'; }
-        else { statusText = 'لم تبدأ'; }
+
         var centerHtml;
-        if (isFinished || isLive) {
+        var headerStatus;
+
+        if (isFinished) {
+          statusClass += ' finished';
+          headerStatus = 'انتهت';
+          centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
+        } else if (isLive) {
+          statusClass += ' live';
+          headerStatus = '🔴 مباشر الآن';
           centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
         } else {
-          centerHtml = '<div class="match-time">' + formatMatchTime(m.date) + '</div>';
+          // المباراة لم تبدأ: عرض العداد
+          headerStatus = '⏱️ ' + formatMatchTime(m.date);
+          centerHtml = countdownHTML(idx);
         }
+
         rhtml += '<div class="match-card">';
-        rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + statusText + '</div></div>';
+        rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
         rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
         rhtml += '</div>';
       });
       rd.innerHTML = rhtml;
+
+      // تشغيل العدادات
+      updateAllCountdowns();
+      setInterval(updateAllCountdowns, 1000);
     }
   })
   .catch(function(e) {
