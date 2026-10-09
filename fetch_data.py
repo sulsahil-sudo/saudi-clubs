@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
 
-# جلب المباريات من آخر 14 يوم وحتى 14 يوم قادم
 today = datetime.utcnow()
 start = (today - timedelta(days=14)).strftime("%Y%m%d")
 end = (today + timedelta(days=14)).strftime("%Y%m%d")
@@ -22,7 +21,6 @@ def fetch_json(url, timeout=30):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     return json.loads(urllib.request.urlopen(req, timeout=timeout).read())
 
-# 1. الترتيب
 standings = []
 team_ids = []
 try:
@@ -48,20 +46,20 @@ try:
 except Exception as ex:
     print("خطأ الترتيب:", ex)
 
-# 2. المباريات (آخر 14 + قادم 14 يوم)
 results = []
 try:
+    print(f"جلب المباريات من: {start} إلى {end}")
     sb = fetch_json(ESPN_SCOREBOARD, timeout=45)
     events = sb.get("events", [])
+    print(f"عدد الأحداث: {len(events)}")
     for ev in events:
         c = ev["competitions"][0]
         home = next((x for x in c["competitors"] if x["homeAway"] == "home"), None)
         away = next((x for x in c["competitors"] if x["homeAway"] == "away"), None)
         if home and away:
-            # معلومات الحالة
             status_type = ev.get("status", {}).get("type", {})
             status_detail = status_type.get("detail", "")
-            status_state = status_type.get("state", "")  # pre / in / post
+            status_state = status_type.get("state", "")
             status_completed = status_type.get("completed", False)
             clock = ev.get("status", {}).get("displayClock", "")
             period = ev.get("status", {}).get("period", 0)
@@ -82,7 +80,6 @@ try:
 except Exception as ex:
     print("خطأ المباريات:", ex)
 
-# 3. اللاعبون
 players = []
 for team_id, team_name in team_ids:
     try:
