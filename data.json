@@ -50,6 +50,18 @@
     },
     {
       "r": 5,
+      "t": "الأهلي",
+      "p": "8",
+      "w": "5",
+      "d": "0",
+      "l": "3",
+      "gf": "20",
+      "ga": "10",
+      "gd": "+10",
+      "pts": "15"
+    },
+    {
+      "r": 6,
       "t": "نيوم",
       "p": "7",
       "w": "5",
@@ -59,18 +71,6 @@
       "ga": "6",
       "gd": "+7",
       "pts": "15"
-    },
-    {
-      "r": 6,
-      "t": "الأهلي",
-      "p": "7",
-      "w": "4",
-      "d": "0",
-      "l": "3",
-      "gf": "16",
-      "ga": "10",
-      "gd": "+6",
-      "pts": "12"
     },
     {
       "r": 7,
@@ -170,18 +170,6 @@
     },
     {
       "r": 15,
-      "t": "الفتح",
-      "p": "7",
-      "w": "0",
-      "d": "3",
-      "l": "4",
-      "gf": "4",
-      "ga": "11",
-      "gd": "-7",
-      "pts": "3"
-    },
-    {
-      "r": 16,
       "t": "الفيصلي",
       "p": "7",
       "w": "0",
@@ -193,7 +181,7 @@
       "pts": "3"
     },
     {
-      "r": 17,
+      "r": 16,
       "t": "التعاون",
       "p": "7",
       "w": "0",
@@ -202,6 +190,18 @@
       "gf": "3",
       "ga": "12",
       "gd": "-9",
+      "pts": "3"
+    },
+    {
+      "r": 17,
+      "t": "الفتح",
+      "p": "8",
+      "w": "0",
+      "d": "3",
+      "l": "5",
+      "gf": "4",
+      "ga": "15",
+      "gd": "-11",
       "pts": "3"
     },
     {
@@ -234,25 +234,25 @@
       "home": "الفتح",
       "away": "الأهلي",
       "hs": "0",
-      "as": "3",
+      "as": "4",
       "date": "2026-10-09T14:55Z",
-      "status": "64'",
-      "state": "in",
-      "completed": false,
-      "clock": "64'",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+4'",
       "period": 2
     },
     {
       "home": "النصر",
       "away": "الدرعية",
-      "hs": "0",
+      "hs": "2",
       "as": "0",
       "date": "2026-10-09T18:00Z",
-      "status": "Fri, October 9th at 2:00 PM EDT",
-      "state": "pre",
+      "status": "61'",
+      "state": "in",
       "completed": false,
-      "clock": "0'",
-      "period": 0
+      "clock": "61'",
+      "period": 2
     },
     {
       "home": "الحزم",
@@ -1224,7 +1224,7 @@
       "name": "Abdulhadi Al-Alwan",
       "team": "النصر",
       "position": "G",
-      "number": "",
+      "number": "22",
       "age": "",
       "nationality": "Saudi Arabia"
     },
@@ -1450,214 +1450,6 @@
       "position": "F",
       "number": "56",
       "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Luís Maximiano",
-      "team": "نيوم",
-      "position": "G",
-      "number": "81",
-      "age": "27",
-      "nationality": "Portugal"
-    },
-    {
-      "name": "Marcin Bulka",
-      "team": "نيوم",
-      "position": "G",
-      "number": "1",
-      "age": "27",
-      "nationality": "Poland"
-    },
-    {
-      "name": "Abdulrhman Daghreeri",
-      "team": "نيوم",
-      "position": "G",
-      "number": "33",
-      "age": "36",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Malang Sarr",
-      "team": "نيوم",
-      "position": "D",
-      "number": "5",
-      "age": "27",
-      "nationality": "France"
-    },
-    {
-      "name": "Mohammed Al-Burayk",
-      "team": "نيوم",
-      "position": "D",
-      "number": "2",
-      "age": "34",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Khalifah Al-Dawsari",
-      "team": "نيوم",
-      "position": "D",
-      "number": "4",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohannad Abu Taha",
-      "team": "نيوم",
-      "position": "D",
-      "number": "19",
-      "age": "23",
-      "nationality": "Jordan"
-    },
-    {
-      "name": "Abdulmalik Al Oyayari",
-      "team": "نيوم",
-      "position": "D",
-      "number": "15",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Nathan Zeze",
-      "team": "نيوم",
-      "position": "D",
-      "number": "44",
-      "age": "21",
-      "nationality": "France"
-    },
-    {
-      "name": "Islam Hawsawi",
-      "team": "نيوم",
-      "position": "D",
-      "number": "27",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Khalid Al Rammah",
-      "team": "نيوم",
-      "position": "D",
-      "number": "75",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Al Dossari",
-      "team": "نيوم",
-      "position": "D",
-      "number": "55",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Valentin Vada",
-      "team": "نيوم",
-      "position": "M",
-      "number": "23",
-      "age": "30",
-      "nationality": "Argentina"
-    },
-    {
-      "name": "Abdulaziz Noor",
-      "team": "نيوم",
-      "position": "M",
-      "number": "24",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Faisal Al-Ghamdi",
-      "team": "نيوم",
-      "position": "M",
-      "number": "8",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ala Al-Hajji",
-      "team": "نيوم",
-      "position": "M",
-      "number": "18",
-      "age": "30",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abbas Al Hassan",
-      "team": "نيوم",
-      "position": "M",
-      "number": "6",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Amadou Koné",
-      "team": "نيوم",
-      "position": "M",
-      "number": "72",
-      "age": "21",
-      "nationality": "Mali"
-    },
-    {
-      "name": "Alexandre Lacazette",
-      "team": "نيوم",
-      "position": "F",
-      "number": "91",
-      "age": "35",
-      "nationality": "France"
-    },
-    {
-      "name": "Saïd Benrahma",
-      "team": "نيوم",
-      "position": "F",
-      "number": "10",
-      "age": "31",
-      "nationality": "Algeria"
-    },
-    {
-      "name": "Georgios Masouras",
-      "team": "نيوم",
-      "position": "F",
-      "number": "7",
-      "age": "32",
-      "nationality": "Greece"
-    },
-    {
-      "name": "Haroune Camara",
-      "team": "نيوم",
-      "position": "F",
-      "number": "70",
-      "age": "28",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Khalil Al-Absi",
-      "team": "نيوم",
-      "position": "F",
-      "number": "14",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Muhannad Al-Saad",
-      "team": "نيوم",
-      "position": "F",
-      "number": "77",
-      "age": "23",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulaziz Al Othman",
-      "team": "نيوم",
-      "position": "F",
-      "number": "9",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ahmed Al Anazi",
-      "team": "نيوم",
-      "position": "F",
-      "number": "22",
-      "age": "22",
       "nationality": "Saudi Arabia"
     },
     {
@@ -1949,6 +1741,214 @@
       "nationality": "Saudi Arabia"
     },
     {
+      "name": "Luís Maximiano",
+      "team": "نيوم",
+      "position": "G",
+      "number": "81",
+      "age": "27",
+      "nationality": "Portugal"
+    },
+    {
+      "name": "Marcin Bulka",
+      "team": "نيوم",
+      "position": "G",
+      "number": "1",
+      "age": "27",
+      "nationality": "Poland"
+    },
+    {
+      "name": "Abdulrhman Daghreeri",
+      "team": "نيوم",
+      "position": "G",
+      "number": "33",
+      "age": "36",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Malang Sarr",
+      "team": "نيوم",
+      "position": "D",
+      "number": "5",
+      "age": "27",
+      "nationality": "France"
+    },
+    {
+      "name": "Mohammed Al-Burayk",
+      "team": "نيوم",
+      "position": "D",
+      "number": "2",
+      "age": "34",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Khalifah Al-Dawsari",
+      "team": "نيوم",
+      "position": "D",
+      "number": "4",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohannad Abu Taha",
+      "team": "نيوم",
+      "position": "D",
+      "number": "19",
+      "age": "23",
+      "nationality": "Jordan"
+    },
+    {
+      "name": "Abdulmalik Al Oyayari",
+      "team": "نيوم",
+      "position": "D",
+      "number": "15",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Nathan Zeze",
+      "team": "نيوم",
+      "position": "D",
+      "number": "44",
+      "age": "21",
+      "nationality": "France"
+    },
+    {
+      "name": "Islam Hawsawi",
+      "team": "نيوم",
+      "position": "D",
+      "number": "27",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Khalid Al Rammah",
+      "team": "نيوم",
+      "position": "D",
+      "number": "75",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Al Dossari",
+      "team": "نيوم",
+      "position": "D",
+      "number": "55",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Valentin Vada",
+      "team": "نيوم",
+      "position": "M",
+      "number": "23",
+      "age": "30",
+      "nationality": "Argentina"
+    },
+    {
+      "name": "Abdulaziz Noor",
+      "team": "نيوم",
+      "position": "M",
+      "number": "24",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Faisal Al-Ghamdi",
+      "team": "نيوم",
+      "position": "M",
+      "number": "8",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ala Al-Hajji",
+      "team": "نيوم",
+      "position": "M",
+      "number": "18",
+      "age": "30",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abbas Al Hassan",
+      "team": "نيوم",
+      "position": "M",
+      "number": "6",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Amadou Koné",
+      "team": "نيوم",
+      "position": "M",
+      "number": "72",
+      "age": "21",
+      "nationality": "Mali"
+    },
+    {
+      "name": "Alexandre Lacazette",
+      "team": "نيوم",
+      "position": "F",
+      "number": "91",
+      "age": "35",
+      "nationality": "France"
+    },
+    {
+      "name": "Saïd Benrahma",
+      "team": "نيوم",
+      "position": "F",
+      "number": "10",
+      "age": "31",
+      "nationality": "Algeria"
+    },
+    {
+      "name": "Georgios Masouras",
+      "team": "نيوم",
+      "position": "F",
+      "number": "7",
+      "age": "32",
+      "nationality": "Greece"
+    },
+    {
+      "name": "Haroune Camara",
+      "team": "نيوم",
+      "position": "F",
+      "number": "70",
+      "age": "28",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Khalil Al-Absi",
+      "team": "نيوم",
+      "position": "F",
+      "number": "14",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Muhannad Al-Saad",
+      "team": "نيوم",
+      "position": "F",
+      "number": "77",
+      "age": "23",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulaziz Al Othman",
+      "team": "نيوم",
+      "position": "F",
+      "number": "9",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ahmed Al Anazi",
+      "team": "نيوم",
+      "position": "F",
+      "number": "22",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
       "name": "Hamed Al-Shanqiti",
       "team": "الخلود",
       "position": "G",
@@ -2229,6 +2229,14 @@
       "nationality": "Saudi Arabia"
     },
     {
+      "name": "Mansour Hibatullah Al Sibyani",
+      "team": "الدرعية",
+      "position": "G",
+      "number": "34",
+      "age": "",
+      "nationality": ""
+    },
+    {
       "name": "Berat Djimsiti",
       "team": "الدرعية",
       "position": "D",
@@ -2315,6 +2323,14 @@
       "number": "20",
       "age": "21",
       "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Dheban",
+      "team": "الدرعية",
+      "position": "D",
+      "number": "21",
+      "age": "",
+      "nationality": ""
     },
     {
       "name": "Idrissa Gueye",
@@ -2573,9 +2589,9 @@
       "nationality": "Kosovo"
     },
     {
-      "name": "Abdoulaye Kante",
+      "name": "Abdoulaye Kanté",
       "team": "الاتفاق",
-      "position": "M",
+      "position": "F",
       "number": "42",
       "age": "21",
       "nationality": "France"
@@ -4101,270 +4117,6 @@
       "nationality": "Saudi Arabia"
     },
     {
-      "name": "Adrian Semper",
-      "team": "الفتح",
-      "position": "G",
-      "number": "1",
-      "age": "28",
-      "nationality": "Croatia"
-    },
-    {
-      "name": "Habib Alwotayan",
-      "team": "الفتح",
-      "position": "G",
-      "number": "31",
-      "age": "30",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Waled Al Enazi",
-      "team": "الفتح",
-      "position": "G",
-      "number": "94",
-      "age": "30",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ibrahim Omar Abdulaziz Al Abood",
-      "team": "الفتح",
-      "position": "G",
-      "number": "38",
-      "age": "",
-      "nationality": ""
-    },
-    {
-      "name": "Marwane Saadane",
-      "team": "الفتح",
-      "position": "D",
-      "number": "17",
-      "age": "34",
-      "nationality": "Morocco"
-    },
-    {
-      "name": "Faisal Darisi",
-      "team": "الفتح",
-      "position": "D",
-      "number": "5",
-      "age": "29",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Kennedy Boateng",
-      "team": "الفتح",
-      "position": "D",
-      "number": "3",
-      "age": "29",
-      "nationality": "Togo"
-    },
-    {
-      "name": "Ziyad Al Jari",
-      "team": "الفتح",
-      "position": "D",
-      "number": "4",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Sattam Al Tumbukti",
-      "team": "الفتح",
-      "position": "D",
-      "number": "87",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulelah Al Khaibari",
-      "team": "الفتح",
-      "position": "D",
-      "number": "16",
-      "age": "29",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdul Rahman Al Khaibari",
-      "team": "الفتح",
-      "position": "D",
-      "number": "22",
-      "age": "26",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Muntathir Al Shaqaq",
-      "team": "الفتح",
-      "position": "D",
-      "number": "63",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Robin Kelder",
-      "team": "الفتح",
-      "position": "D",
-      "number": "19",
-      "age": "21",
-      "nationality": "Netherlands"
-    },
-    {
-      "name": "Abdulaziz Anwar Abdulrahman Al Suwailem",
-      "team": "الفتح",
-      "position": "D",
-      "number": "78",
-      "age": "20",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ali Alamine Ali",
-      "team": "الفتح",
-      "position": "D",
-      "number": "",
-      "age": "",
-      "nationality": ""
-    },
-    {
-      "name": "Lukás Haraslín",
-      "team": "الفتح",
-      "position": "M",
-      "number": "10",
-      "age": "30",
-      "nationality": "Slovakia"
-    },
-    {
-      "name": "Jordan Harrison",
-      "team": "الفتح",
-      "position": "M",
-      "number": "70",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Zaydou Youssef",
-      "team": "الفتح",
-      "position": "M",
-      "number": "28",
-      "age": "27",
-      "nationality": "France"
-    },
-    {
-      "name": "Ali Al-Hassan",
-      "team": "الفتح",
-      "position": "M",
-      "number": "6",
-      "age": "29",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mihai Lixandru",
-      "team": "الفتح",
-      "position": "M",
-      "number": "8",
-      "age": "25",
-      "nationality": "Romania"
-    },
-    {
-      "name": "Othman Ramzi Jasim Al Othman",
-      "team": "الفتح",
-      "position": "M",
-      "number": "88",
-      "age": "23",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Faisal Al Abdulwahed",
-      "team": "الفتح",
-      "position": "M",
-      "number": "80",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulaziz Al Fawaz",
-      "team": "الفتح",
-      "position": "M",
-      "number": "18",
-      "age": "18",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mahdi Al Obod",
-      "team": "الفتح",
-      "position": "M",
-      "number": "24",
-      "age": "20",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Hossam Essadak",
-      "team": "الفتح",
-      "position": "M",
-      "number": "20",
-      "age": "21",
-      "nationality": "Morocco"
-    },
-    {
-      "name": "Mohammed Al-Sahihi",
-      "team": "الفتح",
-      "position": "M",
-      "number": "25",
-      "age": "20",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mourad Batna",
-      "team": "الفتح",
-      "position": "F",
-      "number": "11",
-      "age": "36",
-      "nationality": "Morocco"
-    },
-    {
-      "name": "Wilfried Kanga",
-      "team": "الفتح",
-      "position": "F",
-      "number": "9",
-      "age": "28",
-      "nationality": "France"
-    },
-    {
-      "name": "Ali Al Masoud",
-      "team": "الفتح",
-      "position": "F",
-      "number": "29",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Fahad Zubaidi",
-      "team": "الفتح",
-      "position": "F",
-      "number": "7",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Saad Al-Shurafa",
-      "team": "الفتح",
-      "position": "F",
-      "number": "49",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "João Vitor Oliveira",
-      "team": "الفتح",
-      "position": "F",
-      "number": "23",
-      "age": "21",
-      "nationality": "Brazil"
-    },
-    {
-      "name": "Jefferson Ramos",
-      "team": "الفتح",
-      "position": "F",
-      "number": "21",
-      "age": "21",
-      "nationality": ""
-    },
-    {
       "name": "Fernando Pacheco",
       "team": "الفيصلي",
       "position": "G",
@@ -4901,6 +4653,270 @@
       "nationality": ""
     },
     {
+      "name": "Adrian Semper",
+      "team": "الفتح",
+      "position": "G",
+      "number": "1",
+      "age": "28",
+      "nationality": "Croatia"
+    },
+    {
+      "name": "Habib Alwotayan",
+      "team": "الفتح",
+      "position": "G",
+      "number": "31",
+      "age": "30",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Waled Al Enazi",
+      "team": "الفتح",
+      "position": "G",
+      "number": "94",
+      "age": "30",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ibrahim Omar Abdulaziz Al Abood",
+      "team": "الفتح",
+      "position": "G",
+      "number": "38",
+      "age": "",
+      "nationality": ""
+    },
+    {
+      "name": "Marwane Saadane",
+      "team": "الفتح",
+      "position": "D",
+      "number": "17",
+      "age": "34",
+      "nationality": "Morocco"
+    },
+    {
+      "name": "Faisal Darisi",
+      "team": "الفتح",
+      "position": "D",
+      "number": "5",
+      "age": "29",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Kennedy Boateng",
+      "team": "الفتح",
+      "position": "D",
+      "number": "3",
+      "age": "29",
+      "nationality": "Togo"
+    },
+    {
+      "name": "Ziyad Al Jari",
+      "team": "الفتح",
+      "position": "D",
+      "number": "4",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Sattam Al Tumbukti",
+      "team": "الفتح",
+      "position": "D",
+      "number": "87",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulelah Al Khaibari",
+      "team": "الفتح",
+      "position": "D",
+      "number": "16",
+      "age": "29",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdul Rahman Al Khaibari",
+      "team": "الفتح",
+      "position": "D",
+      "number": "22",
+      "age": "26",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Muntathir Al Shaqaq",
+      "team": "الفتح",
+      "position": "D",
+      "number": "63",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Robin Kelder",
+      "team": "الفتح",
+      "position": "D",
+      "number": "19",
+      "age": "21",
+      "nationality": "Netherlands"
+    },
+    {
+      "name": "Abdulaziz Anwar Abdulrahman Al Suwailem",
+      "team": "الفتح",
+      "position": "D",
+      "number": "78",
+      "age": "20",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ali Alamine Ali",
+      "team": "الفتح",
+      "position": "D",
+      "number": "",
+      "age": "",
+      "nationality": ""
+    },
+    {
+      "name": "Lukás Haraslín",
+      "team": "الفتح",
+      "position": "M",
+      "number": "10",
+      "age": "30",
+      "nationality": "Slovakia"
+    },
+    {
+      "name": "Jordan Harrison",
+      "team": "الفتح",
+      "position": "M",
+      "number": "70",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Zaydou Youssef",
+      "team": "الفتح",
+      "position": "M",
+      "number": "28",
+      "age": "27",
+      "nationality": "France"
+    },
+    {
+      "name": "Ali Al-Hassan",
+      "team": "الفتح",
+      "position": "M",
+      "number": "6",
+      "age": "29",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mihai Lixandru",
+      "team": "الفتح",
+      "position": "M",
+      "number": "8",
+      "age": "25",
+      "nationality": "Romania"
+    },
+    {
+      "name": "Othman Ramzi Jasim Al Othman",
+      "team": "الفتح",
+      "position": "M",
+      "number": "88",
+      "age": "23",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Faisal Al Abdulwahed",
+      "team": "الفتح",
+      "position": "M",
+      "number": "80",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulaziz Al Fawaz",
+      "team": "الفتح",
+      "position": "M",
+      "number": "18",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mahdi Al Obod",
+      "team": "الفتح",
+      "position": "M",
+      "number": "24",
+      "age": "20",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Hossam Essadak",
+      "team": "الفتح",
+      "position": "M",
+      "number": "20",
+      "age": "21",
+      "nationality": "Morocco"
+    },
+    {
+      "name": "Mohammed Al-Sahihi",
+      "team": "الفتح",
+      "position": "M",
+      "number": "25",
+      "age": "20",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mourad Batna",
+      "team": "الفتح",
+      "position": "F",
+      "number": "11",
+      "age": "36",
+      "nationality": "Morocco"
+    },
+    {
+      "name": "Wilfried Kanga",
+      "team": "الفتح",
+      "position": "F",
+      "number": "9",
+      "age": "28",
+      "nationality": "France"
+    },
+    {
+      "name": "Ali Al Masoud",
+      "team": "الفتح",
+      "position": "F",
+      "number": "29",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Fahad Zubaidi",
+      "team": "الفتح",
+      "position": "F",
+      "number": "7",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Saad Al-Shurafa",
+      "team": "الفتح",
+      "position": "F",
+      "number": "49",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "João Vitor Oliveira",
+      "team": "الفتح",
+      "position": "F",
+      "number": "23",
+      "age": "21",
+      "nationality": "Brazil"
+    },
+    {
+      "name": "Jefferson Ramos",
+      "team": "الفتح",
+      "position": "F",
+      "number": "21",
+      "age": "21",
+      "nationality": ""
+    },
+    {
       "name": "Donovan Léon",
       "team": "أبها",
       "position": "G",
@@ -5150,5 +5166,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-09 16:19 UTC"
+  "lastUpdated": "2026-10-09 19:22 UTC"
 }
