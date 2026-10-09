@@ -2,11 +2,7 @@ import json, urllib.request
 from datetime import datetime, timedelta
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
-
-today = datetime.utcnow()
-start = (today - timedelta(days=14)).strftime("%Y%m%d")
-end = (today + timedelta(days=14)).strftime("%Y%m%d")
-ESPN_SCOREBOARD = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard?dates={start}-{end}"
+ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard"
 
 translations = {
     "Al Hilal":"الهلال","Al Ittihad":"الاتحاد","Al Nassr":"النصر","Al Qadsiah":"القادسية",
@@ -21,6 +17,7 @@ def fetch_json(url, timeout=30):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     return json.loads(urllib.request.urlopen(req, timeout=timeout).read())
 
+# 1. الترتيب
 standings = []
 team_ids = []
 try:
@@ -46,40 +43,65 @@ try:
 except Exception as ex:
     print("خطأ الترتيب:", ex)
 
-results = []
-try:
-    print(f"جلب المباريات من: {start} إلى {end}")
-    sb = fetch_json(ESPN_SCOREBOARD, timeout=45)
-    events = sb.get("events", [])
-    print(f"عدد الأحداث: {len(events)}")
-    for ev in events:
-        c = ev["competitions"][0]
-        home = next((x for x in c["competitors"] if x["homeAway"] == "home"), None)
-        away = next((x for x in c["competitors"] if x["homeAway"] == "away"), None)
-        if home and away:
-            status_type = ev.get("status", {}).get("type", {})
-            status_detail = status_type.get("detail", "")
-            status_state = status_type.get("state", "")
-            status_completed = status_type.get("completed", False)
-            clock = ev.get("status", {}).get("displayClock", "")
-            period = ev.get("status", {}).get("period", 0)
-            
-            results.append({
-                "home": tr(home["team"]["displayName"]),
-                "away": tr(away["team"]["displayName"]),
-                "hs": home.get("score", "0"),
-                "as": away.get("score", "0"),
-                "date": ev["date"],
-                "status": status_detail,
-                "state": status_state,
-                "completed": status_completed,
-                "clock": clock,
-                "period": period
-            })
-    print(f"المباريات: {len(results)}")
-except Exception as ex:
-    print("خطأ المباريات:", ex)
+# 2. المباريات - نجرب عدة مصادر
+def parse_event(ev):
+    c = ev["competitions"][0]
+    home = next((x for x in c["competitors"] if x["homeAway"] == "home"), None)
+    away = next((x for x in c["competitors"] if x["homeAway"] == "away"), None)
+    if not home or not away:
+        return None
+    status_type = ev.get("status", {}).get("type", {})
+    return {
+        "home": tr(home["team"]["displayName"]),
+        "away": tr(away["team"]["displayName"]),
+        "hs": home.get("score", "0"),
+        "as": away.get("score", "0"),
+        "date": ev["date"],
+        "status": status_type.get("detail", ""),
+        "state": status_type.get("state", ""),
+        "completed": status_type.get("completed", False),
+        "clock": ev.get("status", {}).get("displayClock", ""),
+        "period": ev.get("status", {}).get("period", 0)
+    }
 
+results = []
+seen = set()
+
+def add_events(events):
+    for ev in events:
+        m = parse_event(ev)
+        if m:
+            key = m["home"] + "|" + m["away"] + "|" + m["date"]
+            if key not in seen:
+                seen.add(key)
+                results.append(m)
+
+# محاولة 1: الرابط الأساسي (مباريات اليوم)
+try:
+    sb = fetch_json(ESPN_BASE, timeout=30)
+    events = sb.get("events", [])
+    print(f"الرابط الأساسي: {len(events)} مباراة")
+    add_events(events)
+except Exception as ex:
+    print("خطأ الأساسي:", ex)
+
+# محاولة 2: أيام محددة (-7 إلى +7)
+today = datetime.utcnow()
+for i in range(-7, 8):
+    d = (today + timedelta(days=i)).strftime("%Y%m%d")
+    try:
+        url = f"{ESPN_BASE}?dates={d}"
+        sb = fetch_json(url, timeout=20)
+        events = sb.get("events", [])
+        if events:
+            print(f"{d}: {len(events)} مباراة")
+            add_events(events)
+    except Exception as ex:
+        pass
+
+print(f"المباريات (بدون تكرار): {len(results)}")
+
+# 3. اللاعبون
 players = []
 for team_id, team_name in team_ids:
     try:
