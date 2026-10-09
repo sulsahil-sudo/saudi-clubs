@@ -6,119 +6,76 @@
 <title>الدوري السعودي - إحصائيات</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; background: #f0f2f5; padding: 15px; color: #333; -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; background: #f0f2f5; padding: 15px; color: #333; }
   h1 { text-align: center; margin-bottom: 20px; color: #1a5490; font-size: 22px; }
-
-  /* التبويبات - قابلة للتمرير على الجوال */
-  .tabs-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 15px; border-radius: 10px; }
+  .tabs-wrap { overflow-x: auto; margin-bottom: 15px; border-radius: 10px; }
   .tabs-wrap::-webkit-scrollbar { display: none; }
   .tabs { display: flex; gap: 6px; background: white; padding: 6px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); min-width: max-content; }
   .tab { padding: 10px 16px; border: none; background: transparent; cursor: pointer; font-size: 14px; font-weight: bold; color: #555; border-radius: 8px; font-family: inherit; white-space: nowrap; }
-  .tab:hover { background: #f0f2f5; }
   .tab.active { background: #1a5490; color: white; }
   .tab.active-live { background: #c0392b; color: white; }
-
   .content { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
   .hidden { display: none; }
-
-  /* الجداول */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; min-width: 600px; }
   th { background: #1a5490; color: white; padding: 10px 8px; text-align: center; font-size: 13px; white-space: nowrap; }
   td { padding: 10px 8px; text-align: center; border-bottom: 1px solid #eee; font-size: 13px; }
-  .team { text-align: right; font-weight: bold; white-space: nowrap; }
+  .team { text-align: right; font-weight: bold; }
   tr:hover { background: #f8f9fa; }
   tr.live-team { background: #fff5f5; }
-
-  .loading { text-align: center; color: #1a5490; padding: 40px; }
-  .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
-
-  /* شريط البحث */
+  .loading, .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
   .search-bar { margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
   .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 120px; }
-  .search-bar input:focus, .search-bar select:focus { outline: none; border-color: #1a5490; }
-
-  /* فلاتر المباريات */
   .match-filters { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
   .filter-btn { padding: 8px 14px; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: bold; color: #555; font-family: inherit; }
   .filter-btn.active { background: #1a5490; color: white; border-color: #1a5490; }
   .filter-btn .count { display: inline-block; background: rgba(255,255,255,0.25); padding: 1px 8px; border-radius: 10px; margin-right: 5px; font-size: 11px; }
   .filter-btn:not(.active) .count { background: #f0f2f5; color: #666; }
-
-  /* بطاقات المباريات */
   .match-card { border: 1px solid #eee; border-radius: 10px; padding: 12px; margin-bottom: 10px; }
   .match-card.live { border-color: #c0392b; border-width: 2px; }
   .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 12px; color: #666; gap: 8px; flex-wrap: wrap; }
-  .match-date { font-weight: bold; font-size: 12px; }
   .match-status { background: #e8f4fd; color: #1a5490; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; white-space: nowrap; }
   .match-status.live { background: #fee; color: #c0392b; }
   .match-status.finished { background: #e8f8e8; color: #27ae60; }
-
   .match-body { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   .match-team { flex: 1; font-weight: bold; font-size: 14px; text-align: center; word-break: break-word; }
   .match-center { min-width: 100px; text-align: center; }
   .match-score { background: #1a5490; color: white; padding: 8px 14px; border-radius: 8px; font-weight: bold; font-size: 17px; display: inline-block; }
   .match-score.live-score { background: #c0392b; }
-
-  /* العداد التنازلي */
   .countdown { display: flex; justify-content: center; gap: 4px; direction: ltr; flex-wrap: wrap; }
   .cd-box { background: linear-gradient(135deg, #1a5490, #2c6db5); color: white; padding: 6px 8px; border-radius: 6px; min-width: 40px; text-align: center; }
   .cd-num { font-size: 15px; font-weight: bold; line-height: 1; }
   .cd-label { font-size: 9px; opacity: 0.85; margin-top: 2px; }
   .cd-sep { color: #1a5490; font-size: 15px; font-weight: bold; align-self: center; padding: 0 1px; }
-
   .updated { text-align: center; color: #888; font-size: 11px; margin-top: 12px; }
-
-  /* شارات المراكز */
-  .pos-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; white-space: nowrap; }
+  .pos-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
   .pos-badge.GK { background: #fff4e0; color: #b8860b; }
   .pos-badge.DF { background: #e8f8e8; color: #27ae60; }
   .pos-badge.MF { background: #e8f4fd; color: #1a5490; }
   .pos-badge.FW { background: #fdeaea; color: #c0392b; }
-
   .number-badge { display: inline-block; background: #1a5490; color: white; width: 28px; height: 28px; line-height: 28px; border-radius: 50%; font-weight: bold; font-size: 12px; }
   .rank-badge { display: inline-block; width: 24px; height: 24px; line-height: 24px; border-radius: 50%; background: #e8f4fd; color: #1a5490; font-weight: bold; text-align: center; font-size: 12px; }
   .rank-badge.gold { background: #ffd700; color: #333; }
   .rank-badge.silver { background: #c0c0c0; color: #333; }
   .rank-badge.bronze { background: #cd7f32; color: white; }
-  .change-arrow { font-size: 12px; font-weight: bold; margin-right: 3px; }
-  .change-up { color: #27ae60; }
-  .change-down { color: #c0392b; }
-
-  /* الترتيب الحي */
+  .change-up { color: #27ae60; font-weight: bold; }
+  .change-down { color: #c0392b; font-weight: bold; }
   .live-banner { background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; font-weight: bold; font-size: 14px; }
   .live-banner .live-dot { display: inline-block; width: 8px; height: 8px; background: white; border-radius: 50%; margin-right: 8px; animation: pulse 1s infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .live-info { text-align: center; font-size: 12px; color: #666; margin-bottom: 12px; padding: 10px; background: #fef9e7; border-radius: 6px; line-height: 1.6; }
-
-  /* ====== الجوال ====== */
   @media (max-width: 600px) {
     body { padding: 10px; }
-    h1 { font-size: 18px; margin-bottom: 15px; }
-    .tab { padding: 8px 12px; font-size: 13px; }
-    .content { padding: 10px; }
-
-    /* تحويل الجداول إلى بطاقات على الجوال */
+    h1 { font-size: 18px; }
     table { min-width: 100%; }
     thead { display: none; }
     tbody tr { display: block; background: white; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; padding: 10px; }
-    tbody td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed #f0f0f0; text-align: right; font-size: 13px; }
+    tbody td { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #f0f0f0; text-align: right; }
     tbody td:last-child { border-bottom: none; }
-    tbody td::before { content: attr(data-label); font-weight: bold; color: #666; margin-left: 10px; font-size: 12px; }
-    .team { text-align: right; }
-
-    /* فلاتر أفقية على الجوال */
-    .match-filters { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 5px; }
+    tbody td::before { content: attr(data-label); font-weight: bold; color: #666; margin-left: 10px; }
+    .match-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; }
     .match-filters::-webkit-scrollbar { display: none; }
-    .filter-btn { white-space: nowrap; padding: 8px 12px; font-size: 12px; }
-
-    /* بطاقة المباراة */
-    .match-team { font-size: 13px; }
-    .match-score { font-size: 16px; padding: 6px 12px; }
-    .cd-box { min-width: 36px; padding: 5px 6px; }
-    .cd-num { font-size: 14px; }
-    .cd-label { font-size: 8px; }
-    .cd-sep { font-size: 13px; }
+    .filter-btn { white-space: nowrap; }
   }
 </style>
 </head>
@@ -136,25 +93,21 @@
 </div>
 
 <div id="standings" class="content">
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
-      <tbody id="standingsBody"><tr><td colspan="10" class="loading">جاري التحميل...</td></tr></tbody>
-    </table>
-  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
+    <tbody id="standingsBody"><tr><td colspan="10" class="loading">جاري التحميل...</td></tr></tbody>
+  </table></div>
   <div id="updatedStandings" class="updated"></div>
 </div>
 
 <div id="live" class="content hidden">
   <div class="live-banner"><span class="live-dot"></span> الترتيب الحي أثناء المباريات</div>
   <div id="liveMatchesInfo" class="live-info"></div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
-      <tbody id="liveBody"></tbody>
-    </table>
-  </div>
-  <div class="updated">⚠️ ترتيب افتراضي ومؤقت - لا يطابق الرسمي.</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
+    <tbody id="liveBody"></tbody>
+  </table></div>
+  <div class="updated">⚠️ ترتيب افتراضي ومؤقت.</div>
 </div>
 
 <div id="players" class="content hidden">
@@ -169,12 +122,10 @@
       <option value="FW">المهاجمون</option>
     </select>
   </div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>المركز</th><th>العمر</th><th>الجنسية</th></tr></thead>
-      <tbody id="playersBody"><tr><td colspan="6" class="loading">جاري التحميل...</td></tr></tbody>
-    </table>
-  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>المركز</th><th>العمر</th><th>الجنسية</th></tr></thead>
+    <tbody id="playersBody"><tr><td colspan="6" class="loading">جاري التحميل...</td></tr></tbody>
+  </table></div>
   <div id="playerCount" class="updated"></div>
 </div>
 
@@ -183,8 +134,10 @@
   <div id="resultsData" class="loading">جاري التحميل...</div>
 </div>
 
+<!-- ربط قاموس الأسماء -->
+<script src="names.js"></script>
+
 <script>
-/* ============ قاموس الجنسيات ============ */
 var countryMap = {
   "Saudi Arabia":"السعودية","Portugal":"البرتغال","Brazil":"البرازيل","France":"فرنسا",
   "Argentina":"الأرجنتين","Spain":"إسبانيا","Germany":"ألمانيا","Italy":"إيطاليا",
@@ -208,22 +161,16 @@ var countryMap = {
   "Kosovo":"كوسوفو","Bosnia and Herzegovina":"البوسنة والهرسك","North Macedonia":"مقدونيا",
   "Georgia":"جورجيا","Armenia":"أرمينيا","Azerbaijan":"أذربيجان","Kazakhstan":"كازاخستان",
   "Burkina Faso":"بوركينا فاسو","South Africa":"جنوب أفريقيا","Kenya":"كينيا",
-  "Ethiopia":"إثيوبيا","Gabon":"الغابون","Congo":"الكونغو","DR Congo":"الكونغو الديمقراطية",
-  "Angola":"أنغولا","Zambia":"زامبيا","Zimbabwe":"زيمبابوي","Tanzania":"تنزانيا",
-  "Uganda":"أوغندا","Benin":"بنين","Togo":"توغو","Niger":"النيجر","Chad":"تشاد",
-  "Mauritania":"موريتانيا","Somalia":"الصومال","Djibouti":"جيبوتي","Comoros":"جزر القمر",
-  "Maldives":"المالديف","Indonesia":"إندونيسيا","Malaysia":"ماليزيا","Thailand":"تايلاند",
-  "Vietnam":"فيتنام","Philippines":"الفلبين","India":"الهند","Pakistan":"باكستان",
-  "Bangladesh":"بنغلاديش","Afghanistan":"أفغانستان","New Zealand":"نيوزيلندا",
-  "French Guiana":"غيانا الفرنسية","Guadeloupe":"غوادلوب","Martinique":"مارتينيك",
-  "Suriname":"سورينام","Guyana":"غيانا","Haiti":"هايتي","Cuba":"كوبا","Panama":"بنما",
-  "Honduras":"هندوراس","Guatemala":"غواتيمالا","Nicaragua":"نيكاراغوا","El Salvador":"السلفادور",
-  "Trinidad and Tobago":"ترينيداد وتوباغو","Cape Verde":"الرأس الأخضر","Guinea-Bissau":"غينيا بيساو",
-  "Equatorial Guinea":"غينيا الاستوائية","Liberia":"ليبيريا","Sierra Leone":"سيراليون",
-  "Gambia":"غامبيا","Madagascar":"مدغشقر","Mozambique":"موزمبيق","Namibia":"ناميبيا",
-  "Botswana":"بوتسوانا","Malawi":"مالاوي","Rwanda":"رواندا","Burundi":"بوروندي",
-  "Eritrea":"إريتريا","South Sudan":"جنوب السودان","Central African Republic":"أفريقيا الوسطى"
+  "Gabon":"الغابون","Congo":"الكونغو","DR Congo":"الكونغو الديمقراطية",
+  "Angola":"أنغولا","Comoros":"جزر القمر","Madagascar":"مدغشقر",
+  "Mauritania":"موريتانيا","Somalia":"الصومال","Djibouti":"جيبوتي"
 };
+
+function translateName(name) {
+  if (!name) return '';
+  if (window.translatePlayer) return window.translatePlayer(name);
+  return name;
+}
 
 function translateCountry(c) {
   if (!c) return '—';
@@ -232,7 +179,6 @@ function translateCountry(c) {
   return c;
 }
 
-/* ============ التنقل ============ */
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(function(el) { el.classList.add('hidden'); });
   document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active', 'active-live'); });
@@ -240,7 +186,6 @@ function showTab(id, btn) {
   if (id === 'live') btn.classList.add('active-live'); else btn.classList.add('active');
 }
 
-/* ============ التنسيقات ============ */
 function formatMatchDate(iso) {
   var d = new Date(iso);
   var days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -279,11 +224,9 @@ function getMatchState(m) {
   var status = (m.status || '').toLowerCase();
   var state = (m.state || '').toLowerCase();
   var diffMin = (Date.now() - new Date(m.date).getTime()) / 60000;
-
   if (m.completed || state === 'post' || status === 'ft' || status.indexOf('final') !== -1 || status.indexOf('full time') !== -1) return 'finished';
   if (status === 'ht' || status.indexOf('half time') !== -1 || status.indexOf('halftime') !== -1) return 'halftime';
   if (state === 'in' || status.indexOf('progress') !== -1 || /^\d+'/.test(status) || status.indexOf("'") !== -1) return 'live';
-
   if (diffMin < 0) return 'upcoming';
   if (diffMin < 105) return 'live-auto';
   if (diffMin >= 105 && diffMin < 135) return 'halftime';
@@ -379,8 +322,8 @@ function renderLiveStandings() {
     var changeHtml = '';
     if (prev !== undefined && prev !== t.r) {
       var diff = prev - t.r;
-      if (diff > 0) changeHtml = '<span class="change-arrow change-up">▲</span>';
-      else changeHtml = '<span class="change-arrow change-down">▼</span>';
+      if (diff > 0) changeHtml = '<span class="change-up"> ▲</span>';
+      else changeHtml = '<span class="change-down"> ▼</span>';
     }
     var rowClass = t.live ? 'live-team' : '';
     var rankClass = 'rank-badge';
@@ -482,7 +425,7 @@ function renderMatches() {
       centerHtml = countdownHTML();
     }
     rhtml += '<div class="' + cardClass + '">';
-    rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
+    rhtml += '<div class="match-header"><div>' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
     rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
     rhtml += '</div>';
   });
@@ -495,13 +438,16 @@ function filterPlayers() {
   var team = document.getElementById('teamFilter').value;
   var pos = document.getElementById('posFilter').value;
   var filtered = allPlayers.filter(function(p) {
-    if (search && p.name.toLowerCase().indexOf(search) === -1) return false;
+    var nameAr = translateName(p.name).toLowerCase();
+    var nameEn = p.name.toLowerCase();
+    if (search && nameEn.indexOf(search) === -1 && nameAr.indexOf(search) === -1) return false;
     if (team && p.team !== team) return false;
     if (pos && posName(p.position) !== pos) return false;
     return true;
   });
   renderPlayers(filtered);
 }
+
 function renderPlayers(players) {
   var tb = document.getElementById('playersBody');
   if (players.length === 0) {
@@ -513,94 +459,4 @@ function renderPlayers(players) {
   players.forEach(function(p) {
     var posClass = posName(p.position);
     html += '<tr>';
-    html += '<td data-label="#"><span class="number-badge">' + (p.number || '—') + '</span></td>';
-    html += '<td data-label="اللاعب" class="team">' + p.name + '</td>';
-    html += '<td data-label="الفريق">' + p.team + '</td>';
-    html += '<td data-label="المركز"><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
-    html += '<td data-label="العمر">' + (p.age || '—') + '</td>';
-    html += '<td data-label="الجنسية">' + translateCountry(p.nationality) + '</td></tr>';
-  });
-  tb.innerHTML = html;
-  document.getElementById('playerCount').textContent = 'عدد اللاعبين: ' + players.length + ' من ' + allPlayers.length;
-}
-
-function loadData(showLoader) {
-  if (showLoader) {
-    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">جاري التحميل...</td></tr>';
-  }
-  fetch('data.json?v=' + Date.now())
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var html = '';
-      data.standings.forEach(function(t) {
-        html += '<tr>';
-        html += '<td data-label="#">' + t.r + '</td>';
-        html += '<td data-label="الفريق" class="team">' + t.t + '</td>';
-        html += '<td data-label="لعب">' + t.p + '</td>';
-        html += '<td data-label="فاز">' + t.w + '</td>';
-        html += '<td data-label="تعادل">' + t.d + '</td>';
-        html += '<td data-label="خسر">' + t.l + '</td>';
-        html += '<td data-label="له">' + t.gf + '</td>';
-        html += '<td data-label="عليه">' + t.ga + '</td>';
-        html += '<td data-label="الفرق">' + t.gd + '</td>';
-        html += '<td data-label="النقاط"><b>' + t.pts + '</b></td></tr>';
-      });
-      document.getElementById('standingsBody').innerHTML = html;
-      document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
-      originalStandings = data.standings || [];
-
-      allPlayers = (data.players || []).slice().sort(function(a, b) {
-        if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
-        return parseInt(a.number || 999) - parseInt(b.number || 999);
-      });
-      if (allPlayers.length === 0) {
-        document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد.</td></tr>';
-      } else {
-        var teams = {};
-        allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
-        var teamSelect = document.getElementById('teamFilter');
-        teamSelect.innerHTML = '<option value="">كل الفرق</option>';
-        Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
-          var opt = document.createElement('option');
-          opt.value = t; opt.textContent = t;
-          teamSelect.appendChild(opt);
-        });
-        renderPlayers(allPlayers);
-      }
-
-      allMatches = data.results || [];
-      buildFilters();
-      renderMatches();
-      renderLiveStandings();
-
-      var hasLive = getFilteredMatches('live').length > 0;
-      var liveTab = document.getElementById('tabLive');
-      if (hasLive) {
-        liveTab.style.display = 'block';
-      } else {
-        liveTab.style.display = 'none';
-        if (!document.getElementById('live').classList.contains('hidden')) {
-          showTab('standings', document.getElementById('tabStandings'));
-        }
-      }
-
-      secondsSinceRefresh = 0;
-    })
-    .catch(function(e) {
-      document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
-    });
-}
-
-loadData(true);
-setInterval(function() {
-  secondsSinceRefresh++;
-  if (secondsSinceRefresh >= REFRESH_INTERVAL) loadData(false);
-}, 1000);
-setInterval(updateAllCountdowns, 1000);
-setInterval(function() {
-  if (!document.getElementById('live').classList.contains('hidden')) renderLiveStandings();
-}, 5000);
-</script>
-
-</body>
-</html>
+    html += '<td data-label="#"><span class="number-badge">' + (p.number || '—
