@@ -1,9 +1,13 @@
 import json, urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
-ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard"
-ESPN_TEAMS = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams"
+
+# جلب المباريات من آخر 14 يوم وحتى 14 يوم قادم
+today = datetime.utcnow()
+start = (today - timedelta(days=14)).strftime("%Y%m%d")
+end = (today + timedelta(days=14)).strftime("%Y%m%d")
+ESPN_SCOREBOARD = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard?dates={start}-{end}"
 
 translations = {
     "Al Hilal":"الهلال","Al Ittihad":"الاتحاد","Al Nassr":"النصر","Al Qadsiah":"القادسية",
@@ -44,28 +48,41 @@ try:
 except Exception as ex:
     print("خطأ الترتيب:", ex)
 
-# 2. المباريات
+# 2. المباريات (آخر 14 + قادم 14 يوم)
 results = []
 try:
-    sb = fetch_json(ESPN_SCOREBOARD)
-    for ev in sb.get("events", []):
+    sb = fetch_json(ESPN_SCOREBOARD, timeout=45)
+    events = sb.get("events", [])
+    for ev in events:
         c = ev["competitions"][0]
         home = next((x for x in c["competitors"] if x["homeAway"] == "home"), None)
         away = next((x for x in c["competitors"] if x["homeAway"] == "away"), None)
         if home and away:
+            # معلومات الحالة
+            status_type = ev.get("status", {}).get("type", {})
+            status_detail = status_type.get("detail", "")
+            status_state = status_type.get("state", "")  # pre / in / post
+            status_completed = status_type.get("completed", False)
+            clock = ev.get("status", {}).get("displayClock", "")
+            period = ev.get("status", {}).get("period", 0)
+            
             results.append({
                 "home": tr(home["team"]["displayName"]),
                 "away": tr(away["team"]["displayName"]),
                 "hs": home.get("score", "0"),
                 "as": away.get("score", "0"),
                 "date": ev["date"],
-                "status": ev["status"]["type"]["detail"]
+                "status": status_detail,
+                "state": status_state,
+                "completed": status_completed,
+                "clock": clock,
+                "period": period
             })
     print(f"المباريات: {len(results)}")
 except Exception as ex:
     print("خطأ المباريات:", ex)
 
-# 3. اللاعبون - من فرق الدوري
+# 3. اللاعبون
 players = []
 for team_id, team_name in team_ids:
     try:
@@ -81,7 +98,6 @@ for team_id, team_name in team_ids:
                 "age": str(ath.get("age", "")),
                 "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", "")
             })
-        print(f"{team_name}: {len(roster.get('athletes', []))} لاعب")
     except Exception as ex:
         print(f"خطأ {team_name}:", ex)
 
