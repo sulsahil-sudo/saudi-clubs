@@ -12,6 +12,7 @@
   .tab { flex: 1; min-width: 100px; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 15px; font-weight: bold; color: #555; border-radius: 8px; font-family: inherit; position: relative; }
   .tab:hover { background: #f0f2f5; }
   .tab.active { background: #1a5490; color: white; }
+  .tab.active-live { background: #c0392b; color: white; }
   .content { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
   .hidden { display: none; }
   table { width: 100%; border-collapse: collapse; }
@@ -19,6 +20,7 @@
   td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; font-size: 14px; }
   .team { text-align: right; font-weight: bold; }
   tr:hover { background: #f8f9fa; }
+  tr.live-team { background: #fff5f5; }
   .loading { text-align: center; color: #1a5490; padding: 40px; }
   .empty { text-align: center; color: #888; padding: 40px; font-size: 16px; }
   .search-bar { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -53,7 +55,17 @@
   .pos-badge.FW { background: #fdeaea; color: #c0392b; }
   .player-name-cell { text-align: right; font-weight: bold; font-size: 15px; }
   .number-badge { display: inline-block; background: #1a5490; color: white; width: 32px; height: 32px; line-height: 32px; border-radius: 50%; font-weight: bold; font-size: 13px; }
-  .name-warning { color: #999; font-size: 11px; font-style: italic; }
+  .rank-badge { display: inline-block; width: 28px; height: 28px; line-height: 28px; border-radius: 50%; background: #e8f4fd; color: #1a5490; font-weight: bold; text-align: center; font-size: 13px; }
+  .rank-badge.gold { background: #ffd700; color: #333; }
+  .rank-badge.silver { background: #c0c0c0; color: #333; }
+  .rank-badge.bronze { background: #cd7f32; color: white; }
+  .change-arrow { font-size: 14px; font-weight: bold; margin-right: 3px; }
+  .change-up { color: #27ae60; }
+  .change-down { color: #c0392b; }
+  .live-banner { background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; padding: 12px 20px; border-radius: 10px; margin-bottom: 15px; text-align: center; font-weight: bold; box-shadow: 0 4px 12px rgba(192,57,43,0.3); }
+  .live-banner .live-dot { display: inline-block; width: 10px; height: 10px; background: white; border-radius: 50%; margin-right: 8px; animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .live-info { text-align: center; font-size: 13px; color: #666; margin-bottom: 15px; padding: 10px; background: #fef9e7; border-radius: 6px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -61,7 +73,8 @@
 <h1>⚽ الدوري السعودي للمحترفين</h1>
 
 <div class="tabs">
-  <button class="tab active" onclick="showTab('standings', this)">الترتيب</button>
+  <button class="tab active" onclick="showTab('standings', this)" id="tabStandings">الترتيب</button>
+  <button class="tab" onclick="showTab('live', this)" id="tabLive" style="display:none;">🔴 ترتيب حي</button>
   <button class="tab" onclick="showTab('players', this)">اللاعبون</button>
   <button class="tab" onclick="showTab('results', this)">المباريات</button>
 </div>
@@ -72,6 +85,16 @@
     <tbody id="standingsBody"><tr><td colspan="10" class="loading">جاري التحميل...</td></tr></tbody>
   </table>
   <div id="updatedStandings" class="updated"></div>
+</div>
+
+<div id="live" class="content hidden">
+  <div class="live-banner"><span class="live-dot"></span> الترتيب الحي أثناء المباريات</div>
+  <div id="liveMatchesInfo" class="live-info"></div>
+  <table>
+    <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
+    <tbody id="liveBody"></tbody>
+  </table>
+  <div class="updated">⚠️ هذا الترتيب <b>افتراضي ومؤقت</b> لمتعة المتابعة. يعتمد على النتائج الحالية وقد لا يطابق الرسمي.</div>
 </div>
 
 <div id="players" class="content hidden">
@@ -125,9 +148,8 @@ var countryMap = {
   "Tanzania":"تنزانيا","Uganda":"أوغندا","Benin":"بنين","Togo":"توغو","Niger":"النيجر"
 };
 
-/* ============ قاموس الأسماء (شامل جداً) ============ */
+/* ============ قاموس الأسماء ============ */
 var nameMap = {
-  /* ---- أسماء أولى ذكور عربية ---- */
   "mohammed":"محمد","mohamed":"محمد","muhammad":"محمد","mohamad":"محمد","mohammad":"محمد",
   "mohannad":"مهند","muhannad":"مهند","ahmed":"أحمد","ahmad":"أحمد","ahmet":"أحمد",
   "ali":"علي","hassan":"حسن","hasan":"حسن","hussein":"حسين","husain":"حسين",
@@ -163,20 +185,18 @@ var nameMap = {
   "tawfiq":"توفيق","wassim":"وسيم","yacoub":"يعقوب","yakoub":"يعقوب","yazan":"يزن",
   "zaher":"زاهر","zahir":"ظاهر","zuhair":"زهير","zouhair":"زهير","moayad":"مؤيد",
   "muayad":"مؤيد","ghareeb":"غريب","abdulelah":"عبدالإله","abdulilah":"عبدالإله",
-  "mohamed":"محمد","mohannad":"مهند","mahdi":"مهدي","mehdi":"مهدي","hadi":"هادي",
-  "hussein":"حسين","hasan":"حسن","hassan":"حسن","khoder":"خضر","khader":"خضر",
-  "marwan":"مروان","osman":"عثمان","othman":"عثمان","uthman":"عثمان","ammar":"عمار",
-  "ashraf":"أشرف","asraf":"أشرف","sharif":"شريف","shariff":"شريف","sami":"سامي",
-  "mohamed":"محمد","mohsen":"محسن","messalam":"مسلم","muslim":"مسلم",
-  "faisal":"فيصل","faysal":"فيصل","faissal":"فيصل","mousa":"موسى","musa":"موسى",
-  "ayman":"أيمن","aiman":"أيمن","osama":"أسامة","usama":"أسامة","samer":"سامر",
-  "samir":"سمير","nasser":"ناصر","nasser":"ناصر","adel":"عادل","adil":"عادل",
-  "rashid":"راشد","rashad":"رشاد","wael":"وائل","wail":"وائل","amr":"عمرو","amro":"عمرو",
-  "khairy":"خيري","khayri":"خيري","sherif":"شريف","sharif":"شريف","hossam":"حسام",
-  "hesham":"هشام","hazem":"حازم","islam":"إسلام","eslam":"إسلام","ramadan":"رمضان",
-  "sobhi":"صبحي","subhi":"صبحي","hussein":"حسين",
+  "mahdi":"مهدي","mehdi":"مهدي","hadi":"هادي","khoder":"خضر","khader":"خضر",
+  "marwan":"مروان","osman":"عثمان","othman":"عثمان","uthman":"عثمان","ashraf":"أشرف",
+  "sharif":"شريف","messalam":"مسلم","muslim":"مسلم","aiman":"أيمن","usama":"أسامة",
+  "samer":"سامر","wael":"وائل","wail":"وائل","amr":"عمرو","amro":"عمرو",
+  "khairy":"خيري","sherif":"شريف","hesham":"هشام","islam":"إسلام","eslam":"إسلام",
+  "ramadan":"رمضان","sobhi":"صبحي","subhi":"صبحي","samir":"سمير","salem":"سالم",
+  "talal":"طلال","majed":"ماجد","adel":"عادل","ammar":"عمار","khalil":"خليل",
+  "khalil":"خليل","kareem":"كريم","kamal":"كمال","nabil":"نبيل","sabri":"صبري",
+  "rashad":"رشاد","mahmoud":"محمود","yaseen":"ياسين","hasan":"حسن","hussein":"حسين",
+  "hashim":"هاشم","hashem":"هاشم","abbas":"عباس","qassem":"قاسم","qahtan":"قحطان",
   
-  /* ---- ألقاب وعائلات عربية ---- */
+  /* ---- ألقاب وعائلات ---- */
   "aqidi":"العقيدي","daajani":"الدعجاني","dajani":"الدعجاني","ghannam":"الغنام",
   "sharari":"الشراري","shammari":"الشمري","shamrani":"الشمراني","nasser":"الناصر",
   "nasseri":"الناصري","hamdan":"الحمدان","khaibari":"الخيبري","najei":"النجعي",
@@ -188,18 +208,15 @@ var nameMap = {
   "sulayhem":"السليهم","sulayhim":"السليهم","johani":"الجهني","ahmadi":"الأحمدي",
   "enezi":"العنزي","rashidi":"الرشيدي","subaie":"السبيعي","subaee":"السبيعي",
   "harthi":"الحارثي","asiri":"العسيري","shahrani":"الشهراني","kanno":"كنو",
-  "bukhari":"البخاري","malik":"مالك","ramzi":"رمزي","marwan":"مروان",
-  "shanqeeti":"شنقيطي","shanqeety":"شنقيطي","bahebri":"باهبري","bahebry":"باهبري",
-  "otayf":"عطيف","otef":"عطيف","hawsawi":"الهوساوي","hawswi":"الهوساوي",
-  "muwallad":"مولد","fallatah":"فلاته","sulayem":"السليم","sulaim":"السليم",
-  "sulaiman":"سليمان","ali":"علي","anas":"أنس","hussain":"حسين","alhassan":"الحسن",
-  "khalidi":"خالدي","abbas":"عباس","al-abbas":"العباس","abbasi":"عباسي",
-  "khatib":"خطيب","kateeb":"خطيب","kateb":"كاتب","katib":"كاتب",
-  "mahmoud":"محمود","mostafa":"مصطفى","moustafa":"مصطفى","mansour":"منصور",
-  "sadiq":"صادق","sadeq":"صادق","sidqi":"صدقي","farouk":"فاروق","farooq":"فاروق",
-  "ashour":"عاشور","ashur":"عاشور","qadir":"قادر","kader":"قادر",
+  "bukhari":"البخاري","malik":"مالك","ramzi":"رمزي","shanqeeti":"شنقيطي",
+  "shanqeety":"شنقيطي","bahebri":"باهبري","bahebry":"باهبري","otayf":"عطيف",
+  "otef":"عطيف","hawsawi":"الهوساوي","hawswi":"الهوساوي","muwallad":"مولد",
+  "fallatah":"فلاته","sulayem":"السليم","sulaim":"السليم","khalidi":"خالدي",
+  "abbasi":"عباسي","khatib":"خطيب","kateeb":"خطيب","sadiq":"صادق","sadeq":"صادق",
+  "sidqi":"صدقي","farouk":"فاروق","farooq":"فاروق","ashour":"عاشور","ashur":"عاشور",
+  "qadir":"قادر","kader":"قادر",
   
-  /* ---- أسماء أجنبية شائعة ---- */
+  /* ---- أسماء أجنبية ---- */
   "cristiano":"كريستيانو","ronaldo":"رونالدو","sadio":"ساديو","mane":"ماني",
   "benzema":"بنزيما","neymar":"نيمار","lionel":"ليونيل","messi":"ميسي",
   "kante":"كانتي","ngolo":"نجولو","riyad":"رياض","mahrez":"محرز","hakim":"حكيم",
@@ -218,14 +235,13 @@ var nameMap = {
   "franck":"فرانك","kessie":"كيسي","donovan":"دونوفان","leon":"ليون","léon":"ليون",
   "georges":"جورج","gory":"غوري","alimani":"عليماني","nkoudou":"نكودو",
   "kamil":"كامل","boumedmed":"بومدين","boumediene":"بومدين","binyan":"بنيان",
-  "moayad":"مؤيد","luiz":"لويز","felipe":"فيليبي","philip":"فيليب",
-  "victor":"فيكتور","viktor":"فيكتور","danilo":"دانيلو","diego":"دييغو",
-  "matheus":"ماتيوس","mateus":"ماتيوس","pedro":"بيدرو","pablo":"بابلو",
-  "jesus":"خيسوس","jesus":"خيسوس","jose":"خوسيه","josé":"خوسيه","juan":"خوان",
-  "carlos":"كارلوس","miguel":"ميغيل","antonio":"أنطونيو","paulo":"باولو",
-  "marco":"ماركو","marcos":"ماركوس","alexandre":"ألكسندر","alexander":"ألكسندر",
-  "sandro":"ساندرو","aleksandar":"ألكسندر","dimitri":"ديميتري","ivan":"إيفان",
-  "igor":"إيغور","sergei":"سيرغي","nikola":"نيكولا","stefan":"ستيفان",
+  "luiz":"لويز","felipe":"فيليبي","philip":"فيليب","victor":"فيكتور","viktor":"فيكتور",
+  "danilo":"دانيلو","diego":"دييغو","matheus":"ماتيوس","mateus":"ماتيوس",
+  "pedro":"بيدرو","pablo":"بابلو","jesus":"خيسوس","jose":"خوسيه","josé":"خوسيه",
+  "juan":"خوان","carlos":"كارلوس","miguel":"ميغيل","antonio":"أنطونيو",
+  "paulo":"باولو","marco":"ماركو","marcos":"ماركوس","alexandre":"ألكسندر",
+  "alexander":"ألكسندر","sandro":"ساندرو","aleksandar":"ألكسندر","dimitri":"ديميتري",
+  "ivan":"إيفان","igor":"إيغور","sergei":"سيرغي","nikola":"نيكولا","stefan":"ستيفان",
   "marko":"ماركو","milan":"ميلان","mateo":"ماتيو","matteo":"ماتيو","lorenzo":"لورينزو",
   "andrea":"أندريا","francesco":"فرانشيسكو","giuseppe":"جوزيبي","giovanni":"جيوفاني",
   "yann":"يان","yves":"إيف","jean":"جان","pierre":"بيير","louis":"لويس",
@@ -235,64 +251,43 @@ var nameMap = {
   "robert":"روبرت","william":"وليام","charles":"تشارلز","henry":"هنري",
   "harry":"هاري","jack":"جاك","luke":"لوك","ben":"بن","sam":"سام","tom":"توم",
   "max":"ماكس","leo":"ليو","adam":"آدم","noah":"نوح","ryan":"ريان",
-  "adam":"آدم","moses":"موسى","aaron":"هارون","david":"داود","solomon":"سليمان",
-  "jesus":"عيسى","isabella":"إيزابيلا","lucas":"لوكاس","luka":"لوكا",
-  
-  /* ---- كلمات مشتركة ---- */
   "abu":"أبو","abou":"أبو","el":"ال","al":"ال","ben":"بن","bin":"بن",
   "ibn":"ابن","bint":"بنت","abd":"عبد","abdul":"عبد","abdel":"عبد","abed":"عبد"
 };
 
-/* ============ دالة الترجمة الذكية ============ */
+/* ============ دالة ترجمة الأسماء الذكية ============ */
 function translateName(name) {
   if (!name) return '';
-  
-  // تحويل خاص للأسماء المركبة المعروفة
   var lower = name.toLowerCase();
-  
-  // ابحث عن تطابق كامل أولاً (للأسماء الشهيرة مثل Cristiano Ronaldo)
   if (nameMap[lower]) return nameMap[lower];
   
   return name.split(' ').map(function(word) {
     var clean = word.toLowerCase().replace(/[^a-z'-]/g, '');
     if (!clean) return word;
-    
-    // تطابق مباشر
     if (nameMap[clean]) return nameMap[clean];
     
-    // Al-XXXX (مع شرطة)
     if (clean.indexOf('al-') === 0) {
-      var rest = clean.substring(3);
-      if (nameMap['al-' + rest]) return nameMap['al-' + rest];
-      if (nameMap[rest]) return 'ال' + nameMap[rest];
+      var r = clean.substring(3);
+      if (nameMap['al-' + r]) return nameMap['al-' + r];
+      if (nameMap[r]) return 'ال' + nameMap[r];
     }
-    
-    // El-XXXX (مع شرطة)
     if (clean.indexOf('el-') === 0) {
-      var rest2 = clean.substring(3);
-      if (nameMap[rest2]) return 'ال' + nameMap[rest2];
+      var r2 = clean.substring(3);
+      if (nameMap[r2]) return 'ال' + nameMap[r2];
     }
-    
-    // AlXXXX (بدون شرطة)
     if (clean.indexOf('al') === 0 && clean.length > 4) {
-      var rest3 = clean.substring(2);
-      if (nameMap[rest3]) return 'ال' + nameMap[rest3];
+      var r3 = clean.substring(2);
+      if (nameMap[r3]) return 'ال' + nameMap[r3];
     }
-    
-    // Ben-XXXX
     if (clean.indexOf('ben-') === 0 || clean.indexOf('bin-') === 0) {
-      var rest4 = clean.substring(4);
-      if (nameMap[rest4]) return 'بن ' + nameMap[rest4];
+      var r4 = clean.substring(4);
+      if (nameMap[r4]) return 'بن ' + nameMap[r4];
     }
-    
-    // Abdel-XXXX / Abdul-XXXX / Abd-XXXX
     var abdelMatch = clean.match(/^(abdel|abdul|abd|abed)(.+)$/);
     if (abdelMatch) {
       var after = abdelMatch[2];
       if (nameMap[after]) return 'عبدال' + nameMap[after];
     }
-    
-    // إذا لم يوجد، أعد الكلمة كما هي
     return word;
   }).join(' ');
 }
@@ -304,14 +299,16 @@ function translateCountry(c) {
   return c;
 }
 
-/* ============ دوال أساسية ============ */
+/* ============ التنقل ============ */
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(function(el) { el.classList.add('hidden'); });
-  document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active', 'active-live'); });
   document.getElementById(id).classList.remove('hidden');
-  btn.classList.add('active');
+  if (id === 'live') btn.classList.add('active-live');
+  else btn.classList.add('active');
 }
 
+/* ============ التنسيقات ============ */
 function formatMatchDate(iso) {
   var d = new Date(iso);
   var days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -338,10 +335,16 @@ function posArabic(a) {
   return p === 'GK' ? 'حارس' : p === 'DF' ? 'مدافع' : p === 'MF' ? 'وسط' : p === 'FW' ? 'مهاجم' : (a || '—');
 }
 
+/* ============ المتغيرات ============ */
 var allMatches = [];
 var allPlayers = [];
+var originalStandings = [];
 var currentFilter = 'all';
+var previousRanks = {};
+var secondsSinceRefresh = 0;
+var REFRESH_INTERVAL = 180;
 
+/* ============ حالة المباراة ============ */
 function getMatchState(m) {
   var status = (m.status || '').toLowerCase();
   var state = (m.state || '').toLowerCase();
@@ -384,6 +387,93 @@ function getFilteredMatches(filter) {
   }).sort(function(a, b) { return new Date(a.date) - new Date(b.date); });
 }
 
+/* ============ حساب الترتيب الحي ============ */
+function computeLiveStandings() {
+  var table = originalStandings.map(function(t) {
+    return {
+      t: t.t, p: parseInt(t.p)||0, w: parseInt(t.w)||0, d: parseInt(t.d)||0,
+      l: parseInt(t.l)||0, gf: parseInt(t.gf)||0, ga: parseInt(t.ga)||0,
+      pts: parseInt(t.pts)||0, live: false
+    };
+  });
+  
+  var liveMatches = [];
+  allMatches.forEach(function(m) {
+    var state = getMatchState(m);
+    if (state === 'live' || state === 'halftime' || state === 'kicked-off') {
+      liveMatches.push(m);
+      var hs = parseInt(m.hs) || 0, as = parseInt(m.as) || 0;
+      var home = table.find(function(t) { return t.t === m.home; });
+      var away = table.find(function(t) { return t.t === m.away; });
+      if (home && away) {
+        home.live = true; away.live = true;
+        home.p++; away.p++;
+        home.gf += hs; home.ga += as;
+        away.gf += as; away.ga += hs;
+        if (hs > as) { home.w++; home.pts += 3; away.l++; }
+        else if (as > hs) { away.w++; away.pts += 3; home.l++; }
+        else { home.d++; home.pts++; away.d++; away.pts++; }
+      }
+    }
+  });
+  
+  table.sort(function(a, b) {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    var gdA = a.gf - a.ga, gdB = b.gf - b.ga;
+    if (gdB !== gdA) return gdB - gdA;
+    return b.gf - a.gf;
+  });
+  table.forEach(function(t, i) { t.r = i + 1; });
+  return { table: table, liveMatches: liveMatches };
+}
+
+function renderLiveStandings() {
+  var result = computeLiveStandings();
+  var table = result.table;
+  var liveMatches = result.liveMatches;
+  
+  var info = document.getElementById('liveMatchesInfo');
+  if (liveMatches.length === 0) {
+    info.innerHTML = 'لا توجد مباريات جارية حالياً.';
+  } else {
+    var mhtml = '<b>' + liveMatches.length + ' مباراة جارية الآن:</b><br>';
+    liveMatches.forEach(function(m) {
+      mhtml += '⚽ ' + m.home + ' <b>' + m.hs + ' - ' + m.as + '</b> ' + m.away + '<br>';
+    });
+    info.innerHTML = mhtml;
+  }
+  
+  var html = '';
+  table.forEach(function(t) {
+    var prev = previousRanks[t.t];
+    var changeHtml = '';
+    if (prev !== undefined && prev !== t.r) {
+      var diff = prev - t.r;
+      if (diff > 0) changeHtml = '<span class="change-arrow change-up">▲</span>';
+      else changeHtml = '<span class="change-arrow change-down">▼</span>';
+    }
+    var rowClass = t.live ? 'live-team' : '';
+    var rankClass = 'rank-badge';
+    if (t.r === 1) rankClass += ' gold';
+    else if (t.r === 2) rankClass += ' silver';
+    else if (t.r === 3) rankClass += ' bronze';
+    var gd = t.gf - t.ga;
+    var gdStr = (gd > 0 ? '+' : '') + gd;
+    
+    html += '<tr class="' + rowClass + '">';
+    html += '<td><span class="' + rankClass + '">' + t.r + '</span>' + changeHtml + '</td>';
+    html += '<td class="team">' + t.t + (t.live ? ' ⚽' : '') + '</td>';
+    html += '<td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td>';
+    html += '<td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + gdStr + '</td>';
+    html += '<td><b>' + t.pts + '</b></td></tr>';
+  });
+  document.getElementById('liveBody').innerHTML = html;
+  
+  previousRanks = {};
+  table.forEach(function(t) { previousRanks[t.t] = t.r; });
+}
+
+/* ============ الفلاتر ============ */
 function buildFilters() {
   var filters = [
     { id: 'all', label: '📋 الكل' },
@@ -404,6 +494,7 @@ function buildFilters() {
 }
 function setFilter(f) { currentFilter = f; buildFilters(); renderMatches(); }
 
+/* ============ العداد ============ */
 function countdownHTML(matchId) {
   return '<div class="countdown" id="cd-' + matchId + '">' +
     '<div class="cd-box"><div class="cd-num" id="cd-d-' + matchId + '">0</div><div class="cd-label">يوم</div></div>' +
@@ -442,7 +533,7 @@ function renderMatches() {
   var filtered = getFilteredMatches(currentFilter);
   var rd = document.getElementById('resultsData');
   if (filtered.length === 0) {
-    rd.innerHTML = '<div class="empty">لا توجد مباريات في هذه الفئة. جرّب فلتراً آخر.</div>';
+    rd.innerHTML = '<div class="empty">لا توجد مباريات في هذه الفئة.</div>';
     return;
   }
   var rhtml = '';
@@ -459,15 +550,14 @@ function renderMatches() {
     } else if (state === 'live') {
       statusClass = 'match-status live';
       var clock = m.clock ? " - د" + m.clock : '';
-      headerStatus = '🔴 مباشر الآن' + clock;
+      headerStatus = '🔴 مباشر' + clock;
       centerHtml = '<div class="match-score live-score">' + m.hs + ' - ' + m.as + '</div>';
       cardClass += ' live';
     } else if (state === 'kicked-off') {
       statusClass = 'match-status kicked-off'; headerStatus = '⚽ بدأت المباراة';
       centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
     } else {
-      statusClass = 'match-status';
-      headerStatus = '⏱️ ' + formatMatchTime(m.date);
+      statusClass = 'match-status'; headerStatus = '⏱️ ' + formatMatchTime(m.date);
       centerHtml = countdownHTML(idx);
     }
     rhtml += '<div class="' + cardClass + '">';
@@ -479,6 +569,7 @@ function renderMatches() {
   updateAllCountdowns();
 }
 
+/* ============ اللاعبون ============ */
 function filterPlayers() {
   var search = document.getElementById('playerSearch').value.toLowerCase().trim();
   var team = document.getElementById('teamFilter').value;
@@ -492,7 +583,6 @@ function filterPlayers() {
   });
   renderPlayers(filtered);
 }
-
 function renderPlayers(players) {
   var tb = document.getElementById('playersBody');
   if (players.length === 0) {
@@ -503,9 +593,8 @@ function renderPlayers(players) {
   var html = '';
   players.forEach(function(p) {
     var posClass = posName(p.position);
-    var nameAr = translateName(p.name);
     html += '<tr><td><span class="number-badge">' + (p.number || '—') + '</span></td>';
-    html += '<td class="player-name-cell">' + nameAr + '</td>';
+    html += '<td class="player-name-cell">' + translateName(p.name) + '</td>';
     html += '<td>' + p.team + '</td>';
     html += '<td><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
     html += '<td>' + (p.age || '—') + '</td>';
@@ -515,43 +604,75 @@ function renderPlayers(players) {
   document.getElementById('playerCount').textContent = 'عدد اللاعبين: ' + players.length + ' من ' + allPlayers.length;
 }
 
-fetch('data.json?v=' + Date.now())
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    var html = '';
-    data.standings.forEach(function(t) {
-      html += '<tr><td>' + t.r + '</td><td class="team">' + t.t + '</td><td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.gd + '</td><td><b>' + t.pts + '</b></td></tr>';
-    });
-    document.getElementById('standingsBody').innerHTML = html;
-    document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
-
-    allPlayers = (data.players || []).slice().sort(function(a, b) {
-      if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
-      return parseInt(a.number || 999) - parseInt(b.number || 999);
-    });
-    if (allPlayers.length === 0) {
-      document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد.</td></tr>';
-    } else {
-      var teams = {};
-      allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
-      var teamSelect = document.getElementById('teamFilter');
-      teamSelect.innerHTML = '<option value="">كل الفرق</option>';
-      Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
-        var opt = document.createElement('option');
-        opt.value = t; opt.textContent = t;
-        teamSelect.appendChild(opt);
+/* ============ التحميل ============ */
+function loadData(showLoader) {
+  if (showLoader) {
+    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">جاري التحميل...</td></tr>';
+  }
+  fetch('data.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var html = '';
+      data.standings.forEach(function(t) {
+        html += '<tr><td>' + t.r + '</td><td class="team">' + t.t + '</td><td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.gd + '</td><td><b>' + t.pts + '</b></td></tr>';
       });
-      renderPlayers(allPlayers);
-    }
+      document.getElementById('standingsBody').innerHTML = html;
+      document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
+      originalStandings = data.standings || [];
 
-    allMatches = data.results || [];
-    buildFilters();
-    renderMatches();
-    setInterval(updateAllCountdowns, 1000);
-  })
-  .catch(function(e) {
-    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
-  });
+      allPlayers = (data.players || []).slice().sort(function(a, b) {
+        if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
+        return parseInt(a.number || 999) - parseInt(b.number || 999);
+      });
+      if (allPlayers.length === 0) {
+        document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد.</td></tr>';
+      } else {
+        var teams = {};
+        allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
+        var teamSelect = document.getElementById('teamFilter');
+        teamSelect.innerHTML = '<option value="">كل الفرق</option>';
+        Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
+          var opt = document.createElement('option');
+          opt.value = t; opt.textContent = t;
+          teamSelect.appendChild(opt);
+        });
+        renderPlayers(allPlayers);
+      }
+
+      allMatches = data.results || [];
+      buildFilters();
+      renderMatches();
+      renderLiveStandings();
+      
+      // إظهار/إخفاء تبويب الترتيب الحي
+      var hasLive = getFilteredMatches('live').length > 0;
+      var liveTab = document.getElementById('tabLive');
+      if (hasLive) {
+        liveTab.style.display = 'block';
+      } else {
+        liveTab.style.display = 'none';
+        if (!document.getElementById('live').classList.contains('hidden')) {
+          showTab('standings', document.getElementById('tabStandings'));
+        }
+      }
+      
+      secondsSinceRefresh = 0;
+    })
+    .catch(function(e) {
+      document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
+    });
+}
+
+/* ============ التشغيل ============ */
+loadData(true);
+setInterval(function() {
+  secondsSinceRefresh++;
+  if (secondsSinceRefresh >= REFRESH_INTERVAL) loadData(false);
+}, 1000);
+setInterval(updateAllCountdowns, 1000);
+setInterval(function() {
+  if (!document.getElementById('live').classList.contains('hidden')) renderLiveStandings();
+}, 5000);
 </script>
 
 </body>
