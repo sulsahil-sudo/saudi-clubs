@@ -21,11 +21,9 @@
   tr:hover { background: #f8f9fa; }
   .loading { text-align: center; color: #1a5490; padding: 40px; }
   .empty { text-align: center; color: #888; padding: 40px; font-size: 16px; }
-
   .search-bar { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
   .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 150px; }
   .search-bar input:focus, .search-bar select:focus { outline: none; border-color: #1a5490; }
-
   .match-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: 0.2s; }
   .match-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
   .match-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px; color: #666; }
@@ -38,15 +36,12 @@
   .match-team { flex: 1; font-weight: bold; font-size: 16px; text-align: center; }
   .match-center { margin: 0 20px; min-width: 180px; text-align: center; }
   .match-score { background: #1a5490; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 20px; }
-
   .countdown { display: flex; justify-content: center; gap: 6px; direction: ltr; }
   .cd-box { background: linear-gradient(135deg, #1a5490, #2c6db5); color: white; padding: 8px 10px; border-radius: 8px; min-width: 50px; text-align: center; }
   .cd-num { font-size: 20px; font-weight: bold; line-height: 1; }
   .cd-label { font-size: 10px; opacity: 0.85; margin-top: 3px; }
   .cd-sep { color: #1a5490; font-size: 20px; font-weight: bold; align-self: center; padding: 0 2px; }
-
   .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
-
   .pos-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
   .pos-badge.GK { background: #fff4e0; color: #b8860b; }
   .pos-badge.DF { background: #e8f8e8; color: #27ae60; }
@@ -68,9 +63,7 @@
 
 <div id="standings" class="content">
   <table>
-    <thead>
-      <tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr>
-    </thead>
+    <thead><tr><th>#</th><th>الفريق</th><th>لعب</th><th>فاز</th><th>تعادل</th><th>خسر</th><th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th></tr></thead>
     <tbody id="standingsBody"><tr><td colspan="10" class="loading">جاري التحميل...</td></tr></tbody>
   </table>
   <div id="updatedStandings" class="updated"></div>
@@ -79,9 +72,7 @@
 <div id="players" class="content hidden">
   <div class="search-bar">
     <input type="text" id="playerSearch" placeholder="ابحث باسم اللاعب..." oninput="filterPlayers()">
-    <select id="teamFilter" onchange="filterPlayers()">
-      <option value="">كل الفرق</option>
-    </select>
+    <select id="teamFilter" onchange="filterPlayers()"><option value="">كل الفرق</option></select>
     <select id="posFilter" onchange="filterPlayers()">
       <option value="">كل المراكز</option>
       <option value="GK">حراس المرمى</option>
@@ -91,9 +82,7 @@
     </select>
   </div>
   <table>
-    <thead>
-      <tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>المركز</th><th>العمر</th><th>الجنسية</th></tr>
-    </thead>
+    <thead><tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>المركز</th><th>العمر</th><th>الجنسية</th></tr></thead>
     <tbody id="playersBody"><tr><td colspan="6" class="loading">جاري التحميل...</td></tr></tbody>
   </table>
   <div id="playerCount" class="updated"></div>
@@ -104,7 +93,6 @@
 </div>
 
 <script>
-/* ============ قاموس الجنسيات ============ */
 var countryMap = {
   "Saudi Arabia":"السعودية","Portugal":"البرتغال","Brazil":"البرازيل","France":"فرنسا",
   "Argentina":"الأرجنتين","Spain":"إسبانيا","Germany":"ألمانيا","Italy":"إيطاليا",
@@ -125,7 +113,7 @@ var countryMap = {
   "Venezuela":"فنزويلا","Ecuador":"الإكوادور","Paraguay":"باراغواي","Bolivia":"بوليفيا",
   "Slovakia":"سلوفاكيا","Slovenia":"سلوفينيا","Bulgaria":"بلغاريا","Hungary":"هنغاريا",
   "Czech Republic":"التشيك","Finland":"فنلندا","Iceland":"آيسلندا","Albania":"ألبانيا",
-  "Kosovo":"كوسوفو","Bosnia and Herzegovina":"البوسنة والهرسك","North Macedonia":"مقدونيا الشمالية",
+  "Kosovo":"كوسوفو","Bosnia and Herzegovina":"البوسنة والهرسك","North Macedonia":"مقدونيا",
   "Georgia":"جورجيا","Armenia":"أرمينيا","Azerbaijan":"أذربيجان","Kazakhstan":"كازاخستان",
   "Burkina Faso":"بوركينا فاسو","South Africa":"جنوب أفريقيا","Kenya":"كينيا",
   "Ethiopia":"إثيوبيا","Gabon":"الغابون","Congo":"الكونغو","DR Congo":"الكونغو الديمقراطية",
@@ -134,124 +122,160 @@ var countryMap = {
   "Mauritania":"موريتانيا","Somalia":"الصومال","Djibouti":"جيبوتي","Comoros":"جزر القمر",
   "Maldives":"المالديف","Indonesia":"إندونيسيا","Malaysia":"ماليزيا","Thailand":"تايلاند",
   "Vietnam":"فيتنام","Philippines":"الفلبين","India":"الهند","Pakistan":"باكستان",
-  "Bangladesh":"بنغلاديش","Afghanistan":"أفغانستان","New Zealand":"نيوزيلندا"
+  "Bangladesh":"بنغلاديش","Afghanistan":"أفغانستان","New Zealand":"نيوزيلندا",
+  "French Guiana":"غيانا الفرنسية","Guadeloupe":"غوادلوب","Martinique":"مارتينيك",
+  "Suriname":"سورينام","Guyana":"غيانا","Haiti":"هايتي","Cuba":"كوبا","Panama":"بنما",
+  "Honduras":"هندوراس","Guatemala":"غواتيمالا","Nicaragua":"نيكاراغوا","El Salvador":"السلفادور",
+  "Trinidad and Tobago":"ترينيداد وتوباغو","Cape Verde":"الرأس الأخضر","Guinea-Bissau":"غينيا بيساو",
+  "Equatorial Guinea":"غينيا الاستوائية","Liberia":"ليبيريا","Sierra Leone":"سيراليون",
+  "Gambia":"غامبيا","Madagascar":"مدغشقر","Mozambique":"موزمبيق","Namibia":"ناميبيا",
+  "Botswana":"بوتسوانا","Malawi":"مالاوي","Rwanda":"رواندا","Burundi":"بوروندي",
+  "Eritrea":"إريتريا","South Sudan":"جنوب السودان","Central African Republic":"أفريقيا الوسطى",
+  "Republic of the Congo":"الكونغو","Sao Tome and Principe":"ساو تومي"
 };
 
-/* ============ قاموس ترجمة الأسماء ============ */
 var nameMap = {
-  // أسماء أولى
+  /* أسماء أولى عربية */
   "mohammed":"محمد","mohamed":"محمد","muhammad":"محمد","mohamad":"محمد","mohammad":"محمد",
   "ahmed":"أحمد","ahmad":"أحمد","ali":"علي","hassan":"حسن","hasan":"حسن",
-  "hussein":"حسين","husain":"حسين","hussain":"حسين","hosein":"حسين",
+  "hussein":"حسين","husain":"حسين","hussain":"حسين","hosein":"حسين","husain":"حسين",
   "omar":"عمر","umar":"عمر","khalid":"خالد","khaled":"خالد","salem":"سالم","salim":"سالم",
   "fahad":"فهد","fahd":"فهد","faisal":"فيصل","faysal":"فيصل","nasser":"ناصر","naser":"ناصر",
   "saud":"سعود","sultan":"سلطان","yasser":"ياسر","yaser":"ياسر","yousef":"يوسف",
   "yusuf":"يوسف","yousif":"يوسف","ibrahim":"إبراهيم","ismail":"إسماعيل","samir":"سمير",
   "waleed":"وليد","walid":"وليد","tariq":"طارق","tarek":"طارق","tarik":"طارق",
-  "mahmoud":"محمود","mahmud":"محمود","mustafa":"مصطفى","rashid":"راشد","saleh":"صالح",
-  "salih":"صالح","sami":"سامي","majed":"ماجد","majid":"ماجد","nawaf":"نواف",
-  "saad":"سعد","sad":"سعد","talal":"طلال","bader":"بدر","badr":"بدر","bandar":"بندر",
+  "mahmoud":"محمود","mahmud":"محمود","mustafa":"مصطفى","mustapha":"مصطفى","moustafa":"مصطفى",
+  "rashid":"راشد","saleh":"صالح","salih":"صالح","sami":"سامي","majed":"ماجد","majid":"ماجد",
+  "nawaf":"نواف","saad":"سعد","talal":"طلال","bader":"بدر","badr":"بدر","bandar":"بندر",
   "ziyad":"زياد","ayman":"أيمن","rayan":"ريان","rayyan":"ريان","abdullah":"عبدالله",
-  "abdallah":"عبدالله","abdulaziz":"عبدالعزيز","abdulrahman":"عبدالرحمن","abdulrrahman":"عبدالرحمن",
-  "abdulkareem":"عبدالكريم","abdulkarim":"عبدالكريم","abdul":"عبد","mohsen":"محسن",
-  "muhsin":"محسن","hamdan":"حمدان","hamad":"حمد","naif":"نايف","mishal":"مشعل",
-  "mishael":"مشعل","meshal":"مشعل","fawaz":"فواز","salman":"سلمان","turki":"تركي",
-  "mansour":"منصور","osama":"أسامة","anas":"أنس","bilal":"بلال","zaid":"زايد",
-  "zayed":"زايد","ammar":"عمار","qasim":"قاسم","issa":"عيسى","isa":"عيسى",
-  "musa":"موسى","moussa":"موسى","yahya":"يحيى","younis":"يونس","younus":"يونس",
-  "ayoub":"أيوب","ayub":"أيوب","suleiman":"سليمان","sulaiman":"سليمان","dawood":"داود",
-  "dawud":"داود","hussam":"حسام","husam":"حسام","wissam":"وسام","wisam":"وسام",
-  "hisham":"هشام","hicham":"هشام","adel":"عادل","adil":"عادل","kamal":"كمال",
-  "jamal":"جمال","gamal":"جمال","razan":"رزان","hani":"هاني","hany":"هاني",
-  "hamza":"حمزة","hamzah":"حمزة","ammar":"عمار","qasem":"قاسم","mohannad":"مهند",
-  "muhannad":"مهند","mubarak":"مبارك","ayad":"عياد","eyad":"إياد","iyad":"إياد",
-  "abdurahman":"عبدالرحمن","abdurrahman":"عبدالرحمن","bassam":"بسام","basem":"باسم",
-  "hazem":"حازم","hazim":"حازم","karem":"كرم","karim":"كريم","kareem":"كريم",
-  "raed":"رائد","rashad":"رشاد","saeed":"سعيد","said":"سعيد","safwan":"صفوان",
-  "salem":"سالم","samih":"صامد","saif":"سيف","seif":"سيف","sufyan":"سفيان",
-  "sufian":"سفيان","tamer":"تامر","thamer":"ثامر","waleed":"وليد","yaman":"يمن",
-  "yahia":"يحيى","yassin":"ياسين","yaseen":"ياسين","yacine":"ياسين","zakaria":"زكريا",
-  "zakariya":"زكريا","nader":"نادر","nasser":"ناصر","nabil":"نبيل","nabeel":"نبيل",
-  "mustapha":"مصطفى","moustafa":"مصطفى","rashad":"رشاد","rafik":"رفيق","rafiq":"رفيق",
-  "rawad":"رواد","rizk":"رزق","saber":"صابر","sabri":"صبري","sadok":"صدوق",
-  "taher":"طاهر","tahar":"طاهر","tawfiq":"توفيق","tarek":"طارق","wassim":"وسيم",
-  "yacoub":"يعقوب","yakoub":"يعقوب","yazan":"يزن","zaher":"زاهر","zahir":"ظاهر",
-  "ziad":"زياد","zuhair":"زهير","zouhair":"زهير",
-  // أسماء أجنبية شهيرة
+  "abdallah":"عبدالله","abdulaziz":"عبدالعزيز","abdulrahman":"عبدالرحمن","abdurrahman":"عبدالرحمن",
+  "abdulrrahman":"عبدالرحمن","abdurahman":"عبدالرحمن","abdulkareem":"عبدالكريم",
+  "abdulkarim":"عبدالكريم","abdul":"عبد","mohsen":"محسن","muhsin":"محسن",
+  "hamdan":"حمدان","hamad":"حمد","naif":"نايف","mishal":"مشعل","meshal":"مشعل",
+  "fawaz":"فواز","salman":"سلمان","turki":"تركي","mansour":"منصور","osama":"أسامة",
+  "anas":"أنس","bilal":"بلال","zaid":"زايد","zayed":"زايد","ammar":"عمار","qasim":"قاسم",
+  "issa":"عيسى","isa":"عيسى","musa":"موسى","moussa":"موسى","yahya":"يحيى","yahia":"يحيى",
+  "younis":"يونس","younus":"يونس","ayoub":"أيوب","ayub":"أيوب","suleiman":"سليمان",
+  "sulaiman":"سليمان","dawood":"داود","dawud":"داود","hussam":"حسام","husam":"حسام",
+  "wissam":"وسام","wisam":"وسام","hisham":"هشام","hicham":"هشام","adel":"عادل","adil":"عادل",
+  "kamal":"كمال","jamal":"جمال","gamal":"جمال","hani":"هاني","hany":"هاني",
+  "hamza":"حمزة","hamzah":"حمزة","mohannad":"مهند","muhannad":"مهند","mubarak":"مبارك",
+  "ayad":"عياد","eyad":"إياد","iyad":"إياد","bassam":"بسام","basem":"باسم",
+  "hazem":"حازم","hazim":"حازم","karim":"كريم","kareem":"كريم","raed":"رائد","rashad":"رشاد",
+  "saeed":"سعيد","said":"سعيد","safwan":"صفوان","saif":"سيف","seif":"سيف",
+  "sufyan":"سفيان","sufian":"سفيان","tamer":"تامر","thamer":"ثامر","yaman":"يمن",
+  "yassin":"ياسين","yaseen":"ياسين","yacine":"ياسين","zakaria":"زكريا","zakariya":"زكريا",
+  "nader":"نادر","nabil":"نبيل","nabeel":"نبيل","rafik":"رفيق","rafiq":"رفيق",
+  "rawad":"رواد","rizk":"رزق","saber":"صابر","sabri":"صبري","taher":"طاهر","tahar":"طاهر",
+  "tawfiq":"توفيق","wassim":"وسيم","yacoub":"يعقوب","yakoub":"يعقوب","yazan":"يزن",
+  "zaher":"زاهر","zahir":"ظاهر","zuhair":"زهير","zouhair":"زهير","moayad":"مؤيد",
+  "muayad":"مؤيد","ghareeb":"غريب","abdulelah":"عبدالإله","abdulilah":"عبدالإله",
+  
+  /* ألقاب وعائلات عربية (بحروف لاتينية) */
+  "aqidi":"العقيدي","daajani":"الدعجاني","dajani":"الدعجاني","ghannam":"الغنام",
+  "sharari":"الشراري","shammari":"الشمري","shamrani":"الشمراني","nasser":"الناصر",
+  "hamdan":"الحمدان","khaibari":"الخيبري","najei":"النجعي","boushal":"بوشل",
+  "maran":"مران","dawsari":"الدوسري","shehri":"الشهري","buraikan":"البريككان",
+  "faraj":"الفرج","bulaihi":"البليهي","tambakti":"التمبكتي","ghamdi":"الغامدي",
+  "qahtani":"القحطاني","malki":"المالكي","harbi":"الحربي","otaibi":"العتيبي",
+  "mutairi":"المطيري","zahrani":"الزهراني","amri":"العمري","hassan":"الحسن",
+  "sulayhem":"السليهم","johani":"الجهني","ahmadi":"الأحمدي","enezi":"العنزي",
+  "rashidi":"الرشيدي","subaie":"السبيعي","harthi":"الحارثي","bahebri":"باهبري",
+  "bahebri":"باهبري","asiri":"العسيري","shahrani":"الشهراني","sulayhim":"السليهم",
+  "bishi":"بيشي","sulayem":"السليم","buraykan":"البريككان","buraykan":"البريكان",
+  "otayf":"عطيف","hawsawi":"الهوساوي","muwallad":"مولد","fallatah":"فلاته",
+  "kanno":"كنو","bukhari":"البخاري","malik":"مالك","ramzi":"رمزي","sulaiman":"سليمان",
+  "marwan":"مروان","mohannad":"مهند","shanqeeti":"شنقيطي","shanqeety":"شنقيطي",
+  "abu":"أبو","abou":"أبو","el":"ال","al":"ال","ben":"بن","bin":"بن",
+  
+  /* أسماء أجنبية شائعة */
   "cristiano":"كريستيانو","ronaldo":"رونالدو","sadio":"ساديو","mane":"ماني",
-  "karim":"كريم","benzema":"بنزيما","neymar":"نيمار","lionel":"ليونيل",
-  "messi":"ميسي","kante":"كانتي","ngolo":"نجولو","riyad":"رياض","mahrez":"محرز",
-  "hakim":"حكيم","ziyech":"زياش","salah":"صلاح","achraf":"أشرف","hakimi":"حكيمي",
-  "yassine":"ياسين","bounou":"بونو","samu":"سامو","costa":"كوستا","angelo":"أنجيلو",
-  "gabriel":"غابرييل","simakan":"سيمان","kalidou":"كاليدو","koulibaly":"كوليبالي",
-  "edouard":"إدوارد","mendy":"ميندي","sadio":"ساديو","vinicius":"فينيسيوس",
-  "junior":"جونيور","luka":"لوكا","modric":"مودريتش","toni":"توني","kroos":"كروس",
-  "kevin":"كيفن","de":"دي","bruyne":"بروين","bruno":"برونو","fernandes":"فرنانديز",
-  "marcelo":"مارسيلو","brozovic":"بروزوفيتش","sergej":"سيرجي","milinkovic":"ميلينكوفيتش",
+  "benzema":"بنزيما","neymar":"نيمار","lionel":"ليونيل","messi":"ميسي",
+  "kante":"كانتي","ngolo":"نجولو","riyad":"رياض","mahrez":"محرز",
+  "hakim":"حكيم","ziyech":"زياش","salah":"صلاح","mohamed":"محمد",
+  "achraf":"أشرف","hakimi":"حكيمي","yassine":"ياسين","bounou":"بونو","bono":"بونو",
+  "samu":"سامو","costa":"كوستا","angelo":"أنجيلو","gabriel":"غابرييل",
+  "simakan":"سيمان","kalidou":"كاليدو","koulibaly":"كوليبالي","edouard":"إدوارد",
+  "mendy":"ميندي","vinicius":"فينيسيوس","junior":"جونيور","luka":"لوكا",
+  "modric":"مودريتش","toni":"توني","kroos":"كروس","kevin":"كيفن","de":"دي",
+  "bruyne":"بروين","bruno":"برونو","fernandes":"فرنانديز","marcelo":"مارسيلو",
+  "brozovic":"بروزوفيتش","sergej":"سيرجي","milinkovic":"ميلينكوفيتش",
   "savic":"سافيتش","ruben":"روبن","neves":"نيفيز","otavio":"أوتافيو",
   "talisca":"تاليسكا","anderson":"أندرسون","roger":"روجر","ibanez":"إيبانيز",
   "wesley":"وسلي","fabinho":"فابينيو","firmino":"فيرمينو","roberto":"روبرتو",
   "alex":"أليكس","telles":"تيليس","merih":"ميريح","demiral":"دميرال",
-  "kalidou":"كاليدو","moussa":"موسى","diaby":"ديابي","fofana":"فوفانا",
-  "yannick":"يانيك","carrasco":"كاراسكو","franck":"فرانك","kessie":"كيسي",
-  "yassine":"ياسين","bono":"بونو","saleh":"صالح","abdulelah":"عبدالإله",
-  "abdulelah":"عبدالإله","abdulrahman":"عبدالرحمن","ghareeb":"غريب",
-  // ألقاب وأسماء عائلات
-  "al-aqidi":"العقيدي","aqidi":"العقيدي","al-ghannam":"الغنام","ghannam":"الغنام",
-  "al-sharari":"الشراري","sharari":"الشراري","al-nasser":"الناصر","alnasser":"الناصر",
-  "al-hamdan":"الحمدان","hamdan":"الحمدان","al-khaibari":"الخيبري","khaibari":"الخيبري",
-  "al-najei":"النجعي","najei":"النجعي","boushal":"بوشل","maran":"مران",
-  "al-dawsari":"الدوسري","dawsari":"الدوسري","al-shehri":"الشهري","shehri":"الشهري",
-  "al-buraikan":"البريككان","buraikan":"البريككان","al-faraj":"الفرج","faraj":"الفرج",
-  "al-bulaihi":"البليهي","bulaihi":"البليهي","al-tambakti":"التمبكتي","tambakti":"التمبكتي",
-  "al-ghamdi":"الغامدي","ghamdi":"الغامدي","al-qahtani":"القحطاني","qahtani":"القحطاني",
-  "al-malki":"المالكي","malki":"المالكي","al-harbi":"الحربي","harbi":"الحربي",
-  "al-otaibi":"العتيبي","otaibi":"العتيبي","al-mutairi":"المطيري","mutairi":"المطيري",
-  "al-zahrani":"الزهراني","zahrani":"الزهراني","al-amri":"العمري","amri":"العمري",
-  "al-hassan":"الحسن","al-sulayhem":"السليهم","sulayhem":"السليهم",
-  "al-shehri":"الشهري","al-sulayhim":"السليهم","al-harbi":"الحربي",
-  "al-qahtani":"القحطاني","al-dawsari":"الدوسري","al-ghamdi":"الغامدي",
-  "al-johani":"الجهني","johani":"الجهني","al-ahmadi":"الأحمدي","ahmadi":"الأحمدي",
-  "al-shammari":"الشمري","shammari":"الشمري","al-enezi":"العنزي","enezi":"العنزي",
-  "al-rashidi":"الرشيدي","rashidi":"الرشيدي","al-subaie":"السبيعي","subaie":"السبيعي",
-  "al-harthi":"الحارثي","harthi":"الحارثي","al-jehani":"الجهني",
-  "al-ghamdi":"الغامدي","alzahrani":"الزهراني","aldossari":"الدوسري"
+  "diaby":"ديابي","fofana":"فوفانا","yannick":"يانيك","carrasco":"كاراسكو",
+  "franck":"فرانك","kessie":"كيسي","fekir":"فقير","nabil":"نبيل",
+  "donovan":"دونوفان","leon":"ليون","léon":"ليون","georges":"جورج",
+  "gory":"غوري","alimani":"عليماني","nkoudou":"نكودو","n'koudou":"نكودو",
+  "kamil":"كامل","boumedmed":"بومدين","boumediene":"بومدين","binyan":"بنيان",
+  "bounedjah":"بونجاح","baghdad":"بغداد","mahrez":"محرز","atlas":"أطلس",
+  "aboubakar":"أبوبكر","vincent":"فينسنت","aboubakar":"أبوبكر",
+  "ignatius":"إغناتيوس","ganago":"غاناغو","jota":"جوتا","diogo":"ديوغو",
+  "ruben":"روبن","goncalo":"غونسالو","gonçalo":"غونسالو","ramos":"راموس",
+  "joao":"جواو","joão":"جواو","pedro":"بيدرو","lucas":"لوكاس","matheus":"ماتيوس",
+  "gustavo":"غوستافو","rodrigo":"رودريغو","fernando":"فرناندو","ricardo":"ريكاردو",
+  "eduardo":"إدواردو","danilo":"دانيلو","bruno":"برونو","guilherme":"غيليرمي",
+  "klein":"كلاين","nicolas":"نيكولاس","nicolas":"نيكولاس","jose":"خوسيه",
+  "josé":"خوسيه","juan":"خوان","carlos":"كارلوس","miguel":"ميغيل","antonio":"أنطونيو",
+  "paulo":"باولو","paolo":"باولو","marco":"ماركو","marcos":"ماركوس",
+  "alexandre":"ألكسندر","alexander":"ألكسندر","sandro":"ساندرو","aleksandar":"ألكسندر",
+  "dimitri":"ديميتري","dmitri":"ديميتري","ivan":"إيفان","igor":"إيغور","sergei":"سيرغي",
+  "nikola":"نيكولا","stefan":"ستيفان","marko":"ماركو","milan":"ميلان","luka":"لوكا",
+  "mateo":"ماتيو","matteo":"ماتيو","lorenzo":"لورينزو","andrea":"أندريا",
+  "francesco":"فرانشيسكو","giuseppe":"جوزيبي","antonio":"أنطونيو","giovanni":"جيوفاني",
+  "yann":"يان","yves":"إيف","jean":"جان","pierre":"بيير","louis":"لويس",
+  "antoine":"أنطوان","olivier":"أوليفييه","thomas":"توماس","mathieu":"ماتيو",
+  "julien":"جوليان","david":"ديفيد","daniel":"دانيال","michael":"مايكل",
+  "marc":"مارك","paul":"بول","peter":"بيتر","john":"جون","james":"جيمس",
+  "robert":"روبرت","william":"وليام","charles":"تشارلز","henry":"هنري",
+  "harry":"هاري","jack":"جاك","luke":"لوك","ben":"بن","sam":"سام","tom":"توم",
+  "max":"ماكس","leo":"ليو","rayan":"ريان","adam":"آدم","noah":"نوح","ryan":"ريان"
 };
 
-/* ============ دوال الترجمة ============ */
 function translateName(name) {
   if (!name) return '';
-  return name.split(' ').map(function(w) {
-    var clean = w.toLowerCase().replace(/[^a-z-]/g, '');
+  var words = name.split(' ');
+  var result = words.map(function(w) {
+    var clean = w.toLowerCase().replace(/['']/g, "'").replace(/[^a-z'-]/g, '');
+    if (!clean) return w;
+    
     if (nameMap[clean]) return nameMap[clean];
+    
     // Al-XXXX
     if (clean.indexOf('al-') === 0) {
       var rest = clean.substring(3);
-      if (nameMap['al-' + rest]) return nameMap['al-' + rest];
       if (nameMap[rest]) return 'ال' + nameMap[rest];
     }
-    // AlXXXX (بدون شرطة)
-    if (clean.indexOf('al') === 0 && clean.length > 4) {
-      var rest2 = clean.substring(2);
-      if (nameMap['al-' + rest2]) return nameMap['al-' + rest2];
+    // El-XXXX
+    if (clean.indexOf('el-') === 0) {
+      var rest2 = clean.substring(3);
       if (nameMap[rest2]) return 'ال' + nameMap[rest2];
     }
+    // Ben-XXXX
+    if (clean.indexOf('ben-') === 0) {
+      var rest3 = clean.substring(4);
+      if (nameMap[rest3]) return 'بن ' + nameMap[rest3];
+    }
+    // AlXXX بدون شرطة (AlDaajani)
+    if (clean.indexOf('al') === 0 && clean.length > 4) {
+      var rest4 = clean.substring(2);
+      if (nameMap[rest4]) return 'ال' + nameMap[rest4];
+    }
     return w;
-  }).join(' ');
+  });
+  return result.join(' ');
 }
 
 function translateCountry(c) {
   if (!c) return '—';
-  var found = countryMap[c];
-  if (found) return found;
-  // محاولة البحث بحروف صغيرة
+  if (countryMap[c]) return countryMap[c];
   for (var k in countryMap) {
     if (k.toLowerCase() === c.toLowerCase()) return countryMap[k];
   }
   return c;
 }
 
-/* ============ الوظائف الأساسية ============ */
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(function(el) { el.classList.add('hidden'); });
   document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
@@ -312,8 +336,7 @@ function updateAllCountdowns() {
   allMatches.forEach(function(m, idx) {
     var el = document.getElementById('cd-' + idx);
     if (!el) return;
-    var target = new Date(m.date).getTime();
-    var diff = target - Date.now();
+    var diff = new Date(m.date).getTime() - Date.now();
     var dEl = document.getElementById('cd-d-' + idx);
     var hEl = document.getElementById('cd-h-' + idx);
     var mEl = document.getElementById('cd-m-' + idx);
@@ -334,7 +357,6 @@ function filterPlayers() {
   var search = document.getElementById('playerSearch').value.toLowerCase().trim();
   var team = document.getElementById('teamFilter').value;
   var pos = document.getElementById('posFilter').value;
-
   var filtered = allPlayers.filter(function(p) {
     var nameAr = translateName(p.name).toLowerCase();
     if (search && p.name.toLowerCase().indexOf(search) === -1 && nameAr.indexOf(search) === -1) return false;
@@ -342,7 +364,6 @@ function filterPlayers() {
     if (pos && posName(p.position) !== pos) return false;
     return true;
   });
-
   renderPlayers(filtered);
 }
 
@@ -372,7 +393,6 @@ function renderPlayers(players) {
 fetch('data.json?v=' + Date.now())
   .then(function(r) { return r.json(); })
   .then(function(data) {
-    // الترتيب
     var html = '';
     data.standings.forEach(function(t) {
       html += '<tr><td>' + t.r + '</td><td class="team">' + t.t + '</td><td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.gd + '</td><td><b>' + t.pts + '</b></td></tr>';
@@ -380,7 +400,6 @@ fetch('data.json?v=' + Date.now())
     document.getElementById('standingsBody').innerHTML = html;
     document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
 
-    // اللاعبون
     allPlayers = (data.players || []).slice().sort(function(a, b) {
       if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
       return parseInt(a.number || 999) - parseInt(b.number || 999);
@@ -400,7 +419,6 @@ fetch('data.json?v=' + Date.now())
       renderPlayers(allPlayers);
     }
 
-    // المباريات
     var rd = document.getElementById('resultsData');
     if (!data.results || data.results.length === 0) {
       rd.innerHTML = '<div class="empty">لا توجد مباريات حالياً. سيتم التحديث تلقائياً.</div>';
@@ -423,10 +441,8 @@ fetch('data.json?v=' + Date.now())
           headerStatus = '⏱️ ' + formatMatchTime(m.date);
           centerHtml = countdownHTML(idx);
         }
-        rhtml += '<div class="match-card">';
-        rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
-        rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
-        rhtml += '</div>';
+        rhtml += '<div class="match-card"><div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
+        rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div></div>';
       });
       rd.innerHTML = rhtml;
       updateAllCountdowns();
