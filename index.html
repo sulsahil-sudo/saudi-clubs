@@ -371,4 +371,256 @@ function computeLiveStandings() {
         home.p++; away.p++;
         home.gf += hs; home.ga += as;
         away.gf += as; away.ga += hs;
-        if (hs > as) { home.w++; home.pts += 3; away
+        if (hs > as) { home.w++; home.pts += 3; away.l++; }
+        else if (as > hs) { away.w++; away.pts += 3; home.l++; }
+        else { home.d++; home.pts++; away.d++; away.pts++; }
+      }
+    }
+  });
+  table.sort(function(a, b) {
+    if (b.pts !== a.pts) return b.pts - a.pts;
+    var gdA = a.gf - a.ga, gdB = b.gf - b.ga;
+    if (gdB !== gdA) return gdB - gdA;
+    return b.gf - a.gf;
+  });
+  table.forEach(function(t, i) { t.r = i + 1; });
+  return { table: table, liveMatches: liveMatches };
+}
+
+function renderLiveStandings() {
+  var result = computeLiveStandings();
+  var table = result.table;
+  var liveMatches = result.liveMatches;
+  var info = document.getElementById('liveMatchesInfo');
+  if (liveMatches.length === 0) {
+    info.innerHTML = 'لا توجد مباريات جارية حالياً.';
+  } else {
+    var mhtml = '<b>' + liveMatches.length + ' مباراة جارية الآن:</b><br>';
+    liveMatches.forEach(function(m) {
+      mhtml += '⚽ ' + m.home + ' <b>' + m.hs + ' - ' + m.as + '</b> ' + m.away + '<br>';
+    });
+    info.innerHTML = mhtml;
+  }
+  var html = '';
+  table.forEach(function(t) {
+    var prev = previousRanks[t.t];
+    var changeHtml = '';
+    if (prev !== undefined && prev !== t.r) {
+      var diff = prev - t.r;
+      if (diff > 0) changeHtml = '<span class="change-arrow change-up">▲</span>';
+      else changeHtml = '<span class="change-arrow change-down">▼</span>';
+    }
+    var rowClass = t.live ? 'live-team' : '';
+    var rankClass = 'rank-badge';
+    if (t.r === 1) rankClass += ' gold';
+    else if (t.r === 2) rankClass += ' silver';
+    else if (t.r === 3) rankClass += ' bronze';
+    var gd = t.gf - t.ga;
+    var gdStr = (gd > 0 ? '+' : '') + gd;
+    html += '<tr class="' + rowClass + '">';
+    html += '<td><span class="' + rankClass + '">' + t.r + '</span>' + changeHtml + '</td>';
+    html += '<td class="team">' + t.t + (t.live ? ' ⚽' : '') + '</td>';
+    html += '<td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td>';
+    html += '<td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + gdStr + '</td>';
+    html += '<td><b>' + t.pts + '</b></td></tr>';
+  });
+  document.getElementById('liveBody').innerHTML = html;
+  previousRanks = {};
+  table.forEach(function(t) { previousRanks[t.t] = t.r; });
+}
+
+function buildFilters() {
+  var filters = [
+    { id: 'all', label: '📋 الكل' },
+    { id: 'live', label: '🔴 مباشر الآن' },
+    { id: 'today', label: '📅 اليوم' },
+    { id: 'yesterday', label: '⬅️ أمس' },
+    { id: 'tomorrow', label: '➡️ غداً' },
+    { id: 'lastweek', label: '⏪ الأسبوع الماضي' },
+    { id: 'nextweek', label: '⏩ الأسبوع القادم' }
+  ];
+  var html = '';
+  filters.forEach(function(f) {
+    var count = getFilteredMatches(f.id).length;
+    var activeClass = currentFilter === f.id ? 'active' : '';
+    html += '<button class="filter-btn ' + activeClass + '" onclick="setFilter(\'' + f.id + '\')">' + f.label + ' <span class="count">' + count + '</span></button>';
+  });
+  document.getElementById('matchFilters').innerHTML = html;
+}
+function setFilter(f) { currentFilter = f; buildFilters(); renderMatches(); }
+
+function countdownHTML(matchId) {
+  return '<div class="countdown" id="cd-' + matchId + '">' +
+    '<div class="cd-box"><div class="cd-num" id="cd-d-' + matchId + '">0</div><div class="cd-label">يوم</div></div>' +
+    '<div class="cd-sep">:</div>' +
+    '<div class="cd-box"><div class="cd-num" id="cd-h-' + matchId + '">0</div><div class="cd-label">ساعة</div></div>' +
+    '<div class="cd-sep">:</div>' +
+    '<div class="cd-box"><div class="cd-num" id="cd-m-' + matchId + '">0</div><div class="cd-label">دقيقة</div></div>' +
+    '<div class="cd-sep">:</div>' +
+    '<div class="cd-box"><div class="cd-num" id="cd-s-' + matchId + '">0</div><div class="cd-label">ثانية</div></div>' +
+    '</div>';
+}
+function updateAllCountdowns() {
+  var filtered = getFilteredMatches(currentFilter);
+  filtered.forEach(function(m, idx) {
+    var el = document.getElementById('cd-' + idx);
+    if (!el) return;
+    var diff = new Date(m.date).getTime() - Date.now();
+    var dEl = document.getElementById('cd-d-' + idx);
+    var hEl = document.getElementById('cd-h-' + idx);
+    var mEl = document.getElementById('cd-m-' + idx);
+    var sEl = document.getElementById('cd-s-' + idx);
+    if (!dEl) return;
+    if (diff <= 0) { dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '0'; return; }
+    var totalSec = Math.floor(diff / 1000);
+    dEl.textContent = Math.floor(totalSec / 86400);
+    var hh = Math.floor((totalSec % 86400) / 3600);
+    var mm = Math.floor((totalSec % 3600) / 60);
+    var ss = totalSec % 60;
+    hEl.textContent = hh < 10 ? '0' + hh : hh;
+    mEl.textContent = mm < 10 ? '0' + mm : mm;
+    sEl.textContent = ss < 10 ? '0' + ss : ss;
+  });
+}
+
+function renderMatches() {
+  var filtered = getFilteredMatches(currentFilter);
+  var rd = document.getElementById('resultsData');
+  if (filtered.length === 0) {
+    rd.innerHTML = '<div class="empty">لا توجد مباريات في هذه الفئة.</div>';
+    return;
+  }
+  var rhtml = '';
+  filtered.forEach(function(m, idx) {
+    var state = getMatchState(m);
+    var headerStatus, statusClass, centerHtml, cardClass = 'match-card';
+    if (state === 'finished') {
+      statusClass = 'match-status finished'; headerStatus = '✅ انتهت';
+      centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
+    } else if (state === 'halftime') {
+      statusClass = 'match-status live'; headerStatus = '⏸️ بين الشوطين';
+      centerHtml = '<div class="match-score live-score">' + m.hs + ' - ' + m.as + '</div>';
+      cardClass += ' live';
+    } else if (state === 'live' || state === 'live-auto') {
+      statusClass = 'match-status live';
+      var clock = m.clock ? " - د" + m.clock : '';
+      headerStatus = state === 'live-auto' ? '🔴 مباشر (تقديري)' : '🔴 مباشر الآن' + clock;
+      centerHtml = '<div class="match-score live-score">' + m.hs + ' - ' + m.as + '</div>';
+      cardClass += ' live';
+    } else {
+      statusClass = 'match-status'; headerStatus = '⏱️ ' + formatMatchTime(m.date);
+      centerHtml = countdownHTML(idx);
+    }
+    rhtml += '<div class="' + cardClass + '">';
+    rhtml += '<div class="match-header"><div>' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
+    rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
+    rhtml += '</div>';
+  });
+  rd.innerHTML = rhtml;
+  updateAllCountdowns();
+}
+
+function filterPlayers() {
+  var search = document.getElementById('playerSearch').value.toLowerCase().trim();
+  var team = document.getElementById('teamFilter').value;
+  var pos = document.getElementById('posFilter').value;
+  var filtered = allPlayers.filter(function(p) {
+    var nameAr = translateName(p.name).toLowerCase();
+    if (search && p.name.toLowerCase().indexOf(search) === -1 && nameAr.indexOf(search) === -1) return false;
+    if (team && p.team !== team) return false;
+    if (pos && posName(p.position) !== pos) return false;
+    return true;
+  });
+  renderPlayers(filtered);
+}
+function renderPlayers(players) {
+  var tb = document.getElementById('playersBody');
+  if (players.length === 0) {
+    tb.innerHTML = '<tr><td colspan="6" class="empty">لا يوجد لاعبون مطابقون للبحث.</td></tr>';
+    document.getElementById('playerCount').textContent = '';
+    return;
+  }
+  var html = '';
+  players.forEach(function(p) {
+    var posClass = posName(p.position);
+    html += '<tr><td><span class="number-badge">' + (p.number || '—') + '</span></td>';
+    html += '<td class="player-name-cell">' + translateName(p.name) + '</td>';
+    html += '<td>' + p.team + '</td>';
+    html += '<td><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
+    html += '<td>' + (p.age || '—') + '</td>';
+    html += '<td>' + translateCountry(p.nationality) + '</td></tr>';
+  });
+  tb.innerHTML = html;
+  document.getElementById('playerCount').textContent = 'عدد اللاعبين: ' + players.length + ' من ' + allPlayers.length;
+}
+
+function loadData(showLoader) {
+  if (showLoader) {
+    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">جاري التحميل...</td></tr>';
+  }
+  fetch('data.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var html = '';
+      data.standings.forEach(function(t) {
+        html += '<tr><td>' + t.r + '</td><td class="team">' + t.t + '</td><td>' + t.p + '</td><td>' + t.w + '</td><td>' + t.d + '</td><td>' + t.l + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.gd + '</td><td><b>' + t.pts + '</b></td></tr>';
+      });
+      document.getElementById('standingsBody').innerHTML = html;
+      document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
+      originalStandings = data.standings || [];
+
+      allPlayers = (data.players || []).slice().sort(function(a, b) {
+        if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
+        return parseInt(a.number || 999) - parseInt(b.number || 999);
+      });
+      if (allPlayers.length === 0) {
+        document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد.</td></tr>';
+      } else {
+        var teams = {};
+        allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
+        var teamSelect = document.getElementById('teamFilter');
+        teamSelect.innerHTML = '<option value="">كل الفرق</option>';
+        Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
+          var opt = document.createElement('option');
+          opt.value = t; opt.textContent = t;
+          teamSelect.appendChild(opt);
+        });
+        renderPlayers(allPlayers);
+      }
+
+      allMatches = data.results || [];
+      buildFilters();
+      renderMatches();
+      renderLiveStandings();
+
+      var hasLive = getFilteredMatches('live').length > 0;
+      var liveTab = document.getElementById('tabLive');
+      if (hasLive) {
+        liveTab.style.display = 'block';
+      } else {
+        liveTab.style.display = 'none';
+        if (!document.getElementById('live').classList.contains('hidden')) {
+          showTab('standings', document.getElementById('tabStandings'));
+        }
+      }
+
+      secondsSinceRefresh = 0;
+    })
+    .catch(function(e) {
+      document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
+    });
+}
+
+loadData(true);
+setInterval(function() {
+  secondsSinceRefresh++;
+  if (secondsSinceRefresh >= REFRESH_INTERVAL) loadData(false);
+}, 1000);
+setInterval(updateAllCountdowns, 1000);
+setInterval(function() {
+  if (!document.getElementById('live').classList.contains('hidden')) renderLiveStandings();
+}, 5000);
+</script>
+
+</body>
+</html>
