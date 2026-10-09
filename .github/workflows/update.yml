@@ -1,4 +1,4 @@
-name: تحديث البيانات
+name: Update Data
 on:
   schedule:
     - cron: '0 * * * *'
@@ -13,12 +13,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: تشغيل السكربت
+      - name: Run fetch script
         run: python fetch_data.py
-      - name: رفع التحديثات
+      - name: Push updates
         run: |
           git config user.name "Auto Update"
           git config user.email "bot@github.com"
           git add data.json
-          git commit -m "تحديث تلقائي" || exit 0
+          git commit -m "Auto update" || exit 0
           git push
