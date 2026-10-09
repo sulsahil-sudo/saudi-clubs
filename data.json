@@ -217,32 +217,7 @@
       "pts": "2"
     }
   ],
-  "results": [
-    {
-      "home": "الخلود",
-      "away": "القادسية",
-      "hs": "0",
-      "as": "3",
-      "date": "2026-10-09T13:50Z",
-      "status": "54'"
-    },
-    {
-      "home": "الفتح",
-      "away": "الأهلي",
-      "hs": "0",
-      "as": "0",
-      "date": "2026-10-09T14:55Z",
-      "status": "12'"
-    },
-    {
-      "home": "النصر",
-      "away": "الدرعية",
-      "hs": "0",
-      "as": "0",
-      "date": "2026-10-09T18:00Z",
-      "status": "Fri, October 9th at 2:00 PM EDT"
-    }
-  ],
+  "results": [],
   "players": [
     {
       "name": "Yassine Bounou",
@@ -4982,5 +4957,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-09 15:07 UTC"
+  "lastUpdated": "2026-10-09 15:21 UTC"
 }
