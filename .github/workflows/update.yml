@@ -1,0 +1,24 @@
+name: تحديث البيانات
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: تشغيل السكربت
+        run: python fetch_data.py
+      - name: رفع التحديثات
+        run: |
+          git config user.name "Auto Update"
+          git config user.email "bot@github.com"
+          git add data.json
+          git commit -m "تحديث تلقائي" || exit 0
+          git push
