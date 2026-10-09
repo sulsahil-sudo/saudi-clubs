@@ -8,19 +8,23 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
   h1 { text-align: center; margin-bottom: 25px; color: #1a5490; }
-  .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-weight: bold; color: #555; border-radius: 8px; transition: 0.2s; font-family: inherit; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-wrap: wrap; }
+  .tab { flex: 1; min-width: 100px; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 15px; font-weight: bold; color: #555; border-radius: 8px; transition: 0.2s; font-family: inherit; }
   .tab:hover { background: #f0f2f5; }
   .tab.active { background: #1a5490; color: white; }
   .content { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
   .hidden { display: none; }
   table { width: 100%; border-collapse: collapse; }
-  th { background: #1a5490; color: white; padding: 12px; text-align: center; font-size: 14px; }
+  th { background: #1a5490; color: white; padding: 12px; text-align: center; font-size: 14px; position: sticky; top: 0; }
   td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; font-size: 14px; }
   .team { text-align: right; font-weight: bold; }
   tr:hover { background: #f8f9fa; }
   .loading { text-align: center; color: #1a5490; padding: 40px; }
   .empty { text-align: center; color: #888; padding: 40px; font-size: 16px; }
+
+  .search-bar { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 150px; }
+  .search-bar input:focus, .search-bar select:focus { outline: none; border-color: #1a5490; }
 
   .match-card { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 12px; transition: 0.2s; }
   .match-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -30,28 +34,26 @@
   .match-status.live { background: #fee; color: #c0392b; animation: pulse 1.5s infinite; }
   .match-status.finished { background: #e8f8e8; color: #27ae60; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
-
   .match-body { display: flex; justify-content: space-between; align-items: center; }
   .match-team { flex: 1; font-weight: bold; font-size: 16px; text-align: center; }
   .match-center { margin: 0 20px; min-width: 180px; text-align: center; }
   .match-score { background: #1a5490; color: white; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 20px; }
 
-  /* عداد تنازلي */
   .countdown { display: flex; justify-content: center; gap: 6px; direction: ltr; }
   .cd-box { background: linear-gradient(135deg, #1a5490, #2c6db5); color: white; padding: 8px 10px; border-radius: 8px; min-width: 50px; text-align: center; }
   .cd-num { font-size: 20px; font-weight: bold; line-height: 1; }
   .cd-label { font-size: 10px; opacity: 0.85; margin-top: 3px; }
   .cd-sep { color: #1a5490; font-size: 20px; font-weight: bold; align-self: center; padding: 0 2px; }
 
-  .match-time { color: #1a5490; font-weight: bold; font-size: 14px; padding: 5px 0; }
   .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
 
-  .rank-badge { display: inline-block; width: 30px; height: 30px; line-height: 30px; border-radius: 50%; background: #e8f4fd; color: #1a5490; font-weight: bold; text-align: center; }
-  .rank-badge.gold { background: #ffd700; color: #333; }
-  .rank-badge.silver { background: #c0c0c0; color: #333; }
-  .rank-badge.bronze { background: #cd7f32; color: white; }
-  .player-name { text-align: right; font-weight: bold; font-size: 15px; }
-  .goals-cell { font-size: 18px; font-weight: bold; color: #1a5490; }
+  .pos-badge { display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; background: #e8f4fd; color: #1a5490; }
+  .pos-badge.GK { background: #fff4e0; color: #b8860b; }
+  .pos-badge.DF { background: #e8f8e8; color: #27ae60; }
+  .pos-badge.MF { background: #e8f4fd; color: #1a5490; }
+  .pos-badge.FW { background: #fdeaea; color: #c0392b; }
+  .player-name-cell { text-align: right; font-weight: bold; }
+  .number-badge { display: inline-block; background: #1a5490; color: white; width: 32px; height: 32px; line-height: 32px; border-radius: 50%; font-weight: bold; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -60,7 +62,7 @@
 
 <div class="tabs">
   <button class="tab active" onclick="showTab('standings', this)">الترتيب</button>
-  <button class="tab" onclick="showTab('scorers', this)">الهدافون</button>
+  <button class="tab" onclick="showTab('players', this)">اللاعبون</button>
   <button class="tab" onclick="showTab('results', this)">المباريات</button>
 </div>
 
@@ -74,13 +76,27 @@
   <div id="updatedStandings" class="updated"></div>
 </div>
 
-<div id="scorers" class="content hidden">
+<div id="players" class="content hidden">
+  <div class="search-bar">
+    <input type="text" id="playerSearch" placeholder="ابحث باسم اللاعب..." oninput="filterPlayers()">
+    <select id="teamFilter" onchange="filterPlayers()">
+      <option value="">كل الفرق</option>
+    </select>
+    <select id="posFilter" onchange="filterPlayers()">
+      <option value="">كل المراكز</option>
+      <option value="GK">حراس المرمى</option>
+      <option value="DF">المدافعون</option>
+      <option value="MF">لاعبو الوسط</option>
+      <option value="FW">المهاجمون</option>
+    </select>
+  </div>
   <table>
     <thead>
-      <tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>الأهداف</th></tr>
+      <tr><th>#</th><th>اللاعب</th><th>الفريق</th><th>المركز</th><th>العمر</th><th>الجنسية</th></tr>
     </thead>
-    <tbody id="scorersBody"><tr><td colspan="4" class="loading">جاري التحميل...</td></tr></tbody>
+    <tbody id="playersBody"><tr><td colspan="6" class="loading">جاري التحميل...</td></tr></tbody>
   </table>
+  <div id="playerCount" class="updated"></div>
 </div>
 
 <div id="results" class="content hidden">
@@ -112,10 +128,26 @@ function formatMatchTime(iso) {
   return h + ':' + mm + ' ' + ampm;
 }
 
-// تخزين المباريات عالمياً للعداد
-var allMatches = [];
+function posName(abbr) {
+  if (abbr === 'GK' || abbr === 'G') return 'GK';
+  if (abbr === 'DF' || abbr === 'D' || abbr === 'CB' || abbr === 'LB' || abbr === 'RB') return 'DF';
+  if (abbr === 'MF' || abbr === 'M' || abbr === 'CM' || abbr === 'DM' || abbr === 'AM') return 'MF';
+  if (abbr === 'FW' || abbr === 'F' || abbr === 'ST' || abbr === 'CF' || abbr === 'LW' || abbr === 'RW') return 'FW';
+  return abbr;
+}
 
-// توليد HTML للعداد التنازلي
+function posArabic(abbr) {
+  var p = posName(abbr);
+  if (p === 'GK') return 'حارس';
+  if (p === 'DF') return 'مدافع';
+  if (p === 'MF') return 'وسط';
+  if (p === 'FW') return 'مهاجم';
+  return abbr || '—';
+}
+
+var allMatches = [];
+var allPlayers = [];
+
 function countdownHTML(matchId) {
   return '<div class="countdown" id="cd-' + matchId + '">' +
          '<div class="cd-box"><div class="cd-num" id="cd-d-' + matchId + '">0</div><div class="cd-label">يوم</div></div>' +
@@ -128,40 +160,64 @@ function countdownHTML(matchId) {
          '</div>';
 }
 
-// تحديث جميع العدادات كل ثانية
 function updateAllCountdowns() {
   allMatches.forEach(function(m, idx) {
     var el = document.getElementById('cd-' + idx);
     if (!el) return;
     var target = new Date(m.date).getTime();
-    var now = Date.now();
-    var diff = target - now;
-
+    var diff = target - Date.now();
     var dEl = document.getElementById('cd-d-' + idx);
     var hEl = document.getElementById('cd-h-' + idx);
     var mEl = document.getElementById('cd-m-' + idx);
     var sEl = document.getElementById('cd-s-' + idx);
-
-    if (diff <= 0) {
-      // انتهى العد، المباراة بدأت
-      dEl.textContent = '0';
-      hEl.textContent = '0';
-      mEl.textContent = '0';
-      sEl.textContent = '0';
-      return;
-    }
-
+    if (diff <= 0) { dEl.textContent = hEl.textContent = mEl.textContent = sEl.textContent = '0'; return; }
     var totalSec = Math.floor(diff / 1000);
-    var days = Math.floor(totalSec / 86400);
-    var hours = Math.floor((totalSec % 86400) / 3600);
-    var mins = Math.floor((totalSec % 3600) / 60);
-    var secs = totalSec % 60;
-
-    dEl.textContent = days;
-    hEl.textContent = hours < 10 ? '0' + hours : hours;
-    mEl.textContent = mins < 10 ? '0' + mins : mins;
-    sEl.textContent = secs < 10 ? '0' + secs : secs;
+    dEl.textContent = Math.floor(totalSec / 86400);
+    var hh = Math.floor((totalSec % 86400) / 3600);
+    var mm = Math.floor((totalSec % 3600) / 60);
+    var ss = totalSec % 60;
+    hEl.textContent = hh < 10 ? '0' + hh : hh;
+    mEl.textContent = mm < 10 ? '0' + mm : mm;
+    sEl.textContent = ss < 10 ? '0' + ss : ss;
   });
+}
+
+function filterPlayers() {
+  var search = document.getElementById('playerSearch').value.toLowerCase().trim();
+  var team = document.getElementById('teamFilter').value;
+  var pos = document.getElementById('posFilter').value;
+
+  var filtered = allPlayers.filter(function(p) {
+    if (search && p.name.toLowerCase().indexOf(search) === -1) return false;
+    if (team && p.team !== team) return false;
+    if (pos && posName(p.position) !== pos) return false;
+    return true;
+  });
+
+  renderPlayers(filtered);
+}
+
+function renderPlayers(players) {
+  var tb = document.getElementById('playersBody');
+  if (players.length === 0) {
+    tb.innerHTML = '<tr><td colspan="6" class="empty">لا يوجد لاعبون مطابقون للبحث.</td></tr>';
+    document.getElementById('playerCount').textContent = '';
+    return;
+  }
+  var html = '';
+  players.forEach(function(p, i) {
+    var posClass = posName(p.position);
+    html += '<tr>';
+    html += '<td><span class="number-badge">' + (p.number || '—') + '</span></td>';
+    html += '<td class="player-name-cell">' + p.name + '</td>';
+    html += '<td>' + p.team + '</td>';
+    html += '<td><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
+    html += '<td>' + (p.age || '—') + '</td>';
+    html += '<td>' + (p.nationality || '—') + '</td>';
+    html += '</tr>';
+  });
+  tb.innerHTML = html;
+  document.getElementById('playerCount').textContent = 'عدد اللاعبين المعروضين: ' + players.length + ' من ' + allPlayers.length;
 }
 
 fetch('data.json?v=' + Date.now())
@@ -175,20 +231,25 @@ fetch('data.json?v=' + Date.now())
     document.getElementById('standingsBody').innerHTML = html;
     document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
 
-    // الهدافون
-    var sb = document.getElementById('scorersBody');
-    if (!data.scorers || data.scorers.length === 0) {
-      sb.innerHTML = '<tr><td colspan="4" class="empty">قائمة الهدافين ستتوفر قريباً.</td></tr>';
+    // اللاعبون
+    allPlayers = (data.players || []).slice().sort(function(a, b) {
+      if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
+      return parseInt(a.number || 999) - parseInt(b.number || 999);
+    });
+
+    if (allPlayers.length === 0) {
+      document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد. سيتم التحديث تلقائياً.</td></tr>';
     } else {
-      var shtml = '';
-      data.scorers.forEach(function(p, i) {
-        var badgeClass = 'rank-badge';
-        if (i === 0) badgeClass += ' gold';
-        else if (i === 1) badgeClass += ' silver';
-        else if (i === 2) badgeClass += ' bronze';
-        shtml += '<tr><td><span class="' + badgeClass + '">' + (i+1) + '</span></td><td class="player-name">' + p.name + '</td><td>' + p.team + '</td><td class="goals-cell">' + p.goals + '</td></tr>';
+      // ملء فلتر الفرق
+      var teams = {};
+      allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
+      var teamSelect = document.getElementById('teamFilter');
+      Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
+        var opt = document.createElement('option');
+        opt.value = t; opt.textContent = t;
+        teamSelect.appendChild(opt);
       });
-      sb.innerHTML = shtml;
+      renderPlayers(allPlayers);
     }
 
     // المباريات
@@ -203,32 +264,23 @@ fetch('data.json?v=' + Date.now())
         var statusText = m.status || '';
         var isLive = statusText.indexOf('progress') !== -1 || statusText.indexOf('Half') !== -1;
         var isFinished = statusText.indexOf('Final') !== -1 || statusText.indexOf('FT') !== -1;
-
-        var centerHtml;
-        var headerStatus;
-
+        var centerHtml, headerStatus;
         if (isFinished) {
-          statusClass += ' finished';
-          headerStatus = 'انتهت';
+          statusClass += ' finished'; headerStatus = 'انتهت';
           centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
         } else if (isLive) {
-          statusClass += ' live';
-          headerStatus = '🔴 مباشر الآن';
+          statusClass += ' live'; headerStatus = '🔴 مباشر الآن';
           centerHtml = '<div class="match-score">' + m.hs + ' - ' + m.as + '</div>';
         } else {
-          // المباراة لم تبدأ: عرض العداد
           headerStatus = '⏱️ ' + formatMatchTime(m.date);
           centerHtml = countdownHTML(idx);
         }
-
         rhtml += '<div class="match-card">';
         rhtml += '<div class="match-header"><div class="match-date">' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
         rhtml += '<div class="match-body"><div class="match-team">' + m.home + '</div><div class="match-center">' + centerHtml + '</div><div class="match-team">' + m.away + '</div></div>';
         rhtml += '</div>';
       });
       rd.innerHTML = rhtml;
-
-      // تشغيل العدادات
       updateAllCountdowns();
       setInterval(updateAllCountdowns, 1000);
     }
