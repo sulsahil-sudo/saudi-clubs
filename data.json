@@ -248,10 +248,10 @@
       "hs": "3",
       "as": "0",
       "date": "2026-10-09T18:00Z",
-      "status": "81'",
+      "status": "86'",
       "state": "in",
       "completed": false,
-      "clock": "81'",
+      "clock": "86'",
       "period": 2
     },
     {
@@ -5166,5 +5166,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-09 19:41 UTC"
+  "lastUpdated": "2026-10-09 19:47 UTC"
 }
