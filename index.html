@@ -8,25 +8,24 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; padding: 20px; color: #333; }
   h1 { text-align: center; margin-bottom: 25px; color: #1a5490; }
-  .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-weight: bold; color: #555; border-radius: 8px; transition: 0.2s; font-family: inherit; }
-  .tab:hover { background: #f0f2f5; }
+  .tabs { display: flex; gap: 10px; margin-bottom: 20px; background: white; padding: 8px; border-radius: 10px; }
+  .tab { flex: 1; padding: 12px; border: none; background: transparent; cursor: pointer; font-size: 16px; font-weight: bold; color: #555; border-radius: 8px; font-family: inherit; }
   .tab.active { background: #1a5490; color: white; }
-  .content { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .content { background: white; padding: 20px; border-radius: 10px; }
   .hidden { display: none; }
   table { width: 100%; border-collapse: collapse; }
-  th { background: #1a5490; color: white; padding: 12px; text-align: center; font-size: 14px; }
+  th { background: #1a5490; color: white; padding: 12px; font-size: 14px; }
   td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; font-size: 14px; }
   .team { text-align: right; font-weight: bold; }
-  tr:hover { background: #f8f9fa; }
-  .loading { text-align: center; color: #1a5490; padding: 40px; font-size: 16px; }
-  .error { text-align: center; color: #c0392b; padding: 20px; background: #fdeaea; border-radius: 8px; }
+  .loading { text-align: center; color: #1a5490; padding: 40px; }
   .match { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
   .match-team { flex: 1; font-weight: bold; }
   .match-team.home { text-align: left; }
   .match-team.away { text-align: right; }
   .score { background: #1a5490; color: white; padding: 8px 18px; border-radius: 6px; font-weight: bold; font-size: 18px; margin: 0 15px; min-width: 70px; text-align: center; }
   .match-date { text-align: center; color: #888; font-size: 12px; padding: 5px; }
+  .updated { text-align: center; color: #888; font-size: 12px; margin-top: 15px; }
+  .empty { text-align: center; color: #888; padding: 40px; }
 </style>
 </head>
 <body>
@@ -46,111 +45,70 @@
         <th>له</th><th>عليه</th><th>الفرق</th><th>النقاط</th>
       </tr>
     </thead>
-    <tbody>
-      <tr><td>1</td><td class="team">الهلال</td><td>7</td><td>6</td><td>0</td><td>1</td><td>23</td><td>5</td><td>+18</td><td><b>18</b></td></tr>
-      <tr><td>2</td><td class="team">الاتحاد</td><td>7</td><td>5</td><td>2</td><td>0</td><td>12</td><td>6</td><td>+6</td><td><b>17</b></td></tr>
-      <tr><td>3</td><td class="team">النصر</td><td>7</td><td>5</td><td>1</td><td>1</td><td>16</td><td>7</td><td>+9</td><td><b>16</b></td></tr>
-      <tr><td>4</td><td class="team">القادسية</td><td>7</td><td>5</td><td>1</td><td>1</td><td>16</td><td>8</td><td>+8</td><td><b>16</b></td></tr>
-      <tr><td>5</td><td class="team">نيوم</td><td>7</td><td>5</td><td>0</td><td>2</td><td>13</td><td>6</td><td>+7</td><td><b>15</b></td></tr>
-      <tr><td>6</td><td class="team">الأهلي</td><td>7</td><td>4</td><td>0</td><td>3</td><td>16</td><td>10</td><td>+6</td><td><b>12</b></td></tr>
-      <tr><td>7</td><td class="team">الخلود</td><td>7</td><td>3</td><td>3</td><td>1</td><td>12</td><td>10</td><td>+2</td><td><b>12</b></td></tr>
-      <tr><td>8</td><td class="team">الدرعية</td><td>7</td><td>3</td><td>2</td><td>2</td><td>7</td><td>5</td><td>+2</td><td><b>11</b></td></tr>
-      <tr><td>9</td><td class="team">الاتفاق</td><td>7</td><td>3</td><td>2</td><td>2</td><td>11</td><td>11</td><td>0</td><td><b>11</b></td></tr>
-      <tr><td>10</td><td class="team">الحزم</td><td>7</td><td>2</td><td>2</td><td>3</td><td>7</td><td>9</td><td>-2</td><td><b>8</b></td></tr>
-      <tr><td>11</td><td class="team">الرياض</td><td>7</td><td>2</td><td>2</td><td>3</td><td>8</td><td>16</td><td>-8</td><td><b>8</b></td></tr>
-      <tr><td>12</td><td class="team">الفيحاء</td><td>7</td><td>1</td><td>3</td><td>3</td><td>7</td><td>11</td><td>-4</td><td><b>6</b></td></tr>
-      <tr><td>13</td><td class="team">الخليج</td><td>7</td><td>0</td><td>5</td><td>2</td><td>3</td><td>10</td><td>-7</td><td><b>5</b></td></tr>
-      <tr><td>14</td><td class="team">الشباب</td><td>7</td><td>0</td><td>4</td><td>3</td><td>6</td><td>11</td><td>-5</td><td><b>4</b></td></tr>
-      <tr><td>15</td><td class="team">الفتح</td><td>7</td><td>0</td><td>3</td><td>4</td><td>4</td><td>11</td><td>-7</td><td><b>3</b></td></tr>
-      <tr><td>16</td><td class="team">الفيصلي</td><td>7</td><td>0</td><td>3</td><td>4</td><td>5</td><td>13</td><td>-8</td><td><b>3</b></td></tr>
-      <tr><td>17</td><td class="team">التعاون</td><td>7</td><td>0</td><td>3</td><td>4</td><td>3</td><td>12</td><td>-9</td><td><b>3</b></td></tr>
-      <tr><td>18</td><td class="team">أبها</td><td>7</td><td>0</td><td>2</td><td>5</td><td>5</td><td>13</td><td>-8</td><td><b>2</b></td></tr>
+    <tbody id="standingsBody">
+      <tr><td colspan="10" class="loading">جاري التحميل...</td></tr>
     </tbody>
   </table>
+  <div id="updatedStandings" class="updated"></div>
 </div>
 
 <div id="results" class="content hidden">
-  <div id="resultsData" class="loading">جاري تحميل النتائج...</div>
+  <div id="resultsData" class="loading">جاري التحميل...</div>
 </div>
 
 <script>
-var teamTranslations = {
-  "Al Hilal": "الهلال", "Al Ittihad": "الاتحاد", "Al Nassr": "النصر",
-  "Al Qadsiah": "القادسية", "Neom SC": "نيوم", "Al Ahli": "الأهلي",
-  "Al Kholood": "الخلود", "Al Diriyah": "الدرعية", "Al Ettifaq": "الاتفاق",
-  "Al Hazem": "الحزم", "Al Riyadh": "الرياض", "Al Fayha": "الفيحاء",
-  "Al Khaleej": "الخليج", "Al Shabab": "الشباب", "Al Fateh": "الفتح",
-  "Al Faisaly": "الفيصلي", "Al Taawoun": "التعاون", "Abha": "أبها"
-};
-
-function ar(name) { return teamTranslations[name] || name; }
-
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(function(el) { el.classList.add('hidden'); });
   document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
   document.getElementById(id).classList.remove('hidden');
   btn.classList.add('active');
-  if (id === 'results' && !window.resultsLoaded) {
-    loadResults();
-  }
 }
 
-function loadResults() {
-  window.resultsLoaded = true;
-  var target = document.getElementById('resultsData');
-  var espnUrl = 'https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard';
-  var proxies = [
-    'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(espnUrl),
-    'https://corsproxy.io/?url=' + encodeURIComponent(espnUrl),
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent(espnUrl)
-  ];
-  var currentProxy = 0;
-
-  function tryProxy() {
-    if (currentProxy >= proxies.length) {
-      target.innerHTML = '<div class="error">تعذر تحميل النتائج من جميع المصادر. حاول تحديث الصفحة لاحقاً.</div>';
-      return;
-    }
-    fetch(proxies[currentProxy])
-      .then(function(r) {
-        if (!r.ok) throw new Error('فشل');
-        return r.json();
-      })
-      .then(function(data) {
-        displayResults(data);
-      })
-      .catch(function() {
-        currentProxy++;
-        tryProxy();
-      });
-  }
-
-  function displayResults(data) {
-    if (!data.events || data.events.length === 0) {
-      target.innerHTML = '<div class="error">لا توجد مباريات حديثة متاحة حالياً.</div>';
-      return;
-    }
+fetch('data.json?v=' + Date.now())
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    // الترتيب
     var html = '';
-    data.events.forEach(function(ev) {
-      var comp = ev.competitions[0];
-      var home = comp.competitors.find(function(c) { return c.homeAway === 'home'; });
-      var away = comp.competitors.find(function(c) { return c.homeAway === 'away'; });
-      var date = new Date(ev.date);
-      var dateStr = date.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' });
-      var status = ev.status.type.detail || '';
-      html += '<div>';
-      html += '<div class="match-date">' + dateStr + ' — ' + status + '</div>';
-      html += '<div class="match">';
-      html += '<div class="match-team home">' + ar(home.team.displayName) + '</div>';
-      html += '<div class="score">' + (home.score || '0') + ' - ' + (away.score || '0') + '</div>';
-      html += '<div class="match-team away">' + ar(away.team.displayName) + '</div>';
-      html += '</div></div>';
+    data.standings.forEach(function(t) {
+      html += '<tr>';
+      html += '<td>' + t.r + '</td>';
+      html += '<td class="team">' + t.t + '</td>';
+      html += '<td>' + t.p + '</td>';
+      html += '<td>' + t.w + '</td>';
+      html += '<td>' + t.d + '</td>';
+      html += '<td>' + t.l + '</td>';
+      html += '<td>' + t.gf + '</td>';
+      html += '<td>' + t.ga + '</td>';
+      html += '<td>' + t.gd + '</td>';
+      html += '<td><b>' + t.pts + '</b></td>';
+      html += '</tr>';
     });
-    target.innerHTML = html;
-  }
+    document.getElementById('standingsBody').innerHTML = html;
+    document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
 
-  tryProxy();
-}
+    // النتائج
+    var rd = document.getElementById('resultsData');
+    if (!data.results || data.results.length === 0) {
+      rd.innerHTML = '<div class="empty">لا توجد مباريات حديثة. سيتم التحديث تلقائياً.</div>';
+    } else {
+      var rhtml = '';
+      data.results.forEach(function(m) {
+        var d = new Date(m.date);
+        var ds = d.toLocaleDateString('ar-SA', { weekday: 'long', day: 'numeric', month: 'long' });
+        rhtml += '<div>';
+        rhtml += '<div class="match-date">' + ds + ' — ' + m.status + '</div>';
+        rhtml += '<div class="match">';
+        rhtml += '<div class="match-team home">' + m.home + '</div>';
+        rhtml += '<div class="score">' + m.hs + ' - ' + m.as + '</div>';
+        rhtml += '<div class="match-team away">' + m.away + '</div>';
+        rhtml += '</div></div>';
+      });
+      rd.innerHTML = rhtml;
+    }
+  })
+  .catch(function(e) {
+    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
+  });
 </script>
 
 </body>
