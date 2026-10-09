@@ -3,7 +3,7 @@ from datetime import datetime
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/scoreboard"
-ESPN_ATHLETES = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/athletes?limit=200&active=true"
+ESPN_TEAMS = "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams"
 
 translations = {
     "Al Hilal":"الهلال","Al Ittihad":"الاتحاد","Al Nassr":"النصر","Al Qadsiah":"القادسية",
@@ -20,14 +20,17 @@ def fetch_json(url, timeout=30):
 
 # 1. الترتيب
 standings = []
+team_ids = []
 try:
     data = fetch_json(ESPN_STANDINGS)
     entries = data["children"][0]["standings"]["entries"]
     for e in entries:
         s = {x["name"]: x["displayValue"] for x in e["stats"]}
+        team_name = tr(e["team"]["displayName"])
+        team_ids.append((e["team"]["id"], team_name))
         standings.append({
             "r": int(s.get("rank", 0)),
-            "t": tr(e["team"]["displayName"]),
+            "t": team_name,
             "p": s.get("gamesPlayed", "0"),
             "w": s.get("wins", "0"),
             "d": s.get("ties", "0"),
@@ -62,30 +65,33 @@ try:
 except Exception as ex:
     print("خطأ المباريات:", ex)
 
-# 3. اللاعبون
+# 3. اللاعبون - من فرق الدوري
 players = []
-try:
-    ath = fetch_json(ESPN_ATHLETES)
-    for item in ath.get("athletes", []):
-        team = item.get("team", {}) or {}
-        position = item.get("position", {}) or {}
-        players.append({
-            "name": item.get("displayName", ""),
-            "team": tr(team.get("displayName", "")),
-            "position": position.get("abbreviation", position.get("name", "")),
-            "number": str(item.get("jersey", "")),
-            "age": str(item.get("age", "")),
-            "nationality": item.get("citizenship", "")
-        })
-    print(f"اللاعبون: {len(players)}")
-except Exception as ex:
-    print("خطأ اللاعبين:", ex)
+for team_id, team_name in team_ids:
+    try:
+        url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
+        roster = fetch_json(url, timeout=20)
+        for ath in roster.get("athletes", []):
+            pos = ath.get("position", {}) or {}
+            players.append({
+                "name": ath.get("displayName", ""),
+                "team": team_name,
+                "position": pos.get("abbreviation", ""),
+                "number": str(ath.get("jersey", "")),
+                "age": str(ath.get("age", "")),
+                "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", "")
+            })
+        print(f"{team_name}: {len(roster.get('athletes', []))} لاعب")
+    except Exception as ex:
+        print(f"خطأ {team_name}:", ex)
+
+print(f"مجموع اللاعبين: {len(players)}")
 
 output = {
     "standings": standings,
     "results": results,
-    "scorers": [],
     "players": players,
+    "scorers": [],
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
 
