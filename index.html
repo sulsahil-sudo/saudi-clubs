@@ -99,15 +99,19 @@
     .match-card { padding: 10px 8px; margin-bottom: 8px; }
     .match-header { margin-bottom: 10px; font-size: 11px; }
     .match-status { font-size: 10px; padding: 2px 6px; }
-    .match-body { gap: 12px; }
-    .match-team-block { min-width: 80px; }
-    .match-team-logo { width: 42px; height: 42px; }
+    .match-body { gap: 10px; }
+    .match-team-block { min-width: 75px; gap: 4px; }
+    .match-team-logo { width: 45px; height: 45px; }
     .match-team { font-size: 12px; }
-    .match-score { font-size: 18px; padding: 6px 16px; }
-    .cd-box { min-width: 38px; padding: 5px 5px; border-radius: 8px; }
-    .cd-num { font-size: 14px; }
-    .cd-label { font-size: 8px; }
-    .cd-sep { font-size: 14px; }
+    .match-score { font-size: 18px; padding: 8px 14px; }
+
+    /* العد التنازلي: كل شيء في صف واحد */
+    .countdown { display: flex !important; flex-wrap: nowrap !important; gap: 2px !important; justify-content: center !important; direction: ltr !important; }
+    .cd-box { min-width: 34px !important; padding: 4px 3px !important; border-radius: 5px !important; }
+    .cd-num { font-size: 13px !important; font-weight: bold !important; line-height: 1 !important; }
+    .cd-label { font-size: 7px !important; margin-top: 2px !important; opacity: 0.85 !important; }
+    .cd-sep { font-size: 12px !important; font-weight: bold !important; padding: 0 !important; }
+    .match-center { min-width: auto !important; }
   }
 </style>
 </head>
