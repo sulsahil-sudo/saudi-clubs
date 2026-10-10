@@ -19,8 +19,10 @@
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; min-width: 600px; }
   th { background: #1a5490; color: white; padding: 10px 8px; text-align: center; font-size: 13px; white-space: nowrap; }
-  td { padding: 10px 8px; text-align: center; border-bottom: 1px solid #eee; font-size: 13px; }
+  td { padding: 8px; text-align: center; border-bottom: 1px solid #eee; font-size: 13px; }
   .team { text-align: right; font-weight: bold; }
+  .team-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+  .team-logo { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; }
   tr:hover { background: #f8f9fa; }
   tr.live-team { background: #fff5f5; }
   .loading, .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
@@ -38,7 +40,9 @@
   .match-status.live { background: #fee; color: #c0392b; }
   .match-status.finished { background: #e8f8e8; color: #27ae60; }
   .match-body { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-  .match-team { flex: 1; font-weight: bold; font-size: 14px; text-align: center; word-break: break-word; }
+  .match-team-block { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .match-team-logo { width: 42px; height: 42px; object-fit: contain; }
+  .match-team { font-weight: bold; font-size: 14px; text-align: center; word-break: break-word; }
   .match-center { min-width: 100px; text-align: center; }
   .match-score { background: #1a5490; color: white; padding: 8px 14px; border-radius: 8px; font-weight: bold; font-size: 17px; display: inline-block; }
   .match-score.live-score { background: #c0392b; }
@@ -65,14 +69,12 @@
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .live-info { text-align: center; font-size: 12px; color: #666; margin-bottom: 12px; padding: 10px; background: #fef9e7; border-radius: 6px; line-height: 1.6; }
 
-  /* ========== الجوال ========== */
   @media (max-width: 600px) {
     body { padding: 8px; }
     h1 { font-size: 17px; margin-bottom: 12px; }
     .content { padding: 8px; }
     .tab { padding: 8px 12px; font-size: 13px; }
 
-    /* الترتيب على الجوال - جدول مضغوط */
     #standings .table-wrap { overflow-x: auto; }
     #standings table { min-width: 100%; font-size: 11px; }
     #standings th, #standings td { padding: 6px 3px; font-size: 11px; }
@@ -81,8 +83,8 @@
     #standings th:nth-child(8), #standings td:nth-child(8) { display: none; }
     #standings .team { font-size: 12px; }
     #standings .rank-badge { width: 20px; height: 20px; font-size: 11px; }
+    #standings .team-logo { width: 22px; height: 22px; }
 
-    /* اللاعبون على الجوال - بطاقات */
     #players table { min-width: 100%; }
     #players thead { display: none; }
     #players tbody tr { display: block; background: white; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; padding: 10px; }
@@ -90,31 +92,19 @@
     #players tbody td:last-child { border-bottom: none; }
     #players tbody td::before { content: attr(data-label); font-weight: bold; color: #666; margin-left: 10px; font-size: 12px; }
 
-    /* الفلاتر تمرير أفقي */
-    .match-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; -webkit-overflow-scrolling: touch; }
+    .match-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; }
     .match-filters::-webkit-scrollbar { display: none; }
     .filter-btn { white-space: nowrap; padding: 8px 12px; font-size: 12px; flex-shrink: 0; }
 
-    /* بطاقة المباراة على الجوال - مدمجة */
     .match-card { padding: 10px 8px; margin-bottom: 8px; }
     .match-header { margin-bottom: 10px; font-size: 11px; }
-    .match-date { font-size: 11px; }
     .match-status { font-size: 10px; padding: 2px 6px; }
-
-    .match-body { display: flex; flex-direction: column; gap: 8px; }
-    .match-teams-row { display: flex; justify-content: space-between; align-items: center; gap: 4px; }
-    .match-team { font-size: 13px; font-weight: bold; flex: 1; padding: 0 2px; }
-    .match-team:first-child { text-align: right; }
-    .match-team:last-child { text-align: left; }
-    .match-vs { font-size: 11px; color: #999; padding: 0 4px; }
-    .match-center { min-width: auto; margin: 0; }
+    .match-team { font-size: 12px; }
+    .match-team-logo { width: 34px; height: 34px; }
     .match-score { font-size: 18px; padding: 6px 16px; }
-
-    /* العداد التنازلي على الجوال */
-    .countdown { justify-content: center; gap: 4px; }
     .cd-box { min-width: 38px; padding: 5px 5px; border-radius: 8px; }
-    .cd-num { font-size: 14px; font-weight: bold; }
-    .cd-label { font-size: 8px; margin-top: 2px; }
+    .cd-num { font-size: 14px; }
+    .cd-label { font-size: 8px; }
     .cd-sep { font-size: 14px; }
   }
 </style>
@@ -176,6 +166,28 @@
 
 <script src="names.js"></script>
 <script>
+/* شعارات الفرق */
+var teamLogos = {
+  "الهلال": "https://a.espncdn.com/i/teamlogos/soccer/500/929.png",
+  "الاتحاد": "https://a.espncdn.com/i/teamlogos/soccer/500/2276.png",
+  "النصر": "https://a.espncdn.com/i/teamlogos/soccer/500/817.png",
+  "القادسية": "https://a.espncdn.com/i/teamlogos/soccer/500/22022.png",
+  "نيوم": "https://a.espncdn.com/i/teamlogos/soccer/500/130899.png",
+  "الأهلي": "https://a.espncdn.com/i/teamlogos/soccer/500/8346.png",
+  "الخلود": "https://a.espncdn.com/i/teamlogos/soccer/500/22028.png",
+  "الدرعية": "https://a.espncdn.com/i/teamlogos/soccer/500/131746.png",
+  "الاتفاق": "https://a.espncdn.com/i/teamlogos/soccer/500/8363.png",
+  "الحزم": "https://a.espncdn.com/i/teamlogos/soccer/500/21964.png",
+  "الرياض": "https://a.espncdn.com/i/teamlogos/soccer/500/21965.png",
+  "الفيحاء": "https://a.espncdn.com/i/teamlogos/soccer/500/21827.png",
+  "الخليج": "https://a.espncdn.com/i/teamlogos/soccer/500/21829.png",
+  "الشباب": "https://a.espncdn.com/i/teamlogos/soccer/500/793.png",
+  "الفتح": "https://a.espncdn.com/i/teamlogos/soccer/500/13033.png",
+  "الفيصلي": "https://a.espncdn.com/i/teamlogos/soccer/500/21446.png",
+  "التعاون": "https://a.espncdn.com/i/teamlogos/soccer/500/18459.png",
+  "أبها": "https://a.espncdn.com/i/teamlogos/soccer/500/21833.png"
+};
+
 var countryMap = {
   "Saudi Arabia":"السعودية","Portugal":"البرتغال","Brazil":"البرازيل","France":"فرنسا",
   "Argentina":"الأرجنتين","Spain":"إسبانيا","Germany":"ألمانيا","Italy":"إيطاليا",
@@ -216,6 +228,14 @@ function translateCountry(c) {
   if (countryMap[c]) return countryMap[c];
   for (var k in countryMap) if (k.toLowerCase() === c.toLowerCase()) return countryMap[k];
   return c;
+}
+
+function teamLogoHTML(teamName) {
+  var logo = teamLogos[teamName];
+  if (logo) {
+    return '<img src="' + logo + '" alt="' + teamName + '" class="team-logo" onerror="this.style.display=\'none\'">';
+  }
+  return '';
 }
 
 function showTab(id, btn) {
@@ -373,7 +393,7 @@ function renderLiveStandings() {
     var gdStr = (gd > 0 ? '+' : '') + gd;
     html += '<tr class="' + rowClass + '">';
     html += '<td data-label="#"><span class="' + rankClass + '">' + t.r + '</span>' + changeHtml + '</td>';
-    html += '<td data-label="الفريق" class="team">' + t.t + (t.live ? ' ⚽' : '') + '</td>';
+    html += '<td data-label="الفريق" class="team"><div class="team-cell">' + t.t + (t.live ? ' ⚽' : '') + teamLogoHTML(t.t) + '</div></td>';
     html += '<td data-label="لعب">' + t.p + '</td>';
     html += '<td data-label="فاز">' + t.w + '</td>';
     html += '<td data-label="تعادل">' + t.d + '</td>';
@@ -466,9 +486,9 @@ function renderMatches() {
     rhtml += '<div class="' + cardClass + '">';
     rhtml += '<div class="match-header"><div>' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
     rhtml += '<div class="match-body">';
-    rhtml += '<div class="match-team">' + m.home + '</div>';
+    rhtml += '<div class="match-team-block"><img src="' + (teamLogos[m.home] || '') + '" class="match-team-logo" onerror="this.style.display=\'none\'"><div class="match-team">' + m.home + '</div></div>';
     rhtml += '<div class="match-center">' + centerHtml + '</div>';
-    rhtml += '<div class="match-team">' + m.away + '</div>';
+    rhtml += '<div class="match-team-block"><img src="' + (teamLogos[m.away] || '') + '" class="match-team-logo" onerror="this.style.display=\'none\'"><div class="match-team">' + m.away + '</div></div>';
     rhtml += '</div></div>';
   });
   rd.innerHTML = rhtml;
@@ -523,7 +543,7 @@ function loadData(showLoader) {
       data.standings.forEach(function(t) {
         html += '<tr>';
         html += '<td data-label="#">' + t.r + '</td>';
-        html += '<td data-label="الفريق" class="team">' + t.t + '</td>';
+        html += '<td data-label="الفريق" class="team"><div class="team-cell">' + t.t + teamLogoHTML(t.t) + '</div></td>';
         html += '<td data-label="لعب">' + t.p + '</td>';
         html += '<td data-label="فاز">' + t.w + '</td>';
         html += '<td data-label="تعادل">' + t.d + '</td>';
