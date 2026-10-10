@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -448,15 +447,17 @@ function buildFilters() {
 }
 function setFilter(f) { currentFilter = f; buildFilters(); renderMatches(); }
 
-function countdownHTML() { return '<div class="countdown"></div>'; }
+function countdownHTML(matchDate) {
+  var safeId = matchDate.replace(/[^a-zA-Z0-9]/g, '');
+  return '<div class="countdown" data-mdate="' + matchDate + '" id="cd-' + safeId + '"></div>';
+}
 
 function updateAllCountdowns() {
-  var filtered = getFilteredMatches(currentFilter);
   var countdowns = document.querySelectorAll('.countdown');
-  countdowns.forEach(function(el, idx) {
-    var m = filtered[idx];
-    if (!m) return;
-    var diff = new Date(m.date).getTime() - Date.now();
+  countdowns.forEach(function(el) {
+    var mdate = el.getAttribute('data-mdate');
+    if (!mdate) return;
+    var diff = new Date(mdate).getTime() - Date.now();
     if (diff <= 0) { el.innerHTML = ''; return; }
     var totalSec = Math.floor(diff / 1000);
     var days = Math.floor(totalSec / 86400);
@@ -501,7 +502,7 @@ function renderMatches() {
       cardClass += ' live';
     } else {
       statusClass = 'match-status'; headerStatus = '⏱️ ' + formatMatchTime(m.date);
-      centerHtml = countdownHTML();
+      centerHtml = countdownHTML(m.date);
     }
     rhtml += '<div class="' + cardClass + '">';
     rhtml += '<div class="match-header"><div>' + formatMatchDate(m.date) + '</div><div class="' + statusClass + '">' + headerStatus + '</div></div>';
