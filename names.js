@@ -591,6 +591,7 @@ window.playerNames = {
   "Qassem Lajami": "قاسم لجامي",
   "Abdulelah Al-Malki": "عبدالإله المالكي",
   "Ameen Al-Bukhari": "أمين البخاري"
+  "Mubarak": "مبارك"
 };
 
 window.translatePlayer = function(name) {
