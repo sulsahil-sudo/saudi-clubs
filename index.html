@@ -134,9 +134,7 @@
   <div id="resultsData" class="loading">جاري التحميل...</div>
 </div>
 
-<!-- ربط قاموس الأسماء -->
 <script src="names.js"></script>
-
 <script>
 var countryMap = {
   "Saudi Arabia":"السعودية","Portugal":"البرتغال","Brazil":"البرازيل","France":"فرنسا",
@@ -146,8 +144,8 @@ var countryMap = {
   "Jordan":"الأردن","Kuwait":"الكويت","UAE":"الإمارات","United Arab Emirates":"الإمارات",
   "Qatar":"قطر","Bahrain":"البحرين","Oman":"عُمان","Yemen":"اليمن","Syria":"سوريا",
   "Lebanon":"لبنان","Palestine":"فلسطين","Libya":"ليبيا","Sudan":"السودان",
-  "Nigeria":"نيجيريا","Ghana":"غانا","Ivory Coast":"ساحل العاج","Cote d'Ivoire":"ساحل العاج",
-  "Cameroon":"الكاميرون","Mali":"مالي","Guinea":"غينيا","Serbia":"صربيا","Croatia":"كرواتيا",
+  "Nigeria":"نيجيريا","Ghana":"غانا","Ivory Coast":"ساحل العاج","Cameroon":"الكاميرون",
+  "Mali":"مالي","Guinea":"غينيا","Serbia":"صربيا","Croatia":"كرواتيا",
   "Poland":"بولندا","Russia":"روسيا","Ukraine":"أوكرانيا","Turkey":"تركيا","Greece":"اليونان",
   "Romania":"رومانيا","Colombia":"كولومبيا","Uruguay":"أوروغواي","Chile":"تشيلي","Peru":"بيرو",
   "Mexico":"المكسيك","USA":"الولايات المتحدة","United States":"الولايات المتحدة",
@@ -459,4 +457,93 @@ function renderPlayers(players) {
   players.forEach(function(p) {
     var posClass = posName(p.position);
     html += '<tr>';
-    html += '<td data-label="#"><span class="number-badge">' + (p.number || '—
+    html += '<td data-label="#"><span class="number-badge">' + (p.number || '—') + '</span></td>';
+    html += '<td data-label="اللاعب" class="team">' + translateName(p.name) + '</td>';
+    html += '<td data-label="الفريق">' + p.team + '</td>';
+    html += '<td data-label="المركز"><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
+    html += '<td data-label="العمر">' + (p.age || '—') + '</td>';
+    html += '<td data-label="الجنسية">' + translateCountry(p.nationality) + '</td></tr>';
+  });
+  tb.innerHTML = html;
+  document.getElementById('playerCount').textContent = 'عدد اللاعبين: ' + players.length + ' من ' + allPlayers.length;
+}
+
+function loadData(showLoader) {
+  if (showLoader) {
+    document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">جاري التحميل...</td></tr>';
+  }
+  fetch('data.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var html = '';
+      data.standings.forEach(function(t) {
+        html += '<tr>';
+        html += '<td data-label="#">' + t.r + '</td>';
+        html += '<td data-label="الفريق" class="team">' + t.t + '</td>';
+        html += '<td data-label="لعب">' + t.p + '</td>';
+        html += '<td data-label="فاز">' + t.w + '</td>';
+        html += '<td data-label="تعادل">' + t.d + '</td>';
+        html += '<td data-label="خسر">' + t.l + '</td>';
+        html += '<td data-label="له">' + t.gf + '</td>';
+        html += '<td data-label="عليه">' + t.ga + '</td>';
+        html += '<td data-label="الفرق">' + t.gd + '</td>';
+        html += '<td data-label="النقاط"><b>' + t.pts + '</b></td></tr>';
+      });
+      document.getElementById('standingsBody').innerHTML = html;
+      document.getElementById('updatedStandings').textContent = 'آخر تحديث: ' + data.lastUpdated;
+      originalStandings = data.standings || [];
+
+      allPlayers = (data.players || []).slice().sort(function(a, b) {
+        if (a.team !== b.team) return a.team.localeCompare(b.team, 'ar');
+        return parseInt(a.number || 999) - parseInt(b.number || 999);
+      });
+      if (allPlayers.length === 0) {
+        document.getElementById('playersBody').innerHTML = '<tr><td colspan="6" class="empty">لم يتم جلب اللاعبين بعد.</td></tr>';
+      } else {
+        var teams = {};
+        allPlayers.forEach(function(p) { if (p.team) teams[p.team] = true; });
+        var teamSelect = document.getElementById('teamFilter');
+        teamSelect.innerHTML = '<option value="">كل الفرق</option>';
+        Object.keys(teams).sort(function(a,b){return a.localeCompare(b,'ar');}).forEach(function(t) {
+          var opt = document.createElement('option');
+          opt.value = t; opt.textContent = t;
+          teamSelect.appendChild(opt);
+        });
+        renderPlayers(allPlayers);
+      }
+
+      allMatches = data.results || [];
+      buildFilters();
+      renderMatches();
+      renderLiveStandings();
+
+      var hasLive = getFilteredMatches('live').length > 0;
+      var liveTab = document.getElementById('tabLive');
+      if (hasLive) {
+        liveTab.style.display = 'block';
+      } else {
+        liveTab.style.display = 'none';
+        if (!document.getElementById('live').classList.contains('hidden')) {
+          showTab('standings', document.getElementById('tabStandings'));
+        }
+      }
+
+      secondsSinceRefresh = 0;
+    })
+    .catch(function(e) {
+      document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">تعذر التحميل</td></tr>';
+    });
+}
+
+loadData(true);
+setInterval(function() {
+  secondsSinceRefresh++;
+  if (secondsSinceRefresh >= REFRESH_INTERVAL) loadData(false);
+}, 1000);
+setInterval(updateAllCountdowns, 1000);
+setInterval(function() {
+  if (!document.getElementById('live').classList.contains('hidden')) renderLiveStandings();
+}, 5000);
+</script>
+</body>
+</html>
