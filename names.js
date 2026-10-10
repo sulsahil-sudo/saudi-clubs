@@ -594,9 +594,6 @@ window.playerNames = {
   "Mubarak": "مبارك",
   "Muath": "معاذ"
 };
-};
- 
-};
 
 window.translatePlayer = function(name) {
   if (!name) return '';
