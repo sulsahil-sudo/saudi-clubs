@@ -2,6 +2,18 @@
   "standings": [
     {
       "r": 1,
+      "t": "الهلال",
+      "p": "8",
+      "w": "7",
+      "d": "0",
+      "l": "1",
+      "gf": "26",
+      "ga": "7",
+      "gd": "+19",
+      "pts": "21"
+    },
+    {
+      "r": 2,
       "t": "القادسية",
       "p": "8",
       "w": "6",
@@ -13,7 +25,7 @@
       "pts": "19"
     },
     {
-      "r": 2,
+      "r": 3,
       "t": "النصر",
       "p": "8",
       "w": "6",
@@ -25,27 +37,15 @@
       "pts": "19"
     },
     {
-      "r": 3,
-      "t": "الهلال",
-      "p": "7",
-      "w": "6",
-      "d": "0",
-      "l": "1",
-      "gf": "23",
-      "ga": "5",
-      "gd": "+18",
-      "pts": "18"
-    },
-    {
       "r": 4,
       "t": "الاتحاد",
-      "p": "7",
+      "p": "8",
       "w": "5",
       "d": "2",
-      "l": "0",
-      "gf": "12",
-      "ga": "6",
-      "gd": "+6",
+      "l": "1",
+      "gf": "14",
+      "ga": "9",
+      "gd": "+5",
       "pts": "17"
     },
     {
@@ -245,14 +245,14 @@
     {
       "home": "الهلال",
       "away": "الاتحاد",
-      "hs": "1",
-      "as": "0",
+      "hs": "3",
+      "as": "2",
       "date": "2026-10-10T18:00Z",
-      "status": "19'",
-      "state": "in",
-      "completed": false,
-      "clock": "19'",
-      "period": 1
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+6'",
+      "period": 2
     },
     {
       "home": "الخلود",
@@ -760,6 +760,286 @@
     }
   ],
   "players": [
+    {
+      "name": "Yassine Bounou",
+      "team": "الهلال",
+      "position": "G",
+      "number": "37",
+      "age": "35",
+      "nationality": "Morocco"
+    },
+    {
+      "name": "Mohammed Al-Owais",
+      "team": "الهلال",
+      "position": "G",
+      "number": "33",
+      "age": "35",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Al-Yami",
+      "team": "الهلال",
+      "position": "G",
+      "number": "17",
+      "age": "29",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Rayan Al Dossary",
+      "team": "الهلال",
+      "position": "G",
+      "number": "35",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Kalidou Koulibaly",
+      "team": "الهلال",
+      "position": "D",
+      "number": "3",
+      "age": "35",
+      "nationality": "Senegal"
+    },
+    {
+      "name": "Theo Hernández",
+      "team": "الهلال",
+      "position": "D",
+      "number": "19",
+      "age": "29",
+      "nationality": "France"
+    },
+    {
+      "name": "Hassan Al-Tambakti",
+      "team": "الهلال",
+      "position": "D",
+      "number": "87",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ali Lajami",
+      "team": "الهلال",
+      "position": "D",
+      "number": "78",
+      "age": "30",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Hamad Al-Yami",
+      "team": "الهلال",
+      "position": "D",
+      "number": "88",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Moteb Al-Harbi",
+      "team": "الهلال",
+      "position": "D",
+      "number": "24",
+      "age": "26",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Mahzari",
+      "team": "الهلال",
+      "position": "D",
+      "number": "2",
+      "age": "24",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Yusuf Akcicek",
+      "team": "الهلال",
+      "position": "D",
+      "number": "4",
+      "age": "20",
+      "nationality": "Türkiye"
+    },
+    {
+      "name": "Saad Khalid Al Muthary",
+      "team": "الهلال",
+      "position": "D",
+      "number": "44",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Meshal Al Dawood",
+      "team": "الهلال",
+      "position": "D",
+      "number": "55",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Mohammed Al-Sarnoukh",
+      "team": "الهلال",
+      "position": "D",
+      "number": "73",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Salem Al-Dawsari",
+      "team": "الهلال",
+      "position": "M",
+      "number": "29",
+      "age": "35",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Rúben Neves",
+      "team": "الهلال",
+      "position": "M",
+      "number": "8",
+      "age": "29",
+      "nationality": "Portugal"
+    },
+    {
+      "name": "Sergej Milinkovic-Savic",
+      "team": "الهلال",
+      "position": "M",
+      "number": "22",
+      "age": "31",
+      "nationality": "Serbia"
+    },
+    {
+      "name": "Mohamed Kanno",
+      "team": "الهلال",
+      "position": "M",
+      "number": "28",
+      "age": "32",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Nasser Al-Dawsari",
+      "team": "الهلال",
+      "position": "M",
+      "number": "6",
+      "age": "27",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdullah Safoud Alemzi",
+      "team": "الهلال",
+      "position": "M",
+      "number": "93",
+      "age": "23",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Suhayb Alzaid",
+      "team": "الهلال",
+      "position": "M",
+      "number": "96",
+      "age": "22",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Nawaf Al-Habshi",
+      "team": "الهلال",
+      "position": "M",
+      "number": "77",
+      "age": "28",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Saïmon Bouabré",
+      "team": "الهلال",
+      "position": "M",
+      "number": "70",
+      "age": "20",
+      "nationality": "France"
+    },
+    {
+      "name": "Murad Al Hawsawi",
+      "team": "الهلال",
+      "position": "M",
+      "number": "18",
+      "age": "25",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Ollie Watkins",
+      "team": "الهلال",
+      "position": "F",
+      "number": "11",
+      "age": "30",
+      "nationality": "England"
+    },
+    {
+      "name": "Gabriel Martinelli",
+      "team": "الهلال",
+      "position": "F",
+      "number": "7",
+      "age": "25",
+      "nationality": "Brazil"
+    },
+    {
+      "name": "Crysencio Summerville",
+      "team": "الهلال",
+      "position": "F",
+      "number": "38",
+      "age": "24",
+      "nationality": "Netherlands"
+    },
+    {
+      "name": "Sultan Mandash",
+      "team": "الهلال",
+      "position": "F",
+      "number": "27",
+      "age": "31",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Turki Al Ghamil",
+      "team": "الهلال",
+      "position": "F",
+      "number": "66",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Sabri Abdu Dahal",
+      "team": "الهلال",
+      "position": "F",
+      "number": "72",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Kader Meïté",
+      "team": "الهلال",
+      "position": "F",
+      "number": "75",
+      "age": "18",
+      "nationality": "Ivory Coast"
+    },
+    {
+      "name": "Thari Saeed",
+      "team": "الهلال",
+      "position": "F",
+      "number": "94",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Abdulaziz Jurmush",
+      "team": "الهلال",
+      "position": "F",
+      "number": "41",
+      "age": "20",
+      "nationality": "Saudi Arabia"
+    },
+    {
+      "name": "Louay Labidi",
+      "team": "الهلال",
+      "position": "F",
+      "number": "42",
+      "age": "19",
+      "nationality": "Saudi Arabia"
+    },
     {
       "name": "Koen Casteels",
       "team": "القادسية",
@@ -1278,286 +1558,6 @@
       "position": "F",
       "number": "56",
       "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Yassine Bounou",
-      "team": "الهلال",
-      "position": "G",
-      "number": "37",
-      "age": "35",
-      "nationality": "Morocco"
-    },
-    {
-      "name": "Mohammed Al-Owais",
-      "team": "الهلال",
-      "position": "G",
-      "number": "33",
-      "age": "35",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Al-Yami",
-      "team": "الهلال",
-      "position": "G",
-      "number": "17",
-      "age": "29",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Rayan Al Dossary",
-      "team": "الهلال",
-      "position": "G",
-      "number": "35",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Kalidou Koulibaly",
-      "team": "الهلال",
-      "position": "D",
-      "number": "3",
-      "age": "35",
-      "nationality": "Senegal"
-    },
-    {
-      "name": "Theo Hernández",
-      "team": "الهلال",
-      "position": "D",
-      "number": "19",
-      "age": "29",
-      "nationality": "France"
-    },
-    {
-      "name": "Hassan Al-Tambakti",
-      "team": "الهلال",
-      "position": "D",
-      "number": "87",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ali Lajami",
-      "team": "الهلال",
-      "position": "D",
-      "number": "78",
-      "age": "30",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Hamad Al-Yami",
-      "team": "الهلال",
-      "position": "D",
-      "number": "88",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Moteb Al-Harbi",
-      "team": "الهلال",
-      "position": "D",
-      "number": "24",
-      "age": "26",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Mahzari",
-      "team": "الهلال",
-      "position": "D",
-      "number": "2",
-      "age": "24",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Yusuf Akcicek",
-      "team": "الهلال",
-      "position": "D",
-      "number": "4",
-      "age": "20",
-      "nationality": "Türkiye"
-    },
-    {
-      "name": "Saad Khalid Al Muthary",
-      "team": "الهلال",
-      "position": "D",
-      "number": "44",
-      "age": "19",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Meshal Al Dawood",
-      "team": "الهلال",
-      "position": "D",
-      "number": "55",
-      "age": "18",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Mohammed Al-Sarnoukh",
-      "team": "الهلال",
-      "position": "D",
-      "number": "73",
-      "age": "19",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Salem Al-Dawsari",
-      "team": "الهلال",
-      "position": "M",
-      "number": "29",
-      "age": "35",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Rúben Neves",
-      "team": "الهلال",
-      "position": "M",
-      "number": "8",
-      "age": "29",
-      "nationality": "Portugal"
-    },
-    {
-      "name": "Sergej Milinkovic-Savic",
-      "team": "الهلال",
-      "position": "M",
-      "number": "22",
-      "age": "31",
-      "nationality": "Serbia"
-    },
-    {
-      "name": "Mohamed Kanno",
-      "team": "الهلال",
-      "position": "M",
-      "number": "28",
-      "age": "32",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Nasser Al-Dawsari",
-      "team": "الهلال",
-      "position": "M",
-      "number": "6",
-      "age": "27",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdullah Safoud Alemzi",
-      "team": "الهلال",
-      "position": "M",
-      "number": "93",
-      "age": "23",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Suhayb Alzaid",
-      "team": "الهلال",
-      "position": "M",
-      "number": "96",
-      "age": "22",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Nawaf Al-Habshi",
-      "team": "الهلال",
-      "position": "M",
-      "number": "77",
-      "age": "28",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Saïmon Bouabré",
-      "team": "الهلال",
-      "position": "M",
-      "number": "70",
-      "age": "20",
-      "nationality": "France"
-    },
-    {
-      "name": "Murad Al Hawsawi",
-      "team": "الهلال",
-      "position": "M",
-      "number": "18",
-      "age": "25",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Ollie Watkins",
-      "team": "الهلال",
-      "position": "F",
-      "number": "11",
-      "age": "30",
-      "nationality": "England"
-    },
-    {
-      "name": "Gabriel Martinelli",
-      "team": "الهلال",
-      "position": "F",
-      "number": "7",
-      "age": "25",
-      "nationality": "Brazil"
-    },
-    {
-      "name": "Crysencio Summerville",
-      "team": "الهلال",
-      "position": "F",
-      "number": "38",
-      "age": "24",
-      "nationality": "Netherlands"
-    },
-    {
-      "name": "Sultan Mandash",
-      "team": "الهلال",
-      "position": "F",
-      "number": "27",
-      "age": "31",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Turki Al Ghamil",
-      "team": "الهلال",
-      "position": "F",
-      "number": "66",
-      "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Sabri Abdu Dahal",
-      "team": "الهلال",
-      "position": "F",
-      "number": "72",
-      "age": "18",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Kader Meïté",
-      "team": "الهلال",
-      "position": "F",
-      "number": "75",
-      "age": "18",
-      "nationality": "Ivory Coast"
-    },
-    {
-      "name": "Thari Saeed",
-      "team": "الهلال",
-      "position": "F",
-      "number": "94",
-      "age": "18",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Abdulaziz Jurmush",
-      "team": "الهلال",
-      "position": "F",
-      "number": "41",
-      "age": "20",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "name": "Louay Labidi",
-      "team": "الهلال",
-      "position": "F",
-      "number": "42",
-      "age": "19",
       "nationality": "Saudi Arabia"
     },
     {
@@ -5514,5 +5514,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-10 18:20 UTC"
+  "lastUpdated": "2026-10-10 22:20 UTC"
 }
