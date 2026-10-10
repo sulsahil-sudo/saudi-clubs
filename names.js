@@ -589,11 +589,15 @@ window.playerNames = {
   "Meshari Al Nemer": "مشاري النمر",
   "Khalid Al Asiri": "خالد العسيري",
   "Qassem Lajami": "قاسم لجامي",
-  "Abdulelah Al-Malki": "عبدالإله المالكي",
-   "Ameen Al-Bukhari": "أمين البخاري",
+   "Abdulelah Al-Malki": "عبدالإله المالكي",
+  "Ameen Al-Bukhari": "أمين البخاري",
   "Mubarak": "مبارك",
-  "Muath": "معاذ"
+  "Muath": "معاذ",
+  "Hawswi": "هوساوي",
+  "Al-Hawsawi": "الهوساوي",
+  "Hawsawi": "هوساوي"
 };
+
 
 window.translatePlayer = function(name) {
   if (!name) return '';
