@@ -597,8 +597,6 @@ window.playerNames = {
   "Al-Hawsawi": "الهوساوي",
   "Hawsawi": "هوساوي"
 };
-
-
 window.translatePlayer = function(name) {
   if (!name) return '';
   if (playerNames[name]) return playerNames[name];
