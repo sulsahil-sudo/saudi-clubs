@@ -219,42 +219,6 @@
   ],
   "results": [
     {
-      "home": "الخلود",
-      "away": "القادسية",
-      "hs": "0",
-      "as": "5",
-      "date": "2026-10-09T13:50Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+4'",
-      "period": 2
-    },
-    {
-      "home": "الفتح",
-      "away": "الأهلي",
-      "hs": "0",
-      "as": "4",
-      "date": "2026-10-09T14:55Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+4'",
-      "period": 2
-    },
-    {
-      "home": "النصر",
-      "away": "الدرعية",
-      "hs": "3",
-      "as": "0",
-      "date": "2026-10-09T18:00Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+3'",
-      "period": 2
-    },
-    {
       "home": "الحزم",
       "away": "نيوم",
       "hs": "0",
@@ -289,6 +253,42 @@
       "completed": false,
       "clock": "0'",
       "period": 0
+    },
+    {
+      "home": "الخلود",
+      "away": "القادسية",
+      "hs": "0",
+      "as": "5",
+      "date": "2026-10-09T13:50Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+4'",
+      "period": 2
+    },
+    {
+      "home": "الفتح",
+      "away": "الأهلي",
+      "hs": "0",
+      "as": "4",
+      "date": "2026-10-09T14:55Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+4'",
+      "period": 2
+    },
+    {
+      "home": "النصر",
+      "away": "الدرعية",
+      "hs": "3",
+      "as": "0",
+      "date": "2026-10-09T18:00Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+3'",
+      "period": 2
     },
     {
       "home": "الفيحاء",
@@ -1293,7 +1293,7 @@
       "team": "الهلال",
       "position": "G",
       "number": "33",
-      "age": "34",
+      "age": "35",
       "nationality": "Saudi Arabia"
     },
     {
@@ -3068,7 +3068,7 @@
       "name": "Lovro Chelfi",
       "team": "الدرعية",
       "position": "F",
-      "number": "",
+      "number": "25",
       "age": "19",
       "nationality": "Croatia"
     },
@@ -5514,5 +5514,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-10 06:50 UTC"
+  "lastUpdated": "2026-10-10 13:26 UTC"
 }
