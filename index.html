@@ -37,39 +37,16 @@
   .team { text-align: right; font-weight: bold; }
   .team-logo { width: 28px; height: 28px; object-fit: contain; flex-shrink: 0; transition: 0.2s; }
 
-  /* ====== رابط الفريق (يفتح Modal) ====== */
   .team-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: flex-end;
-    text-decoration: none;
-    color: #1a5490;
-    font-weight: bold;
-    padding: 4px 6px;
-    border-radius: 6px;
-    transition: 0.2s;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    font-family: inherit;
-    font-size: 13px;
+    display: flex; align-items: center; gap: 8px; justify-content: flex-end;
+    text-decoration: none; color: #1a5490; font-weight: bold;
+    padding: 4px 6px; border-radius: 6px; transition: 0.2s; cursor: pointer;
+    border: none; background: transparent; font-family: inherit; font-size: 13px;
   }
-  .team-link:hover {
-    background: #e8f4fd;
-    color: #c0392b;
-  }
-  .team-link:hover .team-logo {
-    transform: scale(1.1);
-  }
-  .team-link::after {
-    content: 'ℹ️';
-    font-size: 12px;
-    opacity: 0.4;
-  }
-  .team-link:hover::after {
-    opacity: 1;
-  }
+  .team-link:hover { background: #e8f4fd; color: #c0392b; }
+  .team-link:hover .team-logo { transform: scale(1.1); }
+  .team-link::after { content: 'ℹ️'; font-size: 12px; opacity: 0.4; }
+  .team-link:hover::after { opacity: 1; }
 
   tr:hover { background: #f8f9fa; }
   tr.live-team { background: #fff5f5; }
@@ -120,100 +97,60 @@
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
   .live-info { text-align: center; font-size: 12px; color: #666; margin-bottom: 12px; padding: 10px; background: #fef9e7; border-radius: 6px; line-height: 1.6; }
 
-  .player-link { color: #1a5490; text-decoration: none; border-bottom: 1px dashed #1a5490; transition: 0.2s; display: inline-block; }
-  .player-link:hover { color: #c0392b; border-bottom-color: #c0392b; background: #fff5f5; padding: 0 3px; border-radius: 4px; }
-  .player-link::after { content: ' 🔍'; font-size: 10px; opacity: 0.5; }
+  /* ====== اسم اللاعب (عادي - بلا رابط) ====== */
+  .player-name-cell {
+    color: #1a5490;
+    font-weight: bold;
+    font-size: 13px;
+  }
 
-  /* ====== Modal (نافذة معلومات الفريق) ====== */
+  /* ====== Modal ====== */
   .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+    z-index: 1000; display: flex; align-items: center; justify-content: center;
+    padding: 15px; opacity: 0; visibility: hidden; transition: 0.3s;
   }
-  .modal-overlay.open {
-    opacity: 1;
-    visibility: visible;
-  }
+  .modal-overlay.open { opacity: 1; visibility: visible; }
   .modal-content {
-    background: white;
-    border-radius: 15px;
-    max-width: 700px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
+    background: white; border-radius: 15px; max-width: 700px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    transform: scale(0.9);
-    transition: 0.3s;
-    position: relative;
+    transform: scale(0.9); transition: 0.3s; position: relative;
   }
-  .modal-overlay.open .modal-content {
-    transform: scale(1);
-  }
+  .modal-overlay.open .modal-content { transform: scale(1); }
   .modal-close {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #c0392b;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 10;
-    line-height: 1;
-    transition: 0.2s;
+    position: absolute; top: 12px; left: 12px;
+    background: #c0392b; color: white; border: none; border-radius: 50%;
+    width: 36px; height: 36px; font-size: 20px; cursor: pointer;
+    z-index: 10; line-height: 1; transition: 0.2s;
   }
   .modal-close:hover { background: #a93226; transform: rotate(90deg); }
   .modal-header {
     background: linear-gradient(135deg, #1a5490, #2c6db5);
-    color: white;
-    padding: 25px 20px;
-    text-align: center;
+    color: white; padding: 25px 20px; text-align: center;
     border-radius: 15px 15px 0 0;
   }
   .modal-header .team-logo-big {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    width: 100px; height: 100px; object-fit: contain;
+    margin-bottom: 10px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
   }
   .modal-header h2 { font-size: 26px; margin-bottom: 5px; }
   .modal-header .subtitle { font-size: 13px; opacity: 0.9; }
   .modal-body { padding: 20px; }
   .modal-section { margin-bottom: 25px; }
   .modal-section-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #1a5490;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    font-size: 16px; font-weight: bold; color: #1a5490;
+    margin-bottom: 12px; padding-bottom: 8px;
     border-bottom: 2px solid #e8f4fd;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
   }
   .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 10px;
   }
   .stat-card {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #eee;
+    background: #f8f9fa; border-radius: 10px; padding: 12px;
+    text-align: center; border: 1px solid #eee;
   }
   .stat-card .stat-value { font-size: 24px; font-weight: bold; color: #1a5490; line-height: 1; }
   .stat-card .stat-label { font-size: 11px; color: #666; margin-top: 5px; }
@@ -221,60 +158,52 @@
   .stat-card.gold .stat-value { color: #b8860b; }
 
   .players-mini-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 8px;
   }
   .player-mini {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 8px 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    border: 1px solid #eee;
+    background: #f8f9fa; border-radius: 8px; padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; border: 1px solid #eee;
   }
   .player-mini .num {
-    background: #1a5490;
-    color: white;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 11px;
-    flex-shrink: 0;
+    background: #1a5490; color: white; width: 24px; height: 24px;
+    border-radius: 50%; display: inline-flex; align-items: center;
+    justify-content: center; font-weight: bold; font-size: 11px; flex-shrink: 0;
   }
   .player-mini .name {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-decoration: none;
-    color: #333;
+    flex: 1; overflow: hidden; text-overflow: ellipsis;
+    white-space: nowrap; color: #333;
   }
-  .player-mini .name:hover { color: #c0392b; text-decoration: underline; }
   .player-mini .pos-tag { font-size: 10px; padding: 2px 5px; border-radius: 4px; background: #e8f4fd; color: #1a5490; }
 
   .match-mini {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 8px;
-    margin-bottom: 6px;
-    font-size: 12px;
-    border: 1px solid #eee;
+    display: flex; align-items: center; gap: 8px;
+    background: #f8f9fa; border-radius: 8px; padding: 8px;
+    margin-bottom: 6px; font-size: 12px; border: 1px solid #eee;
   }
   .match-mini .date { font-size: 10px; color: #666; min-width: 70px; }
   .match-mini .team { font-weight: bold; flex: 1; text-align: center; }
   .match-mini .score { background: #1a5490; color: white; padding: 3px 8px; border-radius: 5px; font-weight: bold; min-width: 40px; text-align: center; }
   .match-mini .score.live { background: #c0392b; }
   .match-mini .score.upcoming { background: #e8f4fd; color: #1a5490; font-size: 10px; }
+
+  .player-info-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .player-info-item {
+    background: #f8f9fa; border-radius: 8px; padding: 12px;
+    border: 1px solid #eee; text-align: center;
+  }
+  .player-info-item .label { font-size: 11px; color: #666; margin-bottom: 5px; font-weight: bold; }
+  .player-info-item .value { font-size: 16px; color: #1a5490; font-weight: bold; }
+  .player-big-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1a5490, #2c6db5);
+    color: white; width: 100px; height: 100px; border-radius: 50%;
+    font-size: 42px; font-weight: bold; margin-bottom: 10px;
+    box-shadow: 0 6px 20px rgba(26,84,144,0.4);
+  }
 
   @media (max-width: 600px) {
     body { padding: 0 8px 8px; }
@@ -342,6 +271,8 @@
     .stat-card .stat-label { font-size: 10px; }
     .players-mini-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
     .player-mini { padding: 6px 8px; font-size: 11px; }
+    .player-info-grid { grid-template-columns: 1fr 1fr; }
+    .player-big-number { width: 75px; height: 75px; font-size: 32px; }
   }
 </style>
 </head>
@@ -401,10 +332,9 @@
   <div id="resultsData" class="loading">جاري التحميل...</div>
 </div>
 
-<!-- Modal نافذة معلومات الفريق -->
-<div class="modal-overlay" id="teamModal" onclick="closeTeamModal(event)">
+<div class="modal-overlay" id="teamModal" onclick="closeModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeTeamModal()">✕</button>
+    <button class="modal-close" onclick="closeModal()">✕</button>
     <div id="modalInnerContent"></div>
   </div>
 </div>
@@ -494,14 +424,7 @@ function teamMatchLinkHTML(teamName) {
     '<div class="match-team">' + teamName + '</div></button>';
 }
 
-function playerLinkHTML(playerName, playerTeam) {
-  var translated = translateName(playerName);
-  var query = translated + ' ' + playerTeam + ' لاعب كرة قدم';
-  var googleUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-  return '<a href="' + googleUrl + '" target="_blank" rel="noopener" class="player-link">' + translated + '</a>';
-}
-
-/* ====== Modal ====== */
+/* ====== Modal: الفريق ====== */
 function openTeamModal(teamName) {
   var standings = originalStandings.find(function(t) { return t.t === teamName; });
   var teamPlayers = allPlayers.filter(function(p) { return p.team === teamName; });
@@ -543,7 +466,6 @@ function openTeamModal(teamName) {
     html += '<div class="modal-section-title">👥 اللاعبون (' + teamPlayers.length + ')</div>';
     html += '<div class="players-mini-grid">';
     teamPlayers.forEach(function(p) {
-      var posName2 = posName(p.position);
       html += '<div class="player-mini">';
       html += '<span class="num">' + (p.number || '—') + '</span>';
       html += '<span class="name" title="' + translateName(p.name) + '">' + translateName(p.name) + '</span>';
@@ -584,17 +506,16 @@ function openTeamModal(teamName) {
   document.body.style.overflow = 'hidden';
 }
 
-function closeTeamModal(event) {
+function closeModal(event) {
   if (event && event.target && event.target.id !== 'teamModal') return;
   document.getElementById('teamModal').classList.remove('open');
   document.body.style.overflow = '';
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeTeamModal();
+  if (e.key === 'Escape') closeModal();
 });
 
-/* ====== الوظائف الأساسية ====== */
 function showTab(id, btn) {
   document.querySelectorAll('.content').forEach(function(el) { el.classList.add('hidden'); });
   document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active', 'active-live'); });
@@ -879,7 +800,7 @@ function renderPlayers(players) {
     var posClass = posName(p.position);
     html += '<tr>';
     html += '<td data-label="#"><span class="number-badge">' + (p.number || '—') + '</span></td>';
-    html += '<td data-label="اللاعب" class="team">' + playerLinkHTML(p.name, p.team) + '</td>';
+    html += '<td data-label="اللاعب" class="team player-name-cell">' + translateName(p.name) + '</td>';
     html += '<td data-label="الفريق">' + p.team + '</td>';
     html += '<td data-label="المركز"><span class="pos-badge ' + posClass + '">' + posArabic(p.position) + '</span></td>';
     html += '<td data-label="العمر">' + (p.age || '—') + '</td>';
