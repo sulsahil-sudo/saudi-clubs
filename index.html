@@ -205,12 +205,55 @@
     .team-link { gap: 4px; padding: 2px 4px; font-size: 12px; }
     .team-link::after { font-size: 10px; }
 
+    /* ====== اللاعبون على الجوال: سطر مضغوط ====== */
     #players table { min-width: 100%; }
     #players thead { display: none; }
-    #players tbody tr { display: block; background: white; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; padding: 10px; }
-    #players tbody td { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed #f0f0f0; text-align: right; font-size: 13px; }
-    #players tbody td:last-child { border-bottom: none; }
-    #players tbody td::before { content: attr(data-label); font-weight: bold; color: #666; margin-left: 10px; font-size: 12px; }
+    #players tbody tr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 8px 4px;
+      font-size: 12px;
+      gap: 6px;
+    }
+    #players tbody tr:last-child { border-bottom: none; }
+    #players tbody td {
+      display: inline-block;
+      padding: 0;
+      border: none;
+      text-align: right;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #players tbody td::before { content: none; }
+    #players tbody td:nth-child(1) { flex-shrink: 0; width: auto; }
+    #players tbody td:nth-child(2) {
+      flex: 1;
+      text-align: right;
+      font-weight: bold;
+      color: #1a5490;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #players tbody td:nth-child(3) {
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #666;
+      padding-right: 6px;
+    }
+    #players tbody td:nth-child(4) { flex-shrink: 0; }
+    #players tbody td:nth-child(5) {
+      display: none;
+    }
+    #players tbody td:nth-child(6) {
+      display: none;
+    }
+    #players .number-badge { width: 24px; height: 24px; font-size: 11px; }
+    #players .pos-badge { font-size: 10px; padding: 2px 6px; }
 
     .match-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; }
     .match-filters::-webkit-scrollbar { display: none; }
