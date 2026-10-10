@@ -590,8 +590,10 @@ window.playerNames = {
   "Khalid Al Asiri": "خالد العسيري",
   "Qassem Lajami": "قاسم لجامي",
   "Abdulelah Al-Malki": "عبدالإله المالكي",
-  "Ameen Al-Bukhari": "أمين البخاري"
+  "Ameen Al-Bukhari": "أمين البخاري",
   "Mubarak": "مبارك"
+};
+ 
 };
 
 window.translatePlayer = function(name) {
