@@ -705,15 +705,13 @@ function renderLiveStandings() {
   previousRanks = {};
   table.forEach(function(t) { previousRanks[t.t] = t.r; });
 }
-
 function buildFilters() {
-  var filters = [
-    { id: 'all', label: '📋 الكل' },
-    { id: 'live', label: '🔴 مباشر الآن' },
-    { id: 'today', label: '📅 اليوم' },
-    { id: 'yesterday', label: '⬅️ أمس' },
-    { id: 'tomorrow', label: '➡️ غداً' },
-    { id: 'nextweek', label: '⏩ الأسبوع القادم' }
+ var filters = [
+  { id: 'all', label: '📋 الكل' },
+  { id: 'yesterday', label: '⬅️ أمس' },
+  { id: 'today', label: '📅 اليوم' },
+  { id: 'tomorrow', label: '➡️ غداً' }
+];
   ];
   var html = '';
   filters.forEach(function(f) {
