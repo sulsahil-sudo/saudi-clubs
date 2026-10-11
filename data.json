@@ -3444,7 +3444,7 @@
       "name": "Awad Dahal",
       "team": "الرياض",
       "position": "D",
-      "number": "",
+      "number": "32",
       "age": "21",
       "nationality": "Saudi Arabia"
     },
@@ -3588,7 +3588,7 @@
       "name": "Battal Al Harthi",
       "team": "الرياض",
       "position": "F",
-      "number": "",
+      "number": "20",
       "age": "21",
       "nationality": "Saudi Arabia"
     },
@@ -5506,5 +5506,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-11 21:47 UTC"
+  "lastUpdated": "2026-10-11 22:22 UTC"
 }
