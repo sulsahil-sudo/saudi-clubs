@@ -5,26 +5,27 @@ on:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
-*obs:
+jobs:
   update:
-    runs-on: ubuntu*latest
+    runs-on: ubuntu-latest
 
     permissions:
-      con*ents: write
+      contents: write
 
     steps:
-      - us*s: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - us*s: actions/setup-python@v5
-       *with:
-          python-version: '3*11'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
-      - name: Run fetch scrip*
-        run: python fetch_data.py*
+      - name: Run fetch script
+        run: python fetch_data.py
+
       - name: Push updates
-      * run: |
-          git config user.*ame "Auto Update"
-          git co*fig user.email "bot@github.com"
-  *       git add data.json
+        run: |
+          git config user.name "Auto Update"
+          git config user.email "bot@github.com"
+          git add data.json
           git commit -m "Auto update" || exit 0
           git push
