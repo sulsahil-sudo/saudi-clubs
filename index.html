@@ -913,5 +913,12 @@ setInterval(function() {
   if (!document.getElementById('live').classList.contains('hidden')) renderLiveStandings();
 }, 5000);
 </script>
+ <script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
+</script>
 </body>
 </html>
