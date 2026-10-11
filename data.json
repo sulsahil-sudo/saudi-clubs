@@ -123,26 +123,26 @@
     {
       "r": 11,
       "t": "الرياض",
-      "p": "7",
+      "p": "8",
       "w": "2",
-      "d": "2",
+      "d": "3",
       "l": "3",
-      "gf": "8",
-      "ga": "16",
+      "gf": "9",
+      "ga": "17",
       "gd": "-8",
-      "pts": "8"
+      "pts": "9"
     },
     {
       "r": 12,
       "t": "الفيحاء",
-      "p": "7",
+      "p": "8",
       "w": "1",
-      "d": "3",
+      "d": "4",
       "l": "3",
-      "gf": "7",
-      "ga": "11",
+      "gf": "8",
+      "ga": "12",
       "gd": "-4",
-      "pts": "6"
+      "pts": "7"
     },
     {
       "r": 13,
@@ -222,12 +222,12 @@
       "home": "الفيحاء",
       "away": "الرياض",
       "hs": "1",
-      "as": "0",
+      "as": "1",
       "date": "2026-10-11T13:40Z",
-      "status": "89'",
-      "state": "in",
-      "completed": false,
-      "clock": "89'",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+7'",
       "period": 2
     },
     {
@@ -2937,14 +2937,6 @@
       "nationality": "Saudi Arabia"
     },
     {
-      "name": "Mohammed Dheban",
-      "team": "الدرعية",
-      "position": "D",
-      "number": "21",
-      "age": "",
-      "nationality": ""
-    },
-    {
       "name": "Idrissa Gueye",
       "team": "الدرعية",
       "position": "M",
@@ -5514,5 +5506,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-11 15:28 UTC"
+  "lastUpdated": "2026-10-11 17:27 UTC"
 }
