@@ -1,6 +1,13 @@
-data/
-├── leagues.json
-├── seasons.json
-├── matches.json
-├── standings.json
-└── players.json
+[
+  {
+    "player_id": "player-001",
+    "team_id": "al-hilal",
+    "league_id": "saudi-pro-league",
+    "season_id": "2026-2027",
+
+    "name": "سالم الدوسري",
+    "position": "LW",
+    "age": 35,
+    "nationality": "Saudi Arabia"
+  }
+]
