@@ -3,7 +3,18 @@
     "team_id": "al-hilal",
     "league_id": "saudi-pro-league",
     "name_ar": "الهلال",
-    "name_en": "Al Hilal",
-    "country": "SA"
+    "name_en": "Al Hilal"
+  },
+  {
+    "team_id": "al-nassr",
+    "league_id": "saudi-pro-league",
+    "name_ar": "النصر",
+    "name_en": "Al Nassr"
+  },
+  {
+    "team_id": "al-ittihad",
+    "league_id": "saudi-pro-league",
+    "name_en": "Al Ittihad",
+    "name_ar": "الاتحاد"
   }
 ]
