@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "match_id": "spl-2026-001",
+    "league_id": "saudi-pro-league",
+    "season_id": "2026-2027",
+
+    "home_team": "الهلال",
+    "away_team": "النصر",
+
+    "match_date": "2026-10-15",
+    "match_time": "20:00",
+
+    "status": "upcoming",
+
+    "home_score": null,
+    "away_score": null
+  }
+]
