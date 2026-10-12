@@ -167,6 +167,18 @@ with open("data/matches.json", "w", encoding="utf-8") as f:
 # players.json
 with open("data/players.json", "w", encoding="utf-8") as f:
     json.dump(players, f, ensure_ascii=False, indent=2)
+    # teams.json
+teams = []
+
+for team_id, team_name in team_ids:
+    teams.append({
+        "team_id": str(team_id),
+        "league_id": "saudi-pro-league",
+        "name_ar": team_name
+    })
+
+with open("data/teams.json", "w", encoding="utf-8") as f:
+    json.dump(teams, f, ensure_ascii=False, indent=2)
 output = {
     "standings": standings,
     "results": results,
