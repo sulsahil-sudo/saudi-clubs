@@ -1,5 +1,17 @@
 [
   {
+    "season_id": "2024-2025",
+    "hijri_season": "1446-1447",
+    "league_id": "saudi-pro-league",
+    "active": false
+  },
+  {
+    "season_id": "2025-2026",
+    "hijri_season": "1447-1448",
+    "league_id": "saudi-pro-league",
+    "active": false
+  },
+  {
     "season_id": "2026-2027",
     "hijri_season": "1448-1449",
     "league_id": "saudi-pro-league",
