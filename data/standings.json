@@ -1,0 +1,20 @@
+[
+  {
+    "league_id": "saudi-pro-league",
+    "season_id": "2026-2027",
+    "table": [
+      {
+        "position": 1,
+        "team": "الهلال",
+        "played": 0,
+        "won": 0,
+        "draw": 0,
+        "lost": 0,
+        "goals_for": 0,
+        "goals_against": 0,
+        "goal_difference": 0,
+        "points": 0
+      }
+    ]
+  }
+]
