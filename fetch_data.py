@@ -156,7 +156,17 @@ for team_id, team_name in team_ids:
         print(f"  خطأ {team_name}: {str(ex)[:50]}")
 
 print(f"مجموع اللاعبين: {len(players)}")
+# standings.json
+with open("data/standings.json", "w", encoding="utf-8") as f:
+    json.dump(standings, f, ensure_ascii=False, indent=2)
 
+# matches.json
+with open("data/matches.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+# players.json
+with open("data/players.json", "w", encoding="utf-8") as f:
+    json.dump(players, f, ensure_ascii=False, indent=2)
 output = {
     "standings": standings,
     "results": results,
