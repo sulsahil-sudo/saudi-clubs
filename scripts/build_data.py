@@ -1,19 +1,26 @@
-# Build data.json from modular files
-
 import json
 from pathlib import Path
 
 DATA_DIR = Path("data")
 
-files = {
-    "leagues": DATA_DIR / "leagues.json",
-    "seasons": DATA_DIR / "seasons.json",
-    "matches": DATA_DIR / "matches.json",
-    "standings": DATA_DIR / "standings.json",
-    "players": DATA_DIR / "players.json",
+def load_json(filename):
+    path = DATA_DIR / filename
+    if not path.exists():
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+data = {
+    "leagues": load_json("leagues.json"),
+    "seasons": load_json("seasons.json"),
+    "teams": load_json("teams.json"),
+    "matches": load_json("matches.json"),
+    "standings": load_json("standings.json"),
+    "players": load_json("players.json"),
+    "news": load_json("news.json")
 }
 
-print("Build system ready")
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
 
-for name, file in files.items():
-    print(f"Checking: {name} -> {file}")
+print("✅ data.json generated successfully")
