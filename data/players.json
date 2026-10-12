@@ -1,0 +1,6 @@
+data/
+├── leagues.json
+├── seasons.json
+├── matches.json
+├── standings.json
+└── players.json
