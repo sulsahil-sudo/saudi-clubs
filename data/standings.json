@@ -4,8 +4,8 @@
     "season_id": "2026-2027",
     "table": [
       {
+        "team_id": "al-hilal",
         "position": 1,
-        "team": "الهلال",
         "played": 0,
         "won": 0,
         "draw": 0,
