@@ -75,12 +75,25 @@ except Exception as ex:
 # 2. المباريات
 def parse_event(ev):
     c = ev["competitions"][0]
-    home = next((x for x in c["competitors"] if x["homeAway"] == "home"), None)
-    away = next((x for x in c["competitors"] if x["homeAway"] == "away"), None)
+
+    home = next(
+        (x for x in c["competitors"] if x["homeAway"] == "home"),
+        None
+    )
+
+    away = next(
+        (x for x in c["competitors"] if x["homeAway"] == "away"),
+        None
+    )
+
     if not home or not away:
         return None
+
     status_type = ev.get("status", {}).get("type", {})
+
     return {
+        "home_id": str(home["team"]["id"]),
+        "away_id": str(away["team"]["id"]),
         "home": tr(home["team"]["displayName"]),
         "away": tr(away["team"]["displayName"]),
         "hs": home.get("score", "0"),
