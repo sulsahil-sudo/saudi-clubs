@@ -200,13 +200,27 @@ for team_id, team_name in team_ids:
 with open("data/teams.json", "w", encoding="utf-8") as f:
     json.dump(teams, f, ensure_ascii=False, indent=2)
 output = {
+    "leagues": [
+        {
+            "id": "saudi-pro-league",
+            "name_ar": "دوري روشن السعودي"
+        }
+    ],
+    "seasons": [
+        {
+            "season_id": "2026-2027",
+            "league_id": "saudi-pro-league",
+            "active": True
+        }
+    ],
+    "teams": teams,
     "standings": standings,
     "results": results,
     "players": players,
     "scorers": [],
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
-
+``
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 print("\n✅ تم الحفظ")
