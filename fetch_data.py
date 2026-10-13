@@ -141,7 +141,7 @@ print("\nجلب اللاعبين...")
 
 for team_id, team_name in team_ids:
     try:
-       url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
+        url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
         roster = fetch_smart(url, timeout=20)
 
         if roster:
