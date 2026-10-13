@@ -11,12 +11,10 @@
   body { font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; background: #f0f2f5; padding: 0 15px 15px; color: #333; }
  .sticky-header {
    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 9999;
-    background: #f0f2f5;
-    padding: 15px 0 10px;
+   top: 0;
+   z-index: 100;
+   background: #f0f2f5;
+   padding: 15px 0 10px;
 }
 
   h1 { text-align: center; margin-bottom: 15px; color: #1a5490; font-size: 22px; }
@@ -65,7 +63,7 @@
   overflow-x: auto;
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 100;
   background: #f0f2f5;
 }
   .filter-btn { padding: 8px 14px; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: bold; color: #555; font-family: inherit; }
@@ -269,6 +267,12 @@
     #players .number-badge { width: 24px; height: 24px; font-size: 11px; }
     #players .pos-badge { font-size: 10px; padding: 2px 6px; }
   .match-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  position: sticky;
   top: 80px;
   z-index: 999;
   background: #f0f2f5;
