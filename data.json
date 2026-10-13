@@ -366,20 +366,6 @@
       "period": 0
     },
     {
-      "home_id": "8346",
-      "away_id": "817",
-      "home": "الأهلي",
-      "away": "النصر",
-      "hs": "0",
-      "as": "0",
-      "date": "2026-10-15T18:00Z",
-      "status": "Thu, October 15th at 2:00 PM EDT",
-      "state": "pre",
-      "completed": false,
-      "clock": "0'",
-      "period": 0
-    },
-    {
       "home_id": "22028",
       "away_id": "22022",
       "home": "الخلود",
@@ -500,34 +486,6 @@
       "as": "0",
       "date": "2026-10-16T13:15Z",
       "status": "Fri, October 16th at 9:15 AM EDT",
-      "state": "pre",
-      "completed": false,
-      "clock": "0'",
-      "period": 0
-    },
-    {
-      "home_id": "21965",
-      "away_id": "929",
-      "home": "الرياض",
-      "away": "الهلال",
-      "hs": "0",
-      "as": "0",
-      "date": "2026-10-16T15:00Z",
-      "status": "Fri, October 16th at 11:00 AM EDT",
-      "state": "pre",
-      "completed": false,
-      "clock": "0'",
-      "period": 0
-    },
-    {
-      "home_id": "2276",
-      "away_id": "793",
-      "home": "الاتحاد",
-      "away": "الشباب",
-      "hs": "0",
-      "as": "0",
-      "date": "2026-10-16T18:00Z",
-      "status": "Fri, October 16th at 2:00 PM EDT",
       "state": "pre",
       "completed": false,
       "clock": "0'",
@@ -1376,14 +1334,14 @@
       "nationality": "Saudi Arabia"
     },
     {
-      "player_id": "22022-gastón-álvarez-suarez",
+      "player_id": "22022-gastón-álvarez",
       "team_id": "22022",
       "team": "القادسية",
-      "name": "Gastón Álvarez Suarez",
-      "position": "M",
+      "name": "Gastón Álvarez",
+      "position": "D",
       "number": "17",
-      "age": "33",
-      "nationality": "United Arab Emirates"
+      "age": "26",
+      "nationality": "Uruguay"
     },
     {
       "player_id": "22022-mohammed-qasem",
@@ -3296,6 +3254,16 @@
       "nationality": "Saudi Arabia"
     },
     {
+      "player_id": "22028-adi",
+      "team_id": "22028",
+      "team": "الخلود",
+      "name": "Adi",
+      "position": "D",
+      "number": "24",
+      "age": "21",
+      "nationality": "Saudi Arabia"
+    },
+    {
       "player_id": "22028-mansour-camara",
       "team_id": "22028",
       "team": "الخلود",
@@ -3393,16 +3361,6 @@
       "position": "M",
       "number": "22",
       "age": "20",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "player_id": "22028-adi",
-      "team_id": "22028",
-      "team": "الخلود",
-      "name": "Adi",
-      "position": "M",
-      "number": "24",
-      "age": "21",
       "nationality": "Saudi Arabia"
     },
     {
@@ -4366,16 +4324,6 @@
       "nationality": "Ivory Coast"
     },
     {
-      "player_id": "21965-khaled-ali",
-      "team_id": "21965",
-      "team": "الرياض",
-      "name": "Khaled Ali",
-      "position": "M",
-      "number": "18",
-      "age": "23",
-      "nationality": "United Arab Emirates"
-    },
-    {
       "player_id": "21965-bernard-mensah",
       "team_id": "21965",
       "team": "الرياض",
@@ -4656,6 +4604,16 @@
       "nationality": "Serbia"
     },
     {
+      "player_id": "793-yazeed-al-dosari",
+      "team_id": "793",
+      "team": "الشباب",
+      "name": "Yazeed Al Dosari",
+      "position": "D",
+      "number": "56",
+      "age": "18",
+      "nationality": "Saudi Arabia"
+    },
+    {
       "player_id": "793-sultan",
       "team_id": "793",
       "team": "الشباب",
@@ -4733,16 +4691,6 @@
       "position": "M",
       "number": "",
       "age": "21",
-      "nationality": "Saudi Arabia"
-    },
-    {
-      "player_id": "793-yazeed-al-dosari",
-      "team_id": "793",
-      "team": "الشباب",
-      "name": "Yazeed Al Dosari",
-      "position": "M",
-      "number": "56",
-      "age": "18",
       "nationality": "Saudi Arabia"
     },
     {
@@ -6887,5 +6835,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-13 14:37 UTC"
+  "lastUpdated": "2026-10-13 20:21 UTC"
 }

@@ -420,14 +420,14 @@
     "nationality": "Saudi Arabia"
   },
   {
-    "player_id": "22022-gastón-álvarez-suarez",
+    "player_id": "22022-gastón-álvarez",
     "team_id": "22022",
     "team": "القادسية",
-    "name": "Gastón Álvarez Suarez",
-    "position": "M",
+    "name": "Gastón Álvarez",
+    "position": "D",
     "number": "17",
-    "age": "33",
-    "nationality": "United Arab Emirates"
+    "age": "26",
+    "nationality": "Uruguay"
   },
   {
     "player_id": "22022-mohammed-qasem",
@@ -2340,6 +2340,16 @@
     "nationality": "Saudi Arabia"
   },
   {
+    "player_id": "22028-adi",
+    "team_id": "22028",
+    "team": "الخلود",
+    "name": "Adi",
+    "position": "D",
+    "number": "24",
+    "age": "21",
+    "nationality": "Saudi Arabia"
+  },
+  {
     "player_id": "22028-mansour-camara",
     "team_id": "22028",
     "team": "الخلود",
@@ -2437,16 +2447,6 @@
     "position": "M",
     "number": "22",
     "age": "20",
-    "nationality": "Saudi Arabia"
-  },
-  {
-    "player_id": "22028-adi",
-    "team_id": "22028",
-    "team": "الخلود",
-    "name": "Adi",
-    "position": "M",
-    "number": "24",
-    "age": "21",
     "nationality": "Saudi Arabia"
   },
   {
@@ -3410,16 +3410,6 @@
     "nationality": "Ivory Coast"
   },
   {
-    "player_id": "21965-khaled-ali",
-    "team_id": "21965",
-    "team": "الرياض",
-    "name": "Khaled Ali",
-    "position": "M",
-    "number": "18",
-    "age": "23",
-    "nationality": "United Arab Emirates"
-  },
-  {
     "player_id": "21965-bernard-mensah",
     "team_id": "21965",
     "team": "الرياض",
@@ -3700,6 +3690,16 @@
     "nationality": "Serbia"
   },
   {
+    "player_id": "793-yazeed-al-dosari",
+    "team_id": "793",
+    "team": "الشباب",
+    "name": "Yazeed Al Dosari",
+    "position": "D",
+    "number": "56",
+    "age": "18",
+    "nationality": "Saudi Arabia"
+  },
+  {
     "player_id": "793-sultan",
     "team_id": "793",
     "team": "الشباب",
@@ -3777,16 +3777,6 @@
     "position": "M",
     "number": "",
     "age": "21",
-    "nationality": "Saudi Arabia"
-  },
-  {
-    "player_id": "793-yazeed-al-dosari",
-    "team_id": "793",
-    "team": "الشباب",
-    "name": "Yazeed Al Dosari",
-    "position": "M",
-    "number": "56",
-    "age": "18",
     "nationality": "Saudi Arabia"
   },
   {
