@@ -50,7 +50,18 @@
   tr:hover { background: #f8f9fa; }
   tr.live-team { background: #fff5f5; }
   .loading, .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
-  .search-bar { margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .search-bar {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  position: sticky;
+  top: 0;
+  z-index: 998;
+  background: #f0f2f5;
+  padding: 10px 0;
+}
   .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 120px; }
   .match-filters {
   display: flex;
