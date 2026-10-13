@@ -199,6 +199,7 @@ for team_id, team_name in team_ids:
 
 with open("data/teams.json", "w", encoding="utf-8") as f:
     json.dump(teams, f, ensure_ascii=False, indent=2)
+    scorers = []
 output = {
     "leagues": [
         {
