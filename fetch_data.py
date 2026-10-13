@@ -141,7 +141,7 @@ print("\nجلب اللاعبين...")
 
 for team_id, team_name in team_ids:
     try:
-        url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
+       url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
         roster = fetch_smart(url, timeout=20)
 
         if roster:
@@ -150,7 +150,7 @@ for team_id, team_name in team_ids:
                 pos = ath.get("position", {}) or {}
 
                 players.append({
-                    "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
+                    "player_id": f"{team_id}-{ath.get('displayName', '').lower().replace(' ', '-')}",
                     "team_id": str(team_id),
                     "team": team_name,
                     "name": ath.get("displayName", ""),
@@ -160,9 +160,8 @@ for team_id, team_name in team_ids:
                     "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", "")
                 })
 
-   except Exception as ex:
-    print(f"  خطأ {team_name}: {str(ex)[:50]}")
-
+    except Exception as ex:
+        print(f"  خطأ {team_name}: {str(ex)[:50]}")
 print(f"مجموع اللاعبين: {len(players)}")
 # standings.json
 with open("data/standings.json", "w", encoding="utf-8") as f:
