@@ -220,7 +220,6 @@ output = {
     "scorers": [],
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
-``
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
 print("\n✅ تم الحفظ")
