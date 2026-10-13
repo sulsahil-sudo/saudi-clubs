@@ -9,17 +9,15 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; background: #f0f2f5; padding: 0 15px 15px; color: #333; }
-  .sticky-header {
-    position: sticky;
+ .sticky-header {
+    position: fixed;
     top: 0;
-    z-index: 100;
+    right: 0;
+    left: 0;
+    z-index: 9999;
     background: #f0f2f5;
     padding: 15px 0 10px;
-    margin: 0 -15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-shadow: 0 4px 8px -2px rgba(0,0,0,0.05);
-  }
+}
 
   h1 { text-align: center; margin-bottom: 15px; color: #1a5490; font-size: 22px; }
   .tabs-wrap { overflow-x: auto; margin-bottom: 0; border-radius: 10px; }
