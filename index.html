@@ -9,15 +9,17 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', 'Tahoma', Arial, sans-serif; background: #f0f2f5; padding: 0 15px 15px; color: #333; }
- .sticky-header {
-   position: sticky;
+  .sticky-header {
+    position: sticky;
     top: 0;
-    right: 0;
-    left: 0;
-    z-index: 9999;
+    z-index: 100;
     background: #f0f2f5;
     padding: 15px 0 10px;
-}
+    margin: 0 -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0 4px 8px -2px rgba(0,0,0,0.05);
+  }
 
   h1 { text-align: center; margin-bottom: 15px; color: #1a5490; font-size: 22px; }
   .tabs-wrap { overflow-x: auto; margin-bottom: 0; border-radius: 10px; }
@@ -50,27 +52,9 @@
   tr:hover { background: #f8f9fa; }
   tr.live-team { background: #fff5f5; }
   .loading, .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
-.search-bar {
-  margin-bottom: 15px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-}
-}
-}
+  .search-bar { margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
   .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 120px; }
-  .match-filters {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 15px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: #f0f2f5;
-}
+  .match-filters { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
   .filter-btn { padding: 8px 14px; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: bold; color: #555; font-family: inherit; }
   .filter-btn.active { background: #1a5490; color: white; border-color: #1a5490; }
   .filter-btn .count { display: inline-block; background: rgba(255,255,255,0.25); padding: 1px 8px; border-radius: 10px; margin-right: 5px; font-size: 11px; }
@@ -721,6 +705,8 @@ function renderLiveStandings() {
   previousRanks = {};
   table.forEach(function(t) { previousRanks[t.t] = t.r; });
 }
+function buildFilters() {
+ var filters = [
 function buildFilters() {
   var filters = [
     { id: 'all', label: '📋 الكل' },
