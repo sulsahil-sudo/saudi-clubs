@@ -1,128 +1,92 @@
 [
   {
-    "team_id": "al-hilal",
+    "team_id": "929",
     "league_id": "saudi-pro-league",
-    "name_ar": "الهلال",
-    "name_en": "Al Hilal",
-    "country": "SA"
+    "name_ar": "الهلال"
   },
   {
-    "team_id": "al-ittihad",
+    "team_id": "22022",
     "league_id": "saudi-pro-league",
-    "name_ar": "الاتحاد",
-    "name_en": "Al Ittihad",
-    "country": "SA"
+    "name_ar": "القادسية"
   },
   {
-    "team_id": "al-nassr",
+    "team_id": "817",
     "league_id": "saudi-pro-league",
-    "name_ar": "النصر",
-    "name_en": "Al Nassr",
-    "country": "SA"
+    "name_ar": "النصر"
   },
   {
-    "team_id": "al-ahli",
+    "team_id": "2276",
     "league_id": "saudi-pro-league",
-    "name_ar": "الأهلي",
-    "name_en": "Al Ahli",
-    "country": "SA"
+    "name_ar": "الاتحاد"
   },
   {
-    "team_id": "al-shabab",
+    "team_id": "130899",
     "league_id": "saudi-pro-league",
-    "name_ar": "الشباب",
-    "name_en": "Al Shabab",
-    "country": "SA"
+    "name_ar": "نيوم"
   },
   {
-    "team_id": "al-ettifaq",
+    "team_id": "8346",
     "league_id": "saudi-pro-league",
-    "name_ar": "الاتفاق",
-    "name_en": "Al Ettifaq",
-    "country": "SA"
+    "name_ar": "الأهلي"
   },
   {
-    "team_id": "al-taawoun",
+    "team_id": "8363",
     "league_id": "saudi-pro-league",
-    "name_ar": "التعاون",
-    "name_en": "Al Taawoun",
-    "country": "SA"
+    "name_ar": "الاتفاق"
   },
   {
-    "team_id": "al-fateh",
+    "team_id": "22028",
     "league_id": "saudi-pro-league",
-    "name_ar": "الفتح",
-    "name_en": "Al Fateh",
-    "country": "SA"
+    "name_ar": "الخلود"
   },
   {
-    "team_id": "al-fayha",
+    "team_id": "131746",
     "league_id": "saudi-pro-league",
-    "name_ar": "الفيحاء",
-    "name_en": "Al Fayha",
-    "country": "SA"
+    "name_ar": "الدرعية"
   },
   {
-    "team_id": "al-riyadh",
+    "team_id": "21964",
     "league_id": "saudi-pro-league",
-    "name_ar": "الرياض",
-    "name_en": "Al Riyadh",
-    "country": "SA"
+    "name_ar": "الحزم"
   },
   {
-    "team_id": "al-khaleej",
+    "team_id": "21965",
     "league_id": "saudi-pro-league",
-    "name_ar": "الخليج",
-    "name_en": "Al Khaleej",
-    "country": "SA"
+    "name_ar": "الرياض"
   },
   {
-    "team_id": "al-qadsiah",
+    "team_id": "793",
     "league_id": "saudi-pro-league",
-    "name_ar": "القادسية",
-    "name_en": "Al Qadsiah",
-    "country": "SA"
+    "name_ar": "الشباب"
   },
   {
-    "team_id": "al-kholood",
+    "team_id": "21827",
     "league_id": "saudi-pro-league",
-    "name_ar": "الخلود",
-    "name_en": "Al Kholood",
-    "country": "SA"
+    "name_ar": "الفيحاء"
   },
   {
-    "team_id": "al-hazem",
+    "team_id": "21829",
     "league_id": "saudi-pro-league",
-    "name_ar": "الحزم",
-    "name_en": "Al Hazem",
-    "country": "SA"
+    "name_ar": "الخليج"
   },
   {
-    "team_id": "neom",
+    "team_id": "21446",
     "league_id": "saudi-pro-league",
-    "name_ar": "نيوم",
-    "name_en": "Neom SC",
-    "country": "SA"
+    "name_ar": "الفيصلي"
   },
   {
-    "team_id": "al-diriyah",
+    "team_id": "13033",
     "league_id": "saudi-pro-league",
-    "name_ar": "الدرعية",
-    "name_en": "Al Diriyah",
-    "country": "SA"
+    "name_ar": "الفتح"
   },
   {
-    "team_id": "abha",
+    "team_id": "18459",
     "league_id": "saudi-pro-league",
-    "name_ar": "أبها",
-    "name_en": "Abha",
-    "country": "SA"
+    "name_ar": "التعاون"
   },
   {
-    "team_id": "al-faisaly",
+    "team_id": "21833",
     "league_id": "saudi-pro-league",
-    "name_ar": "الفيصلي",
-    "name_en": "Al Faisaly",
-    "country": "SA"
+    "name_ar": "أبها"
   }
 ]
