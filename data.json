@@ -1,4 +1,109 @@
 {
+  "leagues": [
+    {
+      "id": "saudi-pro-league",
+      "name_ar": "دوري روشن السعودي"
+    }
+  ],
+  "seasons": [
+    {
+      "season_id": "2026-2027",
+      "league_id": "saudi-pro-league",
+      "active": true
+    }
+  ],
+  "teams": [
+    {
+      "team_id": "929",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الهلال"
+    },
+    {
+      "team_id": "22022",
+      "league_id": "saudi-pro-league",
+      "name_ar": "القادسية"
+    },
+    {
+      "team_id": "817",
+      "league_id": "saudi-pro-league",
+      "name_ar": "النصر"
+    },
+    {
+      "team_id": "2276",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الاتحاد"
+    },
+    {
+      "team_id": "130899",
+      "league_id": "saudi-pro-league",
+      "name_ar": "نيوم"
+    },
+    {
+      "team_id": "8346",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الأهلي"
+    },
+    {
+      "team_id": "8363",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الاتفاق"
+    },
+    {
+      "team_id": "22028",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الخلود"
+    },
+    {
+      "team_id": "131746",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الدرعية"
+    },
+    {
+      "team_id": "21964",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الحزم"
+    },
+    {
+      "team_id": "21965",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الرياض"
+    },
+    {
+      "team_id": "793",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الشباب"
+    },
+    {
+      "team_id": "21827",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الفيحاء"
+    },
+    {
+      "team_id": "21829",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الخليج"
+    },
+    {
+      "team_id": "21446",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الفيصلي"
+    },
+    {
+      "team_id": "13033",
+      "league_id": "saudi-pro-league",
+      "name_ar": "الفتح"
+    },
+    {
+      "team_id": "18459",
+      "league_id": "saudi-pro-league",
+      "name_ar": "التعاون"
+    },
+    {
+      "team_id": "21833",
+      "league_id": "saudi-pro-league",
+      "name_ar": "أبها"
+    }
+  ],
   "standings": [
     {
       "r": 1,
@@ -6782,5 +6887,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-13 01:47 UTC"
+  "lastUpdated": "2026-10-13 02:42 UTC"
 }
