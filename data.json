@@ -5220,7 +5220,7 @@
       "name": "Mohammed Khubrani",
       "position": "D",
       "number": "3",
-      "age": "32",
+      "age": "33",
       "nationality": "Saudi Arabia"
     },
     {
@@ -5430,7 +5430,7 @@
       "name": "Saleh Al-Jamaan",
       "position": "F",
       "number": "11",
-      "age": "32",
+      "age": "33",
       "nationality": "Saudi Arabia"
     },
     {
@@ -6835,5 +6835,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-14 02:11 UTC"
+  "lastUpdated": "2026-10-14 07:39 UTC"
 }
