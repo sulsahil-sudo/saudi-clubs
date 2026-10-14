@@ -2994,11 +2994,11 @@
       "nationality": "Kosovo"
     },
     {
-      "player_id": "8363-abdoulaye-kante",
+      "player_id": "8363-abdoulaye-kanté",
       "team_id": "8363",
       "team": "الاتفاق",
-      "name": "Abdoulaye Kante",
-      "position": "M",
+      "name": "Abdoulaye Kanté",
+      "position": "F",
       "number": "42",
       "age": "21",
       "nationality": "France"
@@ -6835,5 +6835,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-14 07:39 UTC"
+  "lastUpdated": "2026-10-14 13:05 UTC"
 }
