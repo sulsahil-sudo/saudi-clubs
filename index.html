@@ -54,7 +54,22 @@
   .loading, .empty { text-align: center; color: #888; padding: 40px; font-size: 15px; }
   .search-bar { margin-bottom: 15px; display: flex; gap: 8px; flex-wrap: wrap; }
   .search-bar input, .search-bar select { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; flex: 1; min-width: 120px; }
-  .match-filters { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+.match-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+  background: white;
+  padding: 6px 0;
+}
+
+.match-filters::-webkit-scrollbar {
+  display: none;
+}
   .filter-btn { padding: 8px 14px; border: 2px solid #e0e0e0; background: white; border-radius: 25px; cursor: pointer; font-size: 13px; font-weight: bold; color: #555; font-family: inherit; }
   .filter-btn.active { background: #1a5490; color: white; border-color: #1a5490; }
   .filter-btn .count { display: inline-block; background: rgba(255,255,255,0.25); padding: 1px 8px; border-radius: 10px; margin-right: 5px; font-size: 11px; }
