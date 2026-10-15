@@ -5424,10 +5424,10 @@
       "team_id": "21829",
       "team": "الخليج",
       "name": "Miguel Silva",
-      "position": "M",
+      "position": "G",
       "number": "19",
-      "age": "30",
-      "nationality": "Portugal"
+      "age": "26",
+      "nationality": "Venezuela"
     },
     {
       "player_id": "21829-omar-mascarell",
@@ -6961,5 +6961,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-15 04:26 UTC"
+  "lastUpdated": "2026-10-15 09:18 UTC"
 }
