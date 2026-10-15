@@ -328,14 +328,14 @@
       "away_id": "22028",
       "home": "الفيصلي",
       "away": "الخلود",
-      "hs": "0",
-      "as": "0",
+      "hs": "1",
+      "as": "1",
       "date": "2026-10-15T13:40Z",
-      "status": "Thu, October 15th at 9:40 AM EDT",
-      "state": "pre",
+      "status": "34'",
+      "state": "in",
       "completed": false,
-      "clock": "0'",
-      "period": 0
+      "clock": "34'",
+      "period": 1
     },
     {
       "home_id": "21829",
@@ -5980,6 +5980,16 @@
       "nationality": ""
     },
     {
+      "player_id": "21446-faisal-mohammed-ibrahim-al-fahad",
+      "team_id": "21446",
+      "team": "الفيصلي",
+      "name": "Faisal Mohammed Ibrahim Al Fahad",
+      "position": "F",
+      "number": "47",
+      "age": "",
+      "nationality": ""
+    },
+    {
       "player_id": "13033-adrian-semper",
       "team_id": "13033",
       "team": "الفتح",
@@ -6961,5 +6971,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-15 09:18 UTC"
+  "lastUpdated": "2026-10-15 14:13 UTC"
 }
