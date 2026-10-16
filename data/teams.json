@@ -1,13 +1,13 @@
 [
   {
-    "team_id": "929",
-    "league_id": "saudi-pro-league",
-    "name_ar": "الهلال"
-  },
-  {
     "team_id": "22022",
     "league_id": "saudi-pro-league",
     "name_ar": "القادسية"
+  },
+  {
+    "team_id": "929",
+    "league_id": "saudi-pro-league",
+    "name_ar": "الهلال"
   },
   {
     "team_id": "817",

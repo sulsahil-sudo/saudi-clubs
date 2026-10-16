@@ -4,14 +4,14 @@
     "away_id": "21833",
     "home": "القادسية",
     "away": "أبها",
-    "hs": "0",
-    "as": "0",
+    "hs": "2",
+    "as": "1",
     "date": "2026-10-16T13:15Z",
-    "status": "Fri, October 16th at 9:15 AM EDT",
-    "state": "pre",
-    "completed": false,
-    "clock": "0'",
-    "period": 0
+    "status": "FT",
+    "state": "post",
+    "completed": true,
+    "clock": "90'+7'",
+    "period": 2
   },
   {
     "home_id": "22028",
