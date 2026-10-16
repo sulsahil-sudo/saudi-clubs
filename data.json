@@ -324,46 +324,18 @@
   ],
   "results": [
     {
-      "home_id": "21446",
-      "away_id": "22028",
-      "home": "الفيصلي",
-      "away": "الخلود",
-      "hs": "3",
-      "as": "2",
-      "date": "2026-10-15T13:40Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+10'",
-      "period": 2
-    },
-    {
-      "home_id": "21829",
-      "away_id": "21827",
-      "home": "الخليج",
-      "away": "الفيحاء",
-      "hs": "2",
+      "home_id": "22022",
+      "away_id": "21833",
+      "home": "القادسية",
+      "away": "أبها",
+      "hs": "0",
       "as": "0",
-      "date": "2026-10-15T14:50Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+5'",
-      "period": 2
-    },
-    {
-      "home_id": "21964",
-      "away_id": "13033",
-      "home": "الحزم",
-      "away": "الفتح",
-      "hs": "2",
-      "as": "3",
-      "date": "2026-10-15T15:15Z",
-      "status": "FT",
-      "state": "post",
-      "completed": true,
-      "clock": "90'+7'",
-      "period": 2
+      "date": "2026-10-16T13:15Z",
+      "status": "Fri, October 16th at 9:15 AM EDT",
+      "state": "pre",
+      "completed": false,
+      "clock": "0'",
+      "period": 0
     },
     {
       "home_id": "22028",
@@ -478,18 +450,46 @@
       "period": 2
     },
     {
-      "home_id": "22022",
-      "away_id": "21833",
-      "home": "القادسية",
-      "away": "أبها",
-      "hs": "0",
+      "home_id": "21446",
+      "away_id": "22028",
+      "home": "الفيصلي",
+      "away": "الخلود",
+      "hs": "3",
+      "as": "2",
+      "date": "2026-10-15T13:40Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+10'",
+      "period": 2
+    },
+    {
+      "home_id": "21829",
+      "away_id": "21827",
+      "home": "الخليج",
+      "away": "الفيحاء",
+      "hs": "2",
       "as": "0",
-      "date": "2026-10-16T13:15Z",
-      "status": "Fri, October 16th at 9:15 AM EDT",
-      "state": "pre",
-      "completed": false,
-      "clock": "0'",
-      "period": 0
+      "date": "2026-10-15T14:50Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+5'",
+      "period": 2
+    },
+    {
+      "home_id": "21964",
+      "away_id": "13033",
+      "home": "الحزم",
+      "away": "الفتح",
+      "hs": "2",
+      "as": "3",
+      "date": "2026-10-15T15:15Z",
+      "status": "FT",
+      "state": "post",
+      "completed": true,
+      "clock": "90'+7'",
+      "period": 2
     },
     {
       "home_id": "130899",
@@ -6981,5 +6981,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-16 06:27 UTC"
+  "lastUpdated": "2026-10-16 11:47 UTC"
 }
