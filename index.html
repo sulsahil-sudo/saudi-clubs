@@ -858,7 +858,32 @@ function renderPlayers(players) {
   tb.innerHTML = html;
   document.getElementById('playerCount').textContent = 'عدد اللاعبين: ' + players.length + ' من ' + allPlayers.length;
 }
+function getLastFiveForm(teamName) {
+  var matches = (allMatches || [])
+    .filter(function(m) {
+      return (m.completed === true || getMatchState(m) === 'finished') &&
+             (m.home === teamName || m.away === teamName);
+    })
+    .sort(function(a, b) {
+      return new Date(b.date) - new Date(a.date);
+    })
+    .slice(0, 5);
 
+  return matches.map(function(m) {
+    var hs = parseInt(m.hs || 0);
+    var as = parseInt(m.as || 0);
+
+    if (m.home === teamName) {
+      if (hs > as) return '✅';
+      if (hs < as) return '❌';
+      return '➖';
+    } else {
+      if (as > hs) return '✅';
+      if (as < hs) return '❌';
+      return '➖';
+    }
+  }).join('');
+}
 function loadData(showLoader) {
   if (showLoader) {
     document.getElementById('standingsBody').innerHTML = '<tr><td colspan="10" class="loading">جاري التحميل...</td></tr>';
