@@ -1110,14 +1110,14 @@
       "nationality": "Saudi Arabia"
     },
     {
-      "player_id": "22022-gastón-álvarez",
+      "player_id": "22022-gastón-álvarez-suarez",
       "team_id": "22022",
       "team": "القادسية",
-      "name": "Gastón Álvarez",
-      "position": "D",
+      "name": "Gastón Álvarez Suarez",
+      "position": "M",
       "number": "17",
-      "age": "26",
-      "nationality": "Uruguay"
+      "age": "33",
+      "nationality": "United Arab Emirates"
     },
     {
       "player_id": "22022-mohammed-qasem",
@@ -6981,5 +6981,5 @@
     }
   ],
   "scorers": [],
-  "lastUpdated": "2026-10-17 08:49 UTC"
+  "lastUpdated": "2026-10-17 12:29 UTC"
 }
