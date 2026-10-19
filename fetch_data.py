@@ -219,8 +219,9 @@ output = {
     "results": results,
     "players": players,
     "scorers": scorers,
-    "assists": assists,
-``
+"assists": assists,
+
+
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
 
