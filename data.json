@@ -7021,258 +7021,259 @@
       "name": "Saïd Benrahma",
       "team": "نيوم",
       "goals": 2
-    },
+    }
+  ],
+  "assists": [
     {
       "name": "Ivan Toney",
       "team": "الأهلي",
-      "goals": 11
+      "assists": 11
     },
     {
       "name": "Mateo Retegui",
       "team": "القادسية",
-      "goals": 6
+      "assists": 6
     },
     {
       "name": "Alexandre Lacazette",
       "team": "نيوم",
-      "goals": 5
+      "assists": 5
     },
     {
       "name": "Francisco Trincão",
       "team": "الأهلي",
-      "goals": 5
+      "assists": 5
     },
     {
       "name": "Steven Bergwijn",
       "team": "الاتحاد",
-      "goals": 5
+      "assists": 5
     },
     {
       "name": "Youssef En-Nesyri",
       "team": "الاتحاد",
-      "goals": 5
+      "assists": 5
     },
     {
       "name": "Julien Domingues",
       "team": "الخلود",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Iker Kortajarena",
       "team": "الخلود",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Mohammed Abu Al-Shamat",
       "team": "القادسية",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Alexandre Mendy",
       "team": "الفيصلي",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Amadou Koné",
       "team": "نيوم",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Julián Quiñones",
       "team": "القادسية",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Sergej Milinkovic-Savic",
       "team": "الهلال",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Tijjani Reijnders",
       "team": "القادسية",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Cristiano Ronaldo",
       "team": "النصر",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "George Ilenikhena",
       "team": "الاتحاد",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Ollie Watkins",
       "team": "الهلال",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Gabriel Martinelli",
       "team": "الهلال",
-      "goals": 4
+      "assists": 4
     },
     {
       "name": "Lázaro",
       "team": "الفيحاء",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Yannick Carrasco",
       "team": "الشباب",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Crysencio Summerville",
       "team": "الهلال",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Rúben Neves",
       "team": "الهلال",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Teddy Okou",
       "team": "الرياض",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Moussa Dembélé",
       "team": "الاتفاق",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Abdulaziz Aldhuwayhi",
       "team": "الحزم",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Sultan Mandash",
       "team": "الهلال",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Ângelo Gabriel",
       "team": "النصر",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Abderrazak Hamdallah",
       "team": "التعاون",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Samú Costa",
       "team": "النصر",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Darwin Núñez",
       "team": "الدرعية",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Joshua King",
       "team": "الخليج",
-      "goals": 3
+      "assists": 3
     },
     {
       "name": "Hugo Moura",
       "team": "الفيحاء",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Wilfried Kanga",
       "team": "الفتح",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Bersant Celina",
       "team": "الاتفاق",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Shaquille Pinas",
       "team": "الخلود",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Sofiane Bendebka",
       "team": "الحزم",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Álvaro Medrán",
       "team": "الاتفاق",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Eduard Spertsyan",
       "team": "الأهلي",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Mourad Batna",
       "team": "الفتح",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Sadio Mané",
       "team": "النصر",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Faisal Al Abdulwahed",
       "team": "الفتح",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Roger Martínez",
       "team": "الشباب",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "João Félix",
       "team": "النصر",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Abdullah Al-Hamdan",
       "team": "النصر",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Abdulelah Al-Amri",
       "team": "النصر",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Théo Bongonda",
       "team": "الفيصلي",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Alimani Gory",
       "team": "أبها",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Trézéguet",
       "team": "الرياض",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Adil Boulbina",
       "team": "الدرعية",
-      "goals": 2
+      "assists": 2
     },
     {
       "name": "Saïd Benrahma",
       "team": "نيوم",
-      "goals": 2
+      "assists": 2
     }
   ],
-  "assists": [],
-  "lastUpdated": "2026-10-19 06:34 UTC"
+  "lastUpdated": "2026-10-19 06:56 UTC"
 }
