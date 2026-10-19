@@ -1,4 +1,4 @@
-import json, urllib.request, urllib.parse
+import json, urllib.request, urllib.parse, os
 from datetime import datetime, timedelta
 
 ESPN_STANDINGS = "https://site.api.espn.com/apis/v2/sports/soccer/ksa.1/standings"
@@ -136,7 +136,6 @@ print(f"\nمجموع المباريات: {len(results)}")
 
 # 3. اللاعبون
 players = []
-
 print("\nجلب اللاعبين...")
 
 for team_id, team_name in team_ids:
@@ -146,9 +145,8 @@ for team_id, team_name in team_ids:
 
         if roster:
             for ath in roster.get("athletes", []):
-
                 pos = ath.get("position", {}) or {}
-
+                
                 players.append({
                     "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
                     "team_id": str(team_id),
@@ -159,73 +157,25 @@ for team_id, team_name in team_ids:
                     "age": str(ath.get("age", "")),
                     "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", "")
                 })
-
     except Exception as ex:
         print(f"  خطأ {team_name}: {str(ex)[:50]}")
 
-    goals = 0
-    assists = 0
-    yellowCards = 0
-    redCards = 0
-
-    for cat in stats:
-        for s in cat.get("stats", []):
-            if s.get("name") == "totalGoals":
-                goals = int(float(s.get("value", 0)))
-            elif s.get("name") == "goalAssists":
-                assists = int(float(s.get("value", 0)))
-            elif s.get("name") == "yellowCards":
-                yellowCards = int(float(s.get("value", 0)))
-            elif s.get("name") == "redCards":
-                redCards = int(float(s.get("value", 0)))
-
-    players.append({
-        "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
-        "team_id": str(team_id),
-        "team": team_name,
-        "name": ath.get("displayName", ""),
-        "position": pos.get("abbreviation", ""),
-        "number": str(ath.get("jersey", "")),
-        "age": str(ath.get("age", "")),
-        "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", ""),
-        "goals": goals,
-        "assists": assists,
-        "yellowCards": yellowCards,
-        "redCards": redCards
-    })
-players.append({
-    "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
-    "team_id": str(team_id),
-    "team": team_name,
-    "name": ath.get("displayName", ""),
-    "position": pos.get("abbreviation", ""),
-    "number": str(ath.get("jersey", "")),
-    "age": str(ath.get("age", "")),
-    "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", ""),
-    "goals": goals,
-    "assists": assists,
-    "yellowCards": yellowCards,
-    "redCards": redCards
-})
-
-   except Exception as ex:
-    print(f"  خطأ {team_name}: {str(ex)[:50]}")
-
 print(f"مجموع اللاعبين: {len(players)}")
-# standings.json
+
+# إنشاء مجلد data إذا لم يكن موجوداً
+os.makedirs("data", exist_ok=True)
+
+# حفظ الملفات الفرعية
 with open("data/standings.json", "w", encoding="utf-8") as f:
     json.dump(standings, f, ensure_ascii=False, indent=2)
 
-# matches.json
 with open("data/matches.json", "w", encoding="utf-8") as f:
     json.dump(results, f, ensure_ascii=False, indent=2)
 
-# players.json
 with open("data/players.json", "w", encoding="utf-8") as f:
     json.dump(players, f, ensure_ascii=False, indent=2)
-    # teams.json
-teams = []
 
+teams = []
 for team_id, team_name in team_ids:
     teams.append({
         "team_id": str(team_id),
@@ -235,6 +185,8 @@ for team_id, team_name in team_ids:
 
 with open("data/teams.json", "w", encoding="utf-8") as f:
     json.dump(teams, f, ensure_ascii=False, indent=2)
+
+# الملف الشامل data.json
 output = {
     "standings": standings,
     "results": results,
@@ -245,4 +197,5 @@ output = {
 
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
-print("\n✅ تم الحفظ")
+
+print("\n✅ تم الحفظ بنجاح")
