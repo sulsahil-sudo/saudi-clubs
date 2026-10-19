@@ -35,24 +35,24 @@
     "name_ar": "الاتفاق"
   },
   {
-    "team_id": "22028",
-    "league_id": "saudi-pro-league",
-    "name_ar": "الخلود"
-  },
-  {
     "team_id": "131746",
     "league_id": "saudi-pro-league",
     "name_ar": "الدرعية"
   },
   {
-    "team_id": "21964",
+    "team_id": "22028",
     "league_id": "saudi-pro-league",
-    "name_ar": "الحزم"
+    "name_ar": "الخلود"
   },
   {
     "team_id": "21829",
     "league_id": "saudi-pro-league",
     "name_ar": "الخليج"
+  },
+  {
+    "team_id": "21964",
+    "league_id": "saudi-pro-league",
+    "name_ar": "الحزم"
   },
   {
     "team_id": "21965",
