@@ -143,11 +143,17 @@ for team_id, team_name in team_ids:
     try:
         url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
         roster = fetch_smart(url, timeout=20)
-        if roster:
-          for ath in roster.get("athletes", []):
+       if roster:
+    for ath in roster.get("athletes", []):
 
-    pos = ath.get("position", {}) or {}
+        pos = ath.get("position", {}) or {}
 
+        stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
+
+        goals = 0
+        assists = 0
+        yellowCards = 0
+        redCards = 0
     stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
 
     goals = 0
