@@ -187,12 +187,30 @@ with open("data/teams.json", "w", encoding="utf-8") as f:
     json.dump(teams, f, ensure_ascii=False, indent=2)
 
 # الملف الشامل data.json
-output = {
+# 4. الهدافون
+scorers = []
+
+try:
+    print("\nجلب الهدافين...")
+    data = fetch_smart(
+        "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/statistics"
+    )
+
+    if data:
+        for item in data.get("leaders", []):
+            scorers.append(item)
+
+    print(f"عدد الهدافين: {len(scorers)}")
+
+except Exception as ex:
+    print("خطأ الهدافين:", ex)
+   output = {
     "standings": standings,
     "results": results,
     "players": players,
-    "scorers": [],
+    "scorers": scorers,
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+}
 }
 
 with open("data.json", "w", encoding="utf-8") as f:
