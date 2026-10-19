@@ -49,7 +49,7 @@ standings = []
 team_ids = []
 try:
     print("جلب الترتيب...")
-        data = fetch_smart(ESPN_STANDINGS)
+    data = fetch_smart(ESPN_STANDINGS)
     if data:
         entries = data["children"][0]["standings"]["entries"]
         for e in entries:
