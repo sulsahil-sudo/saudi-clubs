@@ -204,12 +204,19 @@ try:
                         "goals": int(p["value"])
                     })
     
-                for p in stat.get("leaders", []):
-                    assists.append({
-                        "name": p["athlete"]["displayName"],
-                        "team": tr(p["athlete"]["team"]["displayName"]),
-                        "assists": int(p["value"])
-                    })
+               for p in stat.get("leaders", []):
+
+    assist_count = 0
+
+    for st in p.get("statistics", []):
+        if st.get("name") == "goalAssists":
+            assist_count = int(st.get("value", 0))
+
+    assists.append({
+        "name": p["athlete"]["displayName"],
+        "team": tr(p["athlete"]["team"]["displayName"]),
+        "assists": assist_count
+    })
     print(f"عدد الهدافين: {len(scorers)}")
 except Exception as ex:
     print("خطأ الهدافين:", ex)
