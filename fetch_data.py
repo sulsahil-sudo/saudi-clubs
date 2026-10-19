@@ -50,7 +50,7 @@ team_ids = []
 try:
     print("جلب الترتيب...")
     data = fetch_smart(ESPN_STANDINGS)
-    if data:
+ if data:
         entries = data["children"][0]["standings"]["entries"]
         for e in entries:
             s = {x["name"]: x["displayValue"] for x in e["stats"]}
@@ -196,7 +196,7 @@ try:
         "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/statistics"
     )
 
- if data:
+if data:
     for stat in data.get("stats", []):
 
         if stat.get("name") == "goalsLeaders":
