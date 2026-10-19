@@ -898,7 +898,7 @@ if (scorersBody && data.scorers) {
   data.scorers.forEach(function(s, i) {
     shtml += '<tr>';
     shtml += '<td>' + (i + 1) + '</td>';
-    shtml += '<td>' + s.name + '</td>';
+   shtml += '<td>' + translateName(s.name) + '</td>';
     shtml += '<td>' + s.team + '</td>';
     shtml += '<td><b>' + s.goals + '</b></td>';
     shtml += '</tr>';
