@@ -203,7 +203,6 @@ try:
                         "team": tr(p["athlete"]["team"]["displayName"]),
                         "goals": int(p["value"])
                     })
-                             if data:
     for stat in data.get("stats", []):
 
         if stat.get("name") == "goalsLeaders":
