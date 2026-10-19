@@ -188,6 +188,7 @@ with open("data/teams.json", "w", encoding="utf-8") as f:
 
 # 4. الهدافون
 scorers = []
+assists = []
 try:
     print("\nجلب الهدافين...")
     data = fetch_smart(
@@ -196,6 +197,14 @@ try:
     if data:
         for stat in data.get("stats", []):
             if stat.get("name") == "goalsLeaders":
+                if stat.get("name") == "assistsLeaders":
+
+    for p in stat.get("leaders", []):
+        assists.append({
+            "name": p["athlete"]["displayName"],
+            "team": tr(p["athlete"]["team"]["displayName"]),
+            "assists": int(p["value"])
+        })
                 for p in stat.get("leaders", []):
                     scorers.append({
                         "name": p["athlete"]["displayName"],
@@ -211,6 +220,8 @@ output = {
     "results": results,
     "players": players,
     "scorers": scorers,
+    "assists": assists,
+``
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
 
