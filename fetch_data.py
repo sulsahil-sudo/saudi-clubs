@@ -197,14 +197,6 @@ try:
     if data:
         for stat in data.get("stats", []):
             if stat.get("name") == "goalsLeaders":
-                if stat.get("name") == "assistsLeaders":
-
-    for p in stat.get("leaders", []):
-        assists.append({
-            "name": p["athlete"]["displayName"],
-            "team": tr(p["athlete"]["team"]["displayName"]),
-            "assists": int(p["value"])
-        })
                 for p in stat.get("leaders", []):
                     scorers.append({
                         "name": p["athlete"]["displayName"],
