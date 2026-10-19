@@ -305,10 +305,11 @@
   <h1>⚽ الدوري السعودي للمحترفين</h1>
   <div class="tabs-wrap">
     <div class="tabs">
-      <button class="tab active" onclick="showTab('standings', this)" id="tabStandings">الترتيب</button>
-      <button class="tab" onclick="showTab('live', this)" id="tabLive" style="display:none;">🔴 ترتيب حي</button>
-      <button class="tab" onclick="showTab('players', this)">اللاعبون</button>
-      <button class="tab" onclick="showTab('results', this)">المباريات</button>
+    <button class="tab active" onclick="showTab('standings', this)" id="tabStandings">الترتيب</button>
+<button class="tab" onclick="showTab('live', this)" id="tabLive" style="display:none;">🔴 ترتيب حي</button>
+<button class="tab" onclick="showTab('players', this)">اللاعبون</button>
+<button class="tab" onclick="showTab('scorers', this)">⚽ الهدافون</button>
+<button class="tab" onclick="showTab('results', this)">المباريات</button>
     </div>
   </div>
 </div>
@@ -330,7 +331,25 @@
   </table></div>
   <div class="updated">⚠️ ترتيب افتراضي ومؤقت.</div>
 </div>
-
+<div id="scorers" class="content hidden">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>اللاعب</th>
+          <th>الفريق</th>
+          <th>الأهداف</th>
+        </tr>
+      </thead>
+      <tbody id="scorersBody">
+        <tr>
+          <td colspan="4">جاري التحميل...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div id="players" class="content hidden">
   <div class="search-bar">
     <input type="text" id="playerSearch" placeholder="ابحث باسم اللاعب..." oninput="filterPlayers()">
@@ -871,6 +890,22 @@ function loadData(showLoader) {
           opt.value = t; opt.textContent = t;
           teamSelect.appendChild(opt);
         });
+       var scorersBody = document.getElementById('scorersBody');
+
+if (scorersBody && data.scorers) {
+  var shtml = '';
+
+  data.scorers.forEach(function(s, i) {
+    shtml += '<tr>';
+    shtml += '<td>' + (i + 1) + '</td>';
+    shtml += '<td>' + s.name + '</td>';
+    shtml += '<td>' + s.team + '</td>';
+    shtml += '<td><b>' + s.goals + '</b></td>';
+    shtml += '</tr>';
+  });
+
+  scorersBody.innerHTML = shtml;
+}
         renderPlayers(allPlayers);
       }
 
