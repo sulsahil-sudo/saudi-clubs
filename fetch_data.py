@@ -144,28 +144,42 @@ for team_id, team_name in team_ids:
         url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
         roster = fetch_smart(url, timeout=20)
         if roster:
-            for ath in roster.get("athletes", []):
+          for ath in roster.get("athletes", []):
 
-                pos = ath.get("position", {}) or {}
+    pos = ath.get("position", {}) or {}
 
-             stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
+    stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
 
-goals = 0
-assists = 0
-yellowCards = 0
-redCards = 0
+    goals = 0
+    assists = 0
+    yellowCards = 0
+    redCards = 0
 
-for cat in stats:
-    for s in cat.get("stats", []):
-        if s.get("name") == "totalGoals":
-            goals = int(float(s.get("value", 0)))
-        elif s.get("name") == "goalAssists":
-            assists = int(float(s.get("value", 0)))
-        elif s.get("name") == "yellowCards":
-            yellowCards = int(float(s.get("value", 0)))
-        elif s.get("name") == "redCards":
-            redCards = int(float(s.get("value", 0)))
+    for cat in stats:
+        for s in cat.get("stats", []):
+            if s.get("name") == "totalGoals":
+                goals = int(float(s.get("value", 0)))
+            elif s.get("name") == "goalAssists":
+                assists = int(float(s.get("value", 0)))
+            elif s.get("name") == "yellowCards":
+                yellowCards = int(float(s.get("value", 0)))
+            elif s.get("name") == "redCards":
+                redCards = int(float(s.get("value", 0)))
 
+    players.append({
+        "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
+        "team_id": str(team_id),
+        "team": team_name,
+        "name": ath.get("displayName", ""),
+        "position": pos.get("abbreviation", ""),
+        "number": str(ath.get("jersey", "")),
+        "age": str(ath.get("age", "")),
+        "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", ""),
+        "goals": goals,
+        "assists": assists,
+        "yellowCards": yellowCards,
+        "redCards": redCards
+    })
 players.append({
     "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
     "team_id": str(team_id),
