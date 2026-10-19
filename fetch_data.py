@@ -143,18 +143,25 @@ for team_id, team_name in team_ids:
     try:
         url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/teams/{team_id}/roster"
         roster = fetch_smart(url, timeout=20)
-    if roster:
-    for ath in roster.get("athletes", []):
 
-        pos = ath.get("position", {}) or {}
+        if roster:
+            for ath in roster.get("athletes", []):
 
-        stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
+                pos = ath.get("position", {}) or {}
 
-        goals = 0
-        assists = 0
-        yellowCards = 0
-        redCards = 0
-    stats = ath.get("statistics", {}).get("splits", {}).get("categories", [])
+                players.append({
+                    "player_id": f"{team_id}-{ath.get('displayName','').lower().replace(' ','-')}",
+                    "team_id": str(team_id),
+                    "team": team_name,
+                    "name": ath.get("displayName", ""),
+                    "position": pos.get("abbreviation", ""),
+                    "number": str(ath.get("jersey", "")),
+                    "age": str(ath.get("age", "")),
+                    "nationality": ath.get("citizenship", "") or ath.get("birthPlace", {}).get("country", "")
+                })
+
+    except Exception as ex:
+        print(f"  خطأ {team_name}: {str(ex)[:50]}")
 
     goals = 0
     assists = 0
