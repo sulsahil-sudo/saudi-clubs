@@ -196,10 +196,17 @@ try:
         "https://site.api.espn.com/apis/site/v2/sports/soccer/ksa.1/statistics"
     )
 
-    if data:
-        for item in data.get("leaders", []):
-            scorers.append(item)
+ if data:
+    for stat in data.get("stats", []):
 
+        if stat.get("name") == "goalsLeaders":
+
+            for p in stat.get("leaders", []):
+                scorers.append({
+                    "name": p["athlete"]["displayName"],
+                    "team": tr(p["athlete"]["team"]["displayName"]),
+                    "goals": int(p["value"])
+                })
     print(f"عدد الهدافين: {len(scorers)}")
 
 except Exception as ex:
@@ -211,7 +218,7 @@ except Exception as ex:
     "scorers": scorers,
     "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
 }
-}
+
 
 with open("data.json", "w", encoding="utf-8") as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
